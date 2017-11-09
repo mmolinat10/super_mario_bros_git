@@ -1,0 +1,18 @@
+var marioBros = marioBros || {};
+
+var gameOptions = {
+    gameWidth:480,
+    gameHeight:240,
+    bgColor:'#444444',
+    playerGravity:90,
+    playerSpeed:70,
+    playerJump:40
+    
+};
+
+
+marioBros.game = new Phaser.Game(gameOptions.gameWidth,gameOptions.gameHeight,Phaser.AUTO,null,this,false,false);
+
+marioBros.game.state.add('main',marioBros.level1);
+marioBros.game.state.start('main');
+
