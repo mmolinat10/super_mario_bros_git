@@ -1,8 +1,10 @@
 var marioBros = marioBros || {};
 
 var gameOptions = {
-    gameWidth:480,
-    gameHeight:240,
+    gameWidth:255,
+    gameHeight:216,
+    level1Width:3840,
+    level1Height:416,
     bgColor:'#444444',
     playerGravity:90,
     playerSpeed:70,
