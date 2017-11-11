@@ -6,7 +6,7 @@ var gameOptions = {
     level1Width:3840,
     level1Height:416,
     bgColor:'#444444',
-    playerGravity:90,
+    playerGravity:1090,
     playerSpeed:70,
     playerJump:40
     
