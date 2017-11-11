@@ -4,7 +4,8 @@ marioBros.marioPrefab = function(game,x,y)
 {
     Phaser.Sprite.call(this,game,x,y,'mario');
     Phaser.Sprite.call(this,game,x,y,'runLeft');
-    this.animations.add('runLeft',[1,2,3],10,true);
+    this.velocity = gameOptions.playerSpeed;
+    this.jump = gameOptions.playerJump
     game.add.existing(this);
     this.state = 'mario';
    
