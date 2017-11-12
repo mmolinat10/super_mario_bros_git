@@ -27,6 +27,11 @@ marioBros.level1 = function (game) {
 
 };
 
+function keyCollision (player, ground) {
+
+    console.log('colision');
+
+}
 
 marioBros.level1.prototype = {
     init:function(){
@@ -48,13 +53,23 @@ marioBros.level1.prototype = {
         
         map = this.game.add.tilemap('level1');
         map.addTilesetImage('tileset_levels');
- 
-        map.createLayer('Background_Color');
-        this.layer = map.createLayer('Graphic_Layer');
-        this.layer.resizeWorld();
+    
+        backgroundColor = map.createLayer('Background_Color');
+        graphicLayer = map.createLayer('Graphic_Layer');
+        backgroundColor.resizeWorld();
+        graphicLayer.resizeWorld();
+        //map.setCollisionByIndex(1);
+        //map.setCollisionByExclusion([99,100], true, this.layer);
+        //map.setCollisionBetween(0,900,true,this.layer,true);
+        //this.layer.wrap = true;
         
+        /*
+        this.ground = this.game.add.group();
+        this.ground.enablebody = true;
+        this.ground.physicsBodyType = Phaser.Physics.ARCADE;*/
+        //map.createFromObjects('Ground','ground',null,0,true,false,this.ground);
         //collisionArray = [0, 1, 2, 3, 25, 34, 265, 266, 298, 299];
-        //map.setCollision(collisionArray);
+       
         
         cursors = this.game.input.keyboard.createCursorKeys();
         this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
@@ -69,8 +84,11 @@ marioBros.level1.prototype = {
     },
     
     update:function(){      
-
-        //this.game.physics.arcade.collide(this.player,this.layer);
+        
+        this.game.physics.arcade.collide(this.player,graphicLayer, keyCollision);
+        //this.game.physics.arcade.overlap(this.player, this.ground, keyCollision, null, this);
+            
+        
         
         /*
         this.player.body.velocity.x = 0;
@@ -100,6 +118,8 @@ marioBros.level1.prototype = {
         
         
     }
+    
+    
 };
 
 
