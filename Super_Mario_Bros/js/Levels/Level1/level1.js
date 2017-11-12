@@ -1,55 +1,78 @@
+marioBros.level1 = function (game) {
+
+    //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
+
+    this.game;      //  a reference to the currently running game (Phaser.Game)
+    this.add;       //  used to add sprites, text, groups, etc (Phaser.GameObjectFactory)
+    this.camera;    //  a reference to the game camera (Phaser.Camera)
+    this.cache;     //  the game cache (Phaser.Cache)
+    this.input;     //  the global input manager. You can access this.input.keyboard, this.input.mouse, as well from it. (Phaser.Input)
+    this.load;      //  for preloading assets (Phaser.Loader)
+    this.math;      //  lots of useful common math operations (Phaser.Math)
+    this.sound;     //  the sound manager - add a sound, play one, set-up markers, etc (Phaser.SoundManager)
+    this.stage;     //  the game stage (Phaser.Stage)
+    this.time;      //  the clock (Phaser.Time)
+    this.tweens;    //  the tween manager (Phaser.TweenManager)
+    this.state;     //  the state manager (Phaser.StateManager)
+    this.world;     //  the game world (Phaser.World)
+    this.particles; //  the particle manager (Phaser.Particles)
+    this.physics;   //  the physics manager (Phaser.Physics)
+    this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
+    this.runKey;
+    this.space;
+    this.jumpTimer;
+
+    //  You can use any of these from any function within this State.
+    //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
+
+};
 
 
-var marioBros = marioBros || {};
-
-marioBros.level1 = {
+marioBros.level1.prototype = {
     init:function(){
-        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-        //this.scale.setGameSize(gameOptions.gameWidth/2,gameOptions.gameHeight/2);   
-        this.scale.pageAlignHorizontally = true;
-        this.scale.pageAlignVertically = true;
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+      
+        //this.game.physics.startSystem(Phaser.Physics.ARCADE);
         
-        this.game.physics.arcade.gravity.y = gameOptions.playerGravity;
+        //this.game.physics.arcade.gravity.y = gameOptions.playerGravity;
         this.game.world.setBounds(0,0,gameOptions.level1Width,gameOptions.level1Height);
     },
     
     preload:function(){
-     this.load.tilemap('level1','tilemaps/level1.json',null,Phaser.Tilemap.TILED_JSON);
-     this.load.image('tileset_levels','tilemaps/tileset_levels.png');
-     this.load.spritesheet('mario','img/Player/Mario Small/mario small idle.png',19,16);
-     this.load.spritesheet('runLeft','img/Player/Mario Small/mario small.png',22,16);
-    this.load.image('Ground','img/Levels/block.png');
+     
 
     
     },
    
     create:function(){
      ;
-        this.map = this.game.add.tilemap('level1');
-        this.map.addTilesetImage('tileset_levels');
+        
+        map = this.game.add.tilemap('level1');
+        map.addTilesetImage('tileset_levels');
  
-        this.map.createLayer('Background_Color');
-        this.map.createLayer('Graphic_Layer');
+        map.createLayer('Background_Color');
+        this.layer = map.createLayer('Graphic_Layer');
+        this.layer.resizeWorld();
         
-        this.map.addTilesetImage('Ground');
-  
-        this.player = new marioBros.marioPrefab(this.game,150,150);
-        this.player.anchor.setTo(0.5);
-        this.player.scale.setTo(2);
-        this.player.animations.add('runLeft',[1,2,3,4],6,false);
-   
-        this.camera.follow(this.player, Phaser.Camera.FOLLOW_PLATFORMER);
-        this.game.physics.arcade.enable(this.player);
-        this.player.body.collideWorldBounds = true;
+        //collisionArray = [0, 1, 2, 3, 25, 34, 265, 266, 298, 299];
+        //map.setCollision(collisionArray);
         
-        this.cursors = this.game.input.keyboard.createCursorKeys();
+        cursors = this.game.input.keyboard.createCursorKeys();
+        this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        
+        this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/2-25);
+        this.game.add.existing(this.player);
+         
+        this.camera.follow(this.player, Phaser.Camera.FOLLOW_PLATFORMER);
+        
+        
     },
     
     update:function(){      
-       this.game.physics.arcade.collide(this.player,this.walls);
-         
+
+        //this.game.physics.arcade.collide(this.player,this.layer);
+        
+        /*
         this.player.body.velocity.x = 0;
       
         if(this.cursors.left.isDown){
@@ -72,7 +95,10 @@ marioBros.level1 = {
         }
         if(!this.player.body.blocked.down){
             this.player.frame = 6;
-        }
+        }*/
+        
+        
+        
     }
 };
 
