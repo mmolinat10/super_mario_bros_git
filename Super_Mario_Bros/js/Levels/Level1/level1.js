@@ -2,35 +2,48 @@ marioBros.level1 = function (game) {
 
     //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
-    this.game;      //  a reference to the currently running game (Phaser.Game)
-    this.add;       //  used to add sprites, text, groups, etc (Phaser.GameObjectFactory)
-    this.camera;    //  a reference to the game camera (Phaser.Camera)
-    this.cache;     //  the game cache (Phaser.Cache)
-    this.input;     //  the global input manager. You can access this.input.keyboard, this.input.mouse, as well from it. (Phaser.Input)
-    this.load;      //  for preloading assets (Phaser.Loader)
-    this.math;      //  lots of useful common math operations (Phaser.Math)
-    this.sound;     //  the sound manager - add a sound, play one, set-up markers, etc (Phaser.SoundManager)
-    this.stage;     //  the game stage (Phaser.Stage)
-    this.time;      //  the clock (Phaser.Time)
-    this.tweens;    //  the tween manager (Phaser.TweenManager)
-    this.state;     //  the state manager (Phaser.StateManager)
-    this.world;     //  the game world (Phaser.World)
-    this.particles; //  the particle manager (Phaser.Particles)
-    this.physics;   //  the physics manager (Phaser.Physics)
-    this.rnd;       //  the repeatable random number generator (Phaser.RandomDataGenerator)
+    this.game;      
+    this.add;       
+    this.camera;    
+    this.input;     
+    this.sound;     
     this.runKey;
     this.space;
+    this.escape;
     this.jumpTimer;
-
-    //  You can use any of these from any function within this State.
-    //  But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
+   
 
 };
 
-function keyCollision (player, ground) {
+function pipeAccess(player, pipesAccess){
 
-    console.log('colision');
+    if(this.cursors.down.isDown){
+        player.body.position.y += 140;
+        this.camera.y += 200;
+        this.pipeLevel1.play();
+    }
+    
+}
 
+function pipeExit(player, exitPipes){
+
+    if(this.cursors.right.isDown){
+        player.body.position.x = 2630;
+        player.body.position.y = (this.game.world.height/2-25)-60;
+        this.camera.y -= 200;
+        this.pipeLevel1.play();
+    }
+    
+    
+}
+
+function dead(player, deadZones){
+
+    player.body.position.x = 50;
+    player.body.position.y = this.game.world.height/2-30;
+    player.die = true;    
+    this.soundLevel1.stop();
+    
 }
 
 marioBros.level1.prototype = {
@@ -50,72 +63,82 @@ marioBros.level1.prototype = {
    
     create:function(){
      ;
+        this.soundLevel1 = this.game.add.audio('level1');
+        this.soundLevel1.loopFull();
         
-        map = this.game.add.tilemap('level1');
-        map.addTilesetImage('tileset_levels');
+        this.pipeLevel1 = this.game.add.audio('pipe');
+                
+        this.map = this.game.add.tilemap('level1');
+        this.map.addTilesetImage('tileset_levels');
     
-        backgroundColor = map.createLayer('Background_Color');
-        graphicLayer = map.createLayer('Graphic_Layer');
-        backgroundColor.resizeWorld();
-        graphicLayer.resizeWorld();
-        //map.setCollisionByIndex(1);
-        //map.setCollisionByExclusion([99,100], true, this.layer);
-        //map.setCollisionBetween(0,900,true,this.layer,true);
-        //this.layer.wrap = true;
+        this.backgroundColor = this.map.createLayer('Background_Color');
+        this.graphicLayer = this.map.createLayer('Graphic_Layer');
         
-        /*
-        this.ground = this.game.add.group();
-        this.ground.enablebody = true;
-        this.ground.physicsBodyType = Phaser.Physics.ARCADE;*/
-        //map.createFromObjects('Ground','ground',null,0,true,false,this.ground);
-        //collisionArray = [0, 1, 2, 3, 25, 34, 265, 266, 298, 299];
-       
+        //1 bloque suelo
+        //2 bloque rompible
+        //25 bloque interrogante
+        //34 bloques solidos
+        //67 bloque suelo subnivel
+        //69 bloque paredes subnivel 
+        //265 266 267 268 269 298 299 300 301 301 302 Tuberias
         
-        cursors = this.game.input.keyboard.createCursorKeys();
+        
+        this.map.setCollision([1,2,25,34,46,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
+      
+        //coins object layer (es aplicable para obtener otros object layers del json)
+        //muy util para luego situar prefabs de objects sabiendo las coordenadas del object layer
+        /*-----
+        this.coins = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('Coins', 'coins', '', 0, true, false, this.coins);
+        ------*/
+        
+        this.pipesAccess = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('PipesAccess', 'pipesAccess', '', 0, true, false, this.pipesAccess);
+        
+        this.exitPipes = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('ExitPipes', 'exitPipes', '', 0, true, false, this.exitPipes);
+        
+        this.deadZones = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('DeadZones', 'deadZones', '', 0, true, false, this.deadZones);
+        
+        this.backgroundColor.resizeWorld();
+        this.graphicLayer.resizeWorld();
+        
+        
+        this.cursors = this.game.input.keyboard.createCursorKeys();
         this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.escape = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         
         this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/2-25);
+        
         this.game.add.existing(this.player);
          
-        this.camera.follow(this.player, Phaser.Camera.FOLLOW_PLATFORMER);
-        
+        this.camera.follow(this.player, null, 1, 0);
         
     },
     
     update:function(){      
         
-        this.game.physics.arcade.collide(this.player,graphicLayer, keyCollision);
-        //this.game.physics.arcade.overlap(this.player, this.ground, keyCollision, null, this);
-            
+        this.game.physics.arcade.collide(this.player,this.graphicLayer);
+        
+        //detect collision overlap with coins object layer (ejemplo para ver que funciona... ya que esto no se aplicara en la version final)
+        //la detección de colision y destrucción como por ejemplo las monedas se hara con prefabs y no con object layers..estos ultimos solo sirven de referencia (situación en el mapa de los elementos)
+        /*-----
+        this.game.physics.arcade.overlap(this.player, this.coins, keyCollision, null, this);
+        .------*/   
+        
+        this.game.physics.arcade.overlap(this.player, this.pipesAccess, pipeAccess, null, this);
+        this.game.physics.arcade.overlap(this.player, this.exitPipes, pipeExit, null, this);
+        this.game.physics.arcade.overlap(this.player, this.deadZones, dead, null, this);
         
         
         /*
-        this.player.body.velocity.x = 0;
-      
-        if(this.cursors.left.isDown){
-            this.player.body.velocity.x = -this.player.velocity;
-            this.player.animations.play('runLeft');
-            
-            this.player.scale.x = -2;
-         } else if (this.cursors.right.isDown){
-            this.player.body.velocity.x = this.player.velocity;
-            this.player.animations.play('runLeft');
-          this.player.scale.setTo(2,2);            
-        }else{
-              this.player.frame = 0;
-        }
-        
-         if(this.space.isDown 
-            && this.player.body.blocked.down
-            && this.space.downDuration(1)){
-            this.player.body.velocity.y = -gameOptions.playerJump;
-        }
-        if(!this.player.body.blocked.down){
-            this.player.frame = 6;
+        if(this.escape.isDown && !this.game.paused){
+            this.game.paused = true;
+        }else if(this.escape.isDown && this.game.paused){
+            this.game.paused = false;  
         }*/
-        
-        
         
     }
     
