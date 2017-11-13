@@ -9,7 +9,7 @@ marioBros.twoPlayers.prototype = {
 
     create: function () {
 
-        this.textTwoPlayersScene = this.add.text(40, 95, textTwoPlayersScene, style5);
+        this.textTwoPlayersScene = this.add.text(40, 95, textTwoPlayersScene, style3);
        
 
         this.game.stage.backgroundColor = '#4e4845';

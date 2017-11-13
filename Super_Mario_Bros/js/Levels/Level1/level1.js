@@ -150,7 +150,7 @@ marioBros.level1.prototype = {
     },
     
     startMenu: function () {
-
+        this.soundLevel1.stop();
         this.state.start('menu');
     }
     

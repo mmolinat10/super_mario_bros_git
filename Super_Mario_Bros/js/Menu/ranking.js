@@ -9,7 +9,7 @@ marioBros.ranking.prototype = {
 
     create: function () {
 
-        this.textRankingScene = this.add.text(50, 95, textRankingScene, style4);
+        this.textRankingScene = this.add.text(50, 95, textRankingScene, style2);
        
 
         this.game.stage.backgroundColor = '#4e4845';

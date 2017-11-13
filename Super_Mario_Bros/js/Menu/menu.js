@@ -13,9 +13,9 @@ marioBros.menu.prototype = {
     create: function () {
 
         this.title = this.add.sprite(0, -50, 'title');
-        this.text1Player = this.add.text(100, 137, text1Player, style1);
-        this.text2Player = this.add.text(100, 155, text2Player, style2);
-        this.textRanking = this.add.text(100, 173, textRanking, style3);
+        this.text1Player = this.add.text(100, 137, text1Player, style);
+        this.text2Player = this.add.text(100, 155, text2Player, style);
+        this.textRanking = this.add.text(100, 173, textRanking, style);
         this.cursor = this.add.sprite(this.text1Player.position.x-15, this.text1Player.position.y+3, 'cursor');
        
 
@@ -49,7 +49,7 @@ marioBros.menu.prototype = {
         if(this.posMenu == 0){
             this.cursor.position.y = this.text1Player.position.y+3;
             if (this.spaceKey.isDown || this.enter.isDown) {
-                this.startGame();
+                this.startLoadGame();
             }
         }
         else if(this.posMenu == 1){
@@ -68,9 +68,9 @@ marioBros.menu.prototype = {
         
     },
 
-    startGame: function () {
+    startLoadGame: function () {
 
-        this.state.start('level1');
+        this.state.start('loadLevel');
     },
     
     startGameTwoPlayers: function () {

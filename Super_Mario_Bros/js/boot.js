@@ -10,9 +10,11 @@ marioBros.boot.prototype = {
 
         //  Phaser will automatically pause if the browser tab the game is in loses focus. You can disable that here:
         this.stage.disableVisibilityChange = true;
-
-        //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.pageAlignHorizontally = true;
+        this.scale.pageAlignVertically = true;
+        this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.scale.setMinMax(200, 100, 600, 400);
+        
         
        
         //this.scale.setGameSize(gameOptions.gameWidth*2, gameOptions.gameHeight*2);
