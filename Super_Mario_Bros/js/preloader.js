@@ -1,10 +1,7 @@
 
 marioBros.preloader = function (game) {
 
-    this.background = null;
-    this.preloadBar = null;
-
-    this.ready = false;
+ 
 
 };
 
@@ -28,17 +25,22 @@ marioBros.preloader.prototype = {
         //this.load.image('Ground','img/Levels/block.png');
         
         
-        text = "Start Game";
-        style = { font: "12px Arial", fill: "#ffffff", align: "center"};
+        text1Player = "1-Player";
+        style1 = { font: "12px Arial", fill: "#ffffff", align: "center"};
+        text2Player = "2-Player";
+        style2 = { font: "12px Arial", fill: "#ffffff", align: "center"};
+        textRanking = "Ranking";
+        style3 = { font: "12px Arial", fill: "#ffffff", align: "center"};
+
     },
 
     create: function () {
-
+        this.state.start('menu');
     },
 
     update: function () {
 
-        this.state.start('menu');
+        
     }
 
 };

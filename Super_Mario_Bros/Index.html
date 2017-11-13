@@ -30,7 +30,7 @@
         window.onload = function() {
 
             var game = new Phaser.Game(gameOptions.gameWidth,gameOptions.gameHeight,Phaser.AUTO,'gameFrame');
-
+            
             game.state.add('boot', marioBros.boot);
             game.state.add('preloader', marioBros.preloader);
             game.state.add('menu', marioBros.menu);

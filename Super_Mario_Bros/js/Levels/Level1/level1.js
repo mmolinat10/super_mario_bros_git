@@ -83,7 +83,7 @@ marioBros.level1.prototype = {
         //265 266 267 268 269 298 299 300 301 301 302 Tuberias
         
         
-        this.map.setCollision([1,2,25,34,46,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
+        this.map.setCollision([1,2,25,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
       
         //coins object layer (es aplicable para obtener otros object layers del json)
         //muy util para luego situar prefabs de objects sabiendo las coordenadas del object layer

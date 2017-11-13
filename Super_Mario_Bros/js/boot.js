@@ -13,8 +13,9 @@ marioBros.boot.prototype = {
 
         //this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.scale.pageAlignHorizontally = true;
+        
        
-
+        //this.scale.setGameSize(gameOptions.gameWidth*2, gameOptions.gameHeight*2);
     },
 
     preload: function () {
