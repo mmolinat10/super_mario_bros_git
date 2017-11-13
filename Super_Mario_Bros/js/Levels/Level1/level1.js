@@ -21,6 +21,8 @@ function pipeAccess(player, pipesAccess){
         player.body.position.y += 140;
         this.camera.y += 200;
         this.pipeLevel1.play();
+        //this.camera.follow(this.player, null, 0, 0);
+        
     }
     
 }
@@ -32,6 +34,7 @@ function pipeExit(player, exitPipes){
         player.body.position.y = (this.game.world.height/2-25)-60;
         this.camera.y -= 200;
         this.pipeLevel1.play();
+        //this.camera.follow(this.player, null, 1, 0);
     }
     
     
@@ -140,6 +143,15 @@ marioBros.level1.prototype = {
             this.game.paused = false;  
         }*/
         
+        if(this.escape.isDown){
+            this.startMenu();
+        }
+        
+    },
+    
+    startMenu: function () {
+
+        this.state.start('menu');
     }
     
     

@@ -10,6 +10,8 @@
         <script src="js/preloader.js"></script>
         <script src="js/Player/player.js"></script>
         <script src="js/Menu/menu.js"></script>
+        <script src="js/Menu/twoPlayers.js"></script>
+        <script src="js/Menu/ranking.js"></script>
         <script src="js/Levels/Level1/level1.js"></script>
         
         
@@ -34,6 +36,8 @@
             game.state.add('boot', marioBros.boot);
             game.state.add('preloader', marioBros.preloader);
             game.state.add('menu', marioBros.menu);
+            game.state.add('twoPlayers', marioBros.twoPlayers);
+            game.state.add('ranking', marioBros.ranking);
             game.state.add('level1', marioBros.level1);
 
             game.state.start('boot');

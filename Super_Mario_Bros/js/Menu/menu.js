@@ -4,6 +4,8 @@ marioBros.menu = function (game) {
     this.cursors;
     this.posMenu;
     this.isDownKeyPress;
+    this.isUpKeyPress;
+    this.enter;
 };
 
 marioBros.menu.prototype = {
@@ -19,51 +21,65 @@ marioBros.menu.prototype = {
 
         this.game.stage.backgroundColor = '#6B8CFF';
         this.spaceKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.enter = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
         this.cursors = this.game.input.keyboard.createCursorKeys();
         this.posMenu = 0;
         this.isDownKeyPress = false;
+        this.isUpKeyPress = false;
     },
 
     update: function () {
 
-        if(this.cursors.down.isDown && this.posMenu < 2){
+        if(this.cursors.down.isDown && this.posMenu < 2 && !this.isDownKeyPress){
             this.isDownKeyPress = true;
-            
-            
-        }else{
-            this.isDownKeyPress = false;
+            this.posMenu++;
         }
-        if(this.isDownKeyPress){
-           this.posMenu++;
+        else if(this.cursors.down.isUp){
+              this.isDownKeyPress = false;
         }
         
-        if(this.cursors.up.isDown && this.posMenu >= 0){
-            this.isDownKeyPress = true;
-           this.posMenu--;
-        }else{
-            this.isDownKeyPress = false;
+        
+        if(this.cursors.up.isDown && this.posMenu >= 0 && !this.isUpKeyPress){
+            this.isUpKeyPress = true;
+            this.posMenu--;
+        }else if(this.cursors.up.isUp){
+            this.isUpKeyPress = false;
         }
-        if(this.isDownKeyPress){
-           this.posMenu--;
-        }
-
+      
         if(this.posMenu == 0){
-           this.cursor.position.y = this.text1Player.position.y+3;
+            this.cursor.position.y = this.text1Player.position.y+3;
+            if (this.spaceKey.isDown || this.enter.isDown) {
+                this.startGame();
+            }
         }
         else if(this.posMenu == 1){
             this.cursor.position.y = this.text2Player.position.y+3;    
+            if (this.spaceKey.isDown || this.enter.isDown) {
+                this.startGameTwoPlayers();
+            }
         }
         else if(this.posMenu == 2){
-            this.cursor.position.y = this.textRanking.position.y+3;    
+            this.cursor.position.y = this.textRanking.position.y+3;  
+            if (this.spaceKey.isDown || this.enter.isDown) {
+                this.startRanking();
+            }
         }
            
-        if (this.spaceKey.isDown) {
-            this.startGame();
-        }
+        
     },
 
-    startGame: function (pointer) {
+    startGame: function () {
 
         this.state.start('level1');
+    },
+    
+    startGameTwoPlayers: function () {
+
+        this.state.start('twoPlayers');
+    },
+
+    startRanking: function () {
+
+        this.state.start('ranking');
     }
 };

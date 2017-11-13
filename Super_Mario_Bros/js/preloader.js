@@ -19,7 +19,7 @@ marioBros.preloader.prototype = {
         this.load.audio('jumpSmall', 'sounds/Player/jumpSmall.wav');
         this.load.audio('mariodie', 'sounds/Player/mariodie.wav');
         this.load.audio('pipe', 'sounds/Player/pipe.wav');
-        this.load.audio('pipe', 'sounds/pause.wav');
+        this.load.audio('pause', 'sounds/pause.wav');
         //this.load.spritesheet('mario','img/Player/Mario Small/mario small idle.png',19,16);
         //this.load.spritesheet('runLeft','img/Player/Mario Small/mario small.png',22,16);
         //this.load.image('Ground','img/Levels/block.png');
@@ -27,10 +27,18 @@ marioBros.preloader.prototype = {
         
         text1Player = "1-Player";
         style1 = { font: "12px Arial", fill: "#ffffff", align: "center"};
+        
         text2Player = "2-Player";
         style2 = { font: "12px Arial", fill: "#ffffff", align: "center"};
+        
         textRanking = "Ranking";
         style3 = { font: "12px Arial", fill: "#ffffff", align: "center"};
+        
+        textRankingScene = "Scene Ranking";
+        style4 = { font: "24px Arial", fill: "#ffffff", align: "center"};
+        
+        textTwoPlayersScene = "Scene Two Players";
+        style5 = { font: "20px Arial", fill: "#ffffff", align: "center"};
 
     },
 
