@@ -104,15 +104,15 @@
          "name":"DoorFinalLevel",
          "objects":[
                 {
-                 "height":32.5,
+                 "height":43,
                  "id":215,
-                 "name":"",
+                 "name":"doorFinalLevel",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":17.5,
-                 "x":3295,
-                 "y":159.5
+                 "width":22,
+                 "x":3293,
+                 "y":157.75
                 }],
          "opacity":1,
          "type":"objectgroup",

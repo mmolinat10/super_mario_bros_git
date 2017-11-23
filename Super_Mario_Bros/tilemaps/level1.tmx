@@ -499,7 +499,7 @@
 </data>
  </layer>
  <objectgroup name="DoorFinalLevel">
-  <object id="215" x="3295" y="159.5" width="17.5" height="32.5"/>
+  <object id="215" name="doorFinalLevel" x="3293" y="157.75" width="22" height="43"/>
  </objectgroup>
  <layer name="BrickCoins" width="240" height="39">
   <data encoding="csv">

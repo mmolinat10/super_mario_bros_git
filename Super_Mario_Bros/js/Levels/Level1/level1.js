@@ -11,36 +11,109 @@ marioBros.level1 = function (game) {
     this.space;
     this.escape;
     this.jumpTimer;
-   
 
 };
 
-function pipeAccess(player, pipesAccess){
-
-    if(this.cursors.down.isDown){
-        player.body.position.y += 140;
-        this.camera.y += 200;
-        this.pipeLevel1.play();
-        //this.camera.follow(this.player, null, 0, 0);
+function pipeAccess(player){
+    
+    if(player.body.blocked.down){
+        if(this.cursors.down.isDown){
+            player.body.position.y = 420;
+            this.camera.y = 400;
+            this.camera.x = 896;
+            this.pipeLevel1.play();
+            this.camera.follow(this.player, null, 0, 0);
         
-    }
-    
-}
-
-function pipeExit(player, exitPipes){
-
-    if(this.cursors.right.isDown){
-        player.body.position.x = 2630;
-        player.body.position.y = (this.game.world.height/3-25)-60;
-        this.camera.y -= 200;
-        this.pipeLevel1.play();
-        //this.camera.follow(this.player, null, 1, 0);
-    }
+        }
+    }  
     
     
 }
 
-function dead(player, deadZones){
+function pipeExit(player){
+
+    if(player.body.blocked.right){
+        if(this.cursors.right.isDown){
+            var exitPipeValue;
+            //ejemplo de obtener posicion de object layer
+            this.positionExitPipe.forEach(function(positionExitPipe){
+                positionExitPipe.body.immovable = true;
+                exitPipeValue = positionExitPipe;
+            }); 
+            player.body.position.x = exitPipeValue.x+8;
+            player.body.position.y = exitPipeValue.y;
+            this.camera.y -= 400;
+            this.camera.x -= 896;
+            this.pipeLevel1.play();
+            this.camera.follow(this.player, null, 1, 0);
+        }
+    }
+}
+
+function pipeNextLevel(player){
+
+    if(player.body.blocked.right){
+        if(this.cursors.right.isDown){
+            //tuberia next level
+            console.log("tuberia next level");
+        }
+    }
+}
+
+function flag(player){
+    console.log("bandera");
+}
+
+function finishLevelDoor(player){
+    console.log("puerta");
+}
+
+function brickCollision(player){
+    
+    if(player.body.blocked.up){
+        console.log("colision brick");
+            
+    }  
+}
+
+function brickCoinCollision(player){
+    if(player.body.blocked.up){
+        console.log("colision brick Coin");
+    }
+}
+
+function brickMushroomCollision(player){
+    if(player.body.blocked.up){
+        console.log("colision brick Mushroom");
+    }
+}
+
+function brickFlowerOrMushroomCollision(player){
+    if(player.body.blocked.up){
+        console.log("colision brick FlowerOrMushroom");
+    }
+}
+
+function brickStarCollision(player){
+    if(player.body.blocked.up){
+        console.log("colision brick Star");
+    }
+}
+
+function brickCoinsCollision(player){
+    if(player.body.blocked.up){
+        console.log("colision brick Coins");
+    }
+}
+
+function invisibleBlockCollision(player, bricksInvisible1UP){
+    if(bricksInvisible1UP.body.touching.down && player.body.touching.up){
+        console.log("colision invisible brick");
+        //funciona..poner codigo correspondiente
+    }    
+}
+
+function dead(player){
 
     player.body.position.x = 50;
     player.body.position.y = this.game.world.height/3-30;
@@ -142,7 +215,7 @@ marioBros.level1.prototype = {
         this.map.createFromObjects('PipesAccess', 'pipesAccess', '', 0, true, false, this.pipesAccess);
         
         this.pipesAccessLevel = this.game.add.physicsGroup(); 
-        this.map.createFromObjects('PipesAccessLevel', 'pipesAccessLevel', '', 0, true, false, this.pipesAccess);
+        this.map.createFromObjects('PipesAccessLevel', 'pipesAccessLevel', '', 0, true, false, this.pipesAccessLevel);
         
         this.exitPipes = this.game.add.physicsGroup(); 
         this.map.createFromObjects('ExitPipes', 'exitPipes', '', 0, true, false, this.exitPipes);
@@ -174,14 +247,17 @@ marioBros.level1.prototype = {
         this.bricksMushroom = this.game.add.physicsGroup(); 
         this.map.createFromObjects('BricksMushroom', 'bricksMushroom', '', 0, true, false, this.bricksMushroom);
         
+        this.bricksFlowerOrMushroom = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('BricksFlowerOrMushroom', 'bricksFlowerOrMushroom', '', 0, true, false, this.bricksFlowerOrMushroom);
+        
         this.coins = this.game.add.physicsGroup(); 
         this.map.createFromObjects('Coins', 'coins', '', 0, true, false, this.coins);
         
         this.bricksInvisible1UP = this.game.add.physicsGroup(); 
         this.map.createFromObjects('BricksInvisible1UP', 'bricksInvisible1UP', '', 0, true, false, this.bricksInvisible1UP);
         
-        this.finishLevelLayer = this.game.add.physicsGroup(); 
-        this.map.createFromObjects('FinishLevel', 'finishLevelLayer', '', 0, true, false, this.finishLevelLayer);
+        this.finishLevel = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('FinishLevel', 'finishLevel', '', 0, true, false, this.finishLevel);
         
         this.doorFinalLevel = this.game.add.physicsGroup(); 
         this.map.createFromObjects('DoorFinalLevel', 'doorFinalLevel', '', 0, true, false, this.doorFinalLevel);
@@ -202,16 +278,36 @@ marioBros.level1.prototype = {
         this.map.setCollision([1,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
         this.map.setCollision(2,true,this.bricksLayer);
         this.map.setCollision(25,true,this.bricksCoinLayer);
+        this.map.setCollision(25,true,this.bricksFlowerOrMushroomLayer);
+        this.map.setCollision(25,true,this.bricksMushroomLayer);
+        this.map.setCollision(2,true,this.brickStarLayer);
+        this.map.setCollision(2,true,this.brickCoinsLayer);
+        this.map.setCollision([265,266],true,this.pipesAccessLayer);
+        this.map.setCollision([267,300],true,this.exitPipesLayer);
+        this.map.setCollision(29,true,this.bricksInvisible1UPLayer);
+        this.map.setCollision([267,300],true,this.pipesAccessLevelLayer);
+        this.map.setCollision([281,314],true,this.finishLevelLayer);
     },
     
     collisionLayers: function(){
         this.game.physics.arcade.collide(this.player,this.graphicLayer);
-        this.game.physics.arcade.collide(this.player,this.bricksLayer);
-        this.game.physics.arcade.collide(this.player,this.bricksCoinLayer);
+        this.game.physics.arcade.collide(this.player,this.bricksLayer, brickCollision);
+        this.game.physics.arcade.collide(this.player,this.bricksCoinLayer, brickCoinCollision);
+        this.game.physics.arcade.collide(this.player,this.bricksMushroomLayer, brickMushroomCollision);
+        this.game.physics.arcade.collide(this.player,this.bricksFlowerOrMushroomLayer, brickFlowerOrMushroomCollision);
+        this.game.physics.arcade.collide(this.player,this.brickStarLayer, brickStarCollision);
+        this.game.physics.arcade.collide(this.player,this.brickCoinsLayer, brickCoinsCollision);
+        this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
+        this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
+        this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
+        this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
         
-        this.game.physics.arcade.overlap(this.player, this.pipesAccess, pipeAccess, null, this);
-        this.game.physics.arcade.overlap(this.player, this.exitPipes, pipeExit, null, this);
+        
+        this.game.physics.arcade.overlap(this.player,this.bricksInvisible1UP, invisibleBlockCollision, null, this);       
+        
         this.game.physics.arcade.overlap(this.player, this.deadZones, dead, null, this);
+        
+        this.game.physics.arcade.overlap(this.player,this.doorFinalLevel, finishLevelDoor, null, this);
         
     }
     
