@@ -122,6 +122,10 @@ function dead(player){
     
 }
 
+function createBlocksPrefabs(){
+    
+}
+
 marioBros.level1.prototype = {
     init:function(){
       
@@ -138,7 +142,6 @@ marioBros.level1.prototype = {
     },
    
     create:function(){
-     ;
         this.soundLevel1 = this.game.add.audio('level1');
         this.soundLevel1.loopFull();
         
@@ -163,20 +166,10 @@ marioBros.level1.prototype = {
         this.escape = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         
         this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25);
+        this.game.add.existing(this.player);       
+       
+        this.createBlocksPrefabs();
         
-        /*
-        ejemplo creacion prefab brick..funciona! falta mirar como hacer colision en el brick.js
-        this.brick = [];
-        this.brickPos;
-        
-        for(var i = 0; i < this.bricks.children.length; i++){
-            this.brickPos = this.bricks.children[i];
-            this.brick.push(new marioBros.brickPrefab(this.game,this.brickPos.x,this.brickPos.y+16, this.player));
-            this.game.add.existing(this.brick[i]);
-            //console.log(i); num de object layers bricks
-        }*/
-        
-        this.game.add.existing(this.player);        
          
         this.camera.follow(this.player, null, 1, 0);
         
@@ -209,11 +202,11 @@ marioBros.level1.prototype = {
     createLayers: function(){
         this.backgroundColor = this.map.createLayer('Background_Color');
         this.graphicLayer = this.map.createLayer('Graphic_Layer');
-        this.bricksLayer = this.map.createLayer('Bricks');
+        //this.bricksLayer = this.map.createLayer('Bricks');
         this.brickStarLayer = this.map.createLayer('BrickStar');
         this.bricksMushroomLayer = this.map.createLayer('BricksMushroom');
         this.bricksFlowerOrMushroomLayer = this.map.createLayer('BricksFlowerOrMushroom');
-        this.bricksCoinLayer = this.map.createLayer('BricksCoin');
+        //this.bricksCoinLayer = this.map.createLayer('BricksCoin');
         this.brickCoinsLayer = this.map.createLayer('BrickCoins');
         this.pipesAccessLevelLayer = this.map.createLayer('PipesAccessLevel');
         this.bricksInvisible1UPLayer = this.map.createLayer('BricksInvisible1UP');
@@ -288,8 +281,8 @@ marioBros.level1.prototype = {
         
         
         this.map.setCollision([1,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
-        this.map.setCollision(2,true,this.bricksLayer);
-        this.map.setCollision(25,true,this.bricksCoinLayer);
+        //this.map.setCollision(2,true,this.bricksLayer);
+        //this.map.setCollision(25,true,this.bricksCoinLayer);
         this.map.setCollision(25,true,this.bricksFlowerOrMushroomLayer);
         this.map.setCollision(25,true,this.bricksMushroomLayer);
         this.map.setCollision(2,true,this.brickStarLayer);
@@ -303,8 +296,8 @@ marioBros.level1.prototype = {
     
     collisionLayers: function(){
         this.game.physics.arcade.collide(this.player,this.graphicLayer);
-        this.game.physics.arcade.collide(this.player,this.bricksLayer, brickCollision);
-        this.game.physics.arcade.collide(this.player,this.bricksCoinLayer, brickCoinCollision);
+        //this.game.physics.arcade.collide(this.player,this.bricksLayer, brickCollision);
+        //this.game.physics.arcade.collide(this.player,this.bricksCoinLayer, brickCoinCollision);
         this.game.physics.arcade.collide(this.player,this.bricksMushroomLayer, brickMushroomCollision);
         this.game.physics.arcade.collide(this.player,this.bricksFlowerOrMushroomLayer, brickFlowerOrMushroomCollision);
         this.game.physics.arcade.collide(this.player,this.brickStarLayer, brickStarCollision);
@@ -314,13 +307,6 @@ marioBros.level1.prototype = {
         this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
         this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
         
-        /*
-        intent de colisio amb prefab brick (tendria que ser desde el propio brick.js pero no se hacerlo)
-        for(var i = 0; i < this.brick.length; i++){
-            
-            this.game.physics.arcade.collide(this.player, this.brick[i], brickCollision);
-        }*/
-        
         
         
         this.game.physics.arcade.overlap(this.player,this.bricksInvisible1UP, invisibleBlockCollision, null, this);       
@@ -329,6 +315,28 @@ marioBros.level1.prototype = {
         
         this.game.physics.arcade.overlap(this.player,this.doorFinalLevel, finishLevelDoor, null, this);
         
+    },
+    
+    createBlocksPrefabs: function(){
+        this.brick = [];
+        this.brickPos;
+        
+        for(var i = 0; i < this.bricks.children.length; i++){
+            this.brickPos = this.bricks.children[i];
+            this.brick.push(new marioBros.brickPrefab(this.game,this.brickPos.x,this.brickPos.y+16, this));
+            this.game.add.existing(this.brick[i]);
+            //console.log(i); num de object layers bricks
+        }
+        
+        this.brickCoin = [];
+        this.brickCoinPos;
+        
+        for(var i = 0; i < this.bricksCoin.children.length; i++){
+            this.brickCoinPos = this.bricksCoin.children[i];
+            this.brickCoin.push(new marioBros.brickCoinPrefab(this.game,this.brickCoinPos.x,this.brickCoinPos.y+16, this));
+            this.game.add.existing(this.brickCoin[i]);
+            //console.log(i); num de object layers bricks
+        }
     }
     
     

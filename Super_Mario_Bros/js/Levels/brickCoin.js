@@ -1,6 +1,6 @@
-marioBros.brickPrefab = function(game,x,y,level)
+marioBros.brickCoinPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'brick');
+    Phaser.Sprite.call(this,game,x,y,'brickCoin');
     
     //this.animations.add('break', [10, 9, 8], 10, true);
     
@@ -11,13 +11,11 @@ marioBros.brickPrefab = function(game,x,y,level)
     this.level = level;
         
 };
-marioBros.brickPrefab.prototype = Object.create(Phaser.Sprite.prototype);
-marioBros.brickPrefab.prototype.constructor = marioBros.brickPrefab;
+marioBros.brickCoinPrefab.prototype = Object.create(Phaser.Sprite.prototype);
+marioBros.brickCoinPrefab.prototype.constructor = marioBros.brickCoinPrefab;
 
-marioBros.brickPrefab.prototype.update = function(){
+marioBros.brickCoinPrefab.prototype.update = function(){
     this.game.physics.arcade.collide(this, this.level.player);
     
     
 };
-
-
