@@ -164,7 +164,19 @@ marioBros.level1.prototype = {
         
         this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25);
         
-        this.game.add.existing(this.player);
+        /*
+        ejemplo creacion prefab brick..funciona! falta mirar como hacer colision en el brick.js
+        this.brick = [];
+        this.brickPos;
+        
+        for(var i = 0; i < this.bricks.children.length; i++){
+            this.brickPos = this.bricks.children[i];
+            this.brick.push(new marioBros.brickPrefab(this.game,this.brickPos.x,this.brickPos.y+16, this.player));
+            this.game.add.existing(this.brick[i]);
+            //console.log(i); num de object layers bricks
+        }*/
+        
+        this.game.add.existing(this.player);        
          
         this.camera.follow(this.player, null, 1, 0);
         
@@ -301,6 +313,14 @@ marioBros.level1.prototype = {
         this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
         this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
         this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
+        
+        /*
+        intent de colisio amb prefab brick (tendria que ser desde el propio brick.js pero no se hacerlo)
+        for(var i = 0; i < this.brick.length; i++){
+            
+            this.game.physics.arcade.collide(this.player, this.brick[i], brickCollision);
+        }*/
+        
         
         
         this.game.physics.arcade.overlap(this.player,this.bricksInvisible1UP, invisibleBlockCollision, null, this);       

@@ -30,7 +30,6 @@ marioBros.marioPrefab.prototype.constructor = marioBros.marioPrefab;
 
 marioBros.marioPrefab.prototype.update = function(){
     
-    
     if (this.cursors.right.isDown) {
 
         this.body.acceleration.x = 300;
