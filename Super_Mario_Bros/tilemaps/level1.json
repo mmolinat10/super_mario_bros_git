@@ -844,17 +844,6 @@
                  "y":64
                 }, 
                 {
-                 "height":0,
-                 "id":81,
-                 "name":"bricksCoin",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2096,
-                 "y":64
-                }, 
-                {
                  "height":16,
                  "id":83,
                  "name":"bricksCoin",
@@ -1333,17 +1322,6 @@
                  "y":128
                 }, 
                 {
-                 "height":0,
-                 "id":98,
-                 "name":"bricks",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1520,
-                 "y":128
-                }, 
-                {
                  "height":16,
                  "id":99,
                  "name":"bricks",
@@ -1374,17 +1352,6 @@
                  "visible":true,
                  "width":16,
                  "x":1472,
-                 "y":64
-                }, 
-                {
-                 "height":0,
-                 "id":103,
-                 "name":"bricks",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":1408,
                  "y":64
                 }, 
                 {

@@ -205,9 +205,9 @@ marioBros.level1.prototype = {
         //this.bricksLayer = this.map.createLayer('Bricks');
         this.brickStarLayer = this.map.createLayer('BrickStar');
         this.bricksMushroomLayer = this.map.createLayer('BricksMushroom');
-        this.bricksFlowerOrMushroomLayer = this.map.createLayer('BricksFlowerOrMushroom');
+        //this.bricksFlowerOrMushroomLayer = this.map.createLayer('BricksFlowerOrMushroom');
         //this.bricksCoinLayer = this.map.createLayer('BricksCoin');
-        this.brickCoinsLayer = this.map.createLayer('BrickCoins');
+        //this.brickCoinsLayer = this.map.createLayer('BrickCoins');
         this.pipesAccessLevelLayer = this.map.createLayer('PipesAccessLevel');
         this.bricksInvisible1UPLayer = this.map.createLayer('BricksInvisible1UP');
         this.pipesAccessLayer = this.map.createLayer('PipesAccess');
@@ -283,10 +283,10 @@ marioBros.level1.prototype = {
         this.map.setCollision([1,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
         //this.map.setCollision(2,true,this.bricksLayer);
         //this.map.setCollision(25,true,this.bricksCoinLayer);
-        this.map.setCollision(25,true,this.bricksFlowerOrMushroomLayer);
+        //this.map.setCollision(25,true,this.bricksFlowerOrMushroomLayer);
         this.map.setCollision(25,true,this.bricksMushroomLayer);
         this.map.setCollision(2,true,this.brickStarLayer);
-        this.map.setCollision(2,true,this.brickCoinsLayer);
+        //this.map.setCollision(2,true,this.brickCoinsLayer);
         this.map.setCollision([265,266],true,this.pipesAccessLayer);
         this.map.setCollision([267,300],true,this.exitPipesLayer);
         this.map.setCollision(29,true,this.bricksInvisible1UPLayer);
@@ -299,9 +299,9 @@ marioBros.level1.prototype = {
         //this.game.physics.arcade.collide(this.player,this.bricksLayer, brickCollision);
         //this.game.physics.arcade.collide(this.player,this.bricksCoinLayer, brickCoinCollision);
         this.game.physics.arcade.collide(this.player,this.bricksMushroomLayer, brickMushroomCollision);
-        this.game.physics.arcade.collide(this.player,this.bricksFlowerOrMushroomLayer, brickFlowerOrMushroomCollision);
+        //this.game.physics.arcade.collide(this.player,this.bricksFlowerOrMushroomLayer, brickFlowerOrMushroomCollision);
         this.game.physics.arcade.collide(this.player,this.brickStarLayer, brickStarCollision);
-        this.game.physics.arcade.collide(this.player,this.brickCoinsLayer, brickCoinsCollision);
+        //this.game.physics.arcade.collide(this.player,this.brickCoinsLayer, brickCoinsCollision);
         this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
         this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
         this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
@@ -328,6 +328,7 @@ marioBros.level1.prototype = {
             //console.log(i); num de object layers bricks
         }
         
+        
         this.brickCoin = [];
         this.brickCoinPos;
         
@@ -336,6 +337,26 @@ marioBros.level1.prototype = {
             this.brickCoin.push(new marioBros.brickCoinPrefab(this.game,this.brickCoinPos.x,this.brickCoinPos.y+16, this));
             this.game.add.existing(this.brickCoin[i]);
             //console.log(i); num de object layers bricks
+        }
+        
+        
+        this.brickCoinsA = [];
+        this.brickCoinsPos;
+        
+        for(var i = 0; i < this.brickCoins.children.length; i++){
+            this.brickCoinsPos = this.brickCoins.children[i];
+            this.brickCoinsA.push(new marioBros.brickCoinsPrefab(this.game,this.brickCoinsPos.x,this.brickCoinsPos.y+16, this));
+            this.game.add.existing(this.brickCoinsA[i]);
+            //console.log(i); num de object layers bricks
+        }
+        
+        
+        this.brickFlowerOrMushroom = [];
+        this.brickFlowerOrMushroomPos;
+        for(var i = 0; i < this.bricksFlowerOrMushroom.length; i++){
+            this.brickFlowerOrMushroomPos = this.bricksFlowerOrMushroom.children[i];
+            this.brickFlowerOrMushroom.push(new marioBros.brickFlowerOrMushroomPrefab(this.game,this.brickFlowerOrMushroomPos.x,this.brickFlowerOrMushroomPos.y+16, this));
+            this.game.add.existing(this.brickFlowerOrMushroom[i]);
         }
     }
     

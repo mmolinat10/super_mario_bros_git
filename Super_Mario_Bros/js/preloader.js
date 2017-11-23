@@ -17,6 +17,8 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('mario', 'img/Player/Mario Small/Other_version/small_mario.png', 16, 16);
         this.load.spritesheet('brick', 'img/Levels/brick.png', 16, 16);
         this.load.spritesheet('brickCoin', 'img/Levels/questionMarkBlock.png', 16, 16);
+        this.load.spritesheet('brickCoins', 'img/Levels/brick.png', 16, 16);
+        this.load.spritesheet('brickFlowerOrMushroom', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
         this.load.audio('jumpSmall', 'sounds/Player/jumpSmall.wav');
         this.load.audio('mariodie', 'sounds/Player/mariodie.wav');

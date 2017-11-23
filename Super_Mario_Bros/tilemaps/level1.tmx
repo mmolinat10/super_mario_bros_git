@@ -743,7 +743,6 @@
   <object id="77" name="bricksCoin" x="1760" y="128" width="16" height="16"/>
   <object id="79" name="bricksCoin" x="1808" y="128" width="16" height="16"/>
   <object id="80" name="bricksCoin" x="2080" y="64" width="16" height="16"/>
-  <object id="81" name="bricksCoin" x="2096" y="64" width="16"/>
   <object id="83" name="bricksCoin" x="2096" y="64" width="16" height="16"/>
   <object id="84" name="bricksCoin" x="2736" y="128" width="16" height="16"/>
   <object id="159" name="bricksCoin" x="255.969" y="127.969" width="16.0313" height="16.0625"/>
@@ -794,11 +793,9 @@
   <object id="93" name="bricks" x="1968" y="64" width="16" height="16"/>
   <object id="94" name="bricks" x="1984" y="64" width="16" height="16"/>
   <object id="97" name="bricks" x="1616" y="128" width="16" height="16"/>
-  <object id="98" name="bricks" x="1520" y="128" width="16"/>
   <object id="99" name="bricks" x="1504" y="64" width="16" height="16"/>
   <object id="100" name="bricks" x="1488" y="64" width="16" height="16"/>
   <object id="101" name="bricks" x="1472" y="64" width="16" height="16"/>
-  <object id="103" name="bricks" x="1408" y="64" width="16"/>
   <object id="104" name="bricks" x="1408" y="64" width="16" height="16"/>
   <object id="105" name="bricks" x="1392" y="64" width="16" height="16"/>
   <object id="106" name="bricks" x="1376" y="64" width="16" height="16"/>
