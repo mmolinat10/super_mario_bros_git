@@ -1562,17 +1562,6 @@
          "objects":[
                 {
                  "height":16,
-                 "id":139,
-                 "name":"goombas",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":512,
-                 "y":176
-                }, 
-                {
-                 "height":16,
                  "id":140,
                  "name":"goombas",
                  "rotation":0,
@@ -1590,8 +1579,8 @@
                  "type":"",
                  "visible":true,
                  "width":16,
-                 "x":832,
-                 "y":176
+                 "x":816.5,
+                 "y":175.5
                 }, 
                 {
                  "height":16,
@@ -1606,17 +1595,6 @@
                 }, 
                 {
                  "height":16,
-                 "id":143,
-                 "name":"goombas",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":560,
-                 "y":176
-                }, 
-                {
-                 "height":16,
                  "id":148,
                  "name":"goombas",
                  "rotation":0,
@@ -1625,6 +1603,116 @@
                  "width":16,
                  "x":1920,
                  "y":176
+                }, 
+                {
+                 "height":15.5,
+                 "id":217,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.5,
+                 "x":400.5,
+                 "y":176.5
+                }, 
+                {
+                 "height":15,
+                 "id":222,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15,
+                 "x":848.5,
+                 "y":176
+                }, 
+                {
+                 "height":15.75,
+                 "id":223,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.5,
+                 "x":1328.25,
+                 "y":48
+                }, 
+                {
+                 "height":15.5,
+                 "id":224,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.25,
+                 "x":1344.25,
+                 "y":48.25
+                }, 
+                {
+                 "height":15.5,
+                 "id":225,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.5,
+                 "x":1616,
+                 "y":176.25
+                }, 
+                {
+                 "height":15.75,
+                 "id":227,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.75,
+                 "x":1648,
+                 "y":176.25
+                }, 
+                {
+                 "height":15.75,
+                 "id":229,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.25,
+                 "x":1952.25,
+                 "y":176
+                }, 
+                {
+                 "height":15.5,
+                 "id":230,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":16,
+                 "x":2096,
+                 "y":176.25
+                }, 
+                {
+                 "height":15.25,
+                 "id":231,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.5,
+                 "x":2128.25,
+                 "y":176.25
+                }, 
+                {
+                 "height":15.3333333333333,
+                 "id":233,
+                 "name":"goombas",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.333333333333,
+                 "x":2800,
+                 "y":176.333333333333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1637,37 +1725,15 @@
          "name":"Turtles",
          "objects":[
                 {
-                 "height":16,
-                 "id":150,
+                 "height":15.25,
+                 "id":228,
                  "name":"turtles",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":16,
-                 "x":400,
-                 "y":176
-                }, 
-                {
-                 "height":16,
-                 "id":151,
-                 "name":"turtles",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":864,
-                 "y":176
-                }, 
-                {
-                 "height":16,
-                 "id":152,
-                 "name":"turtles",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":2352,
-                 "y":176
+                 "width":15.5,
+                 "x":1744,
+                 "y":176.25
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1675,7 +1741,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":216,
+ "nextobjectid":234,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

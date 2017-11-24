@@ -18,7 +18,13 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('brick', 'img/Levels/brick.png', 16, 16);
         this.load.spritesheet('brickCoin', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.spritesheet('brickCoins', 'img/Levels/brick.png', 16, 16);
+        this.load.spritesheet('brickStar', 'img/Levels/brick.png', 16, 16);
         this.load.spritesheet('brickFlowerOrMushroom', 'img/Levels/questionMarkBlock.png', 16, 16);
+        this.load.spritesheet('brickMushroom', 'img/Levels/questionMarkBlock.png', 16, 16);
+        this.load.spritesheet('brickInvisible1UP', 'img/Levels/invisibleBlock.png', 16, 16);
+        this.load.spritesheet('goomba', 'img/Enemies/Goomba/goomba.png', 16, 16);
+        
+        
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
         this.load.audio('jumpSmall', 'sounds/Player/jumpSmall.wav');
         this.load.audio('mariodie', 'sounds/Player/mariodie.wav');
@@ -26,9 +32,6 @@ marioBros.preloader.prototype = {
         this.load.audio('pause', 'sounds/pause.wav');
         this.load.image('marioLoadScreen', 'img/UI/Load/marioSmallIdle.png');
         this.load.image('coinLoadScreen', 'img/UI/Load/coin1.png');
-        //this.load.spritesheet('mario','img/Player/Mario Small/mario small idle.png',19,16);
-        //this.load.spritesheet('runLeft','img/Player/Mario Small/mario small.png',22,16);
-        //this.load.image('Ground','img/Levels/block.png');
         
         //menu textos
         text1Player = "1-Player";

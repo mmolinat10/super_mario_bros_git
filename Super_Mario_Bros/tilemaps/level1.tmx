@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="240" height="39" tilewidth="16" tileheight="16" nextobjectid="216">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="240" height="39" tilewidth="16" tileheight="16" nextobjectid="234">
  <tileset firstgid="1" name="tileset_levels" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
   <image source="tileset_levels.png" width="594" height="504"/>
   <tile id="0">
@@ -818,16 +818,22 @@
   <object id="163" name="brickCoins" x="1519.82" y="128" width="16.3636" height="16.1818"/>
  </objectgroup>
  <objectgroup name="Goombas">
-  <object id="139" name="goombas" x="512" y="176" width="16" height="16"/>
   <object id="140" name="goombas" x="672" y="176" width="16" height="16"/>
-  <object id="141" name="goombas" x="832" y="176" width="16" height="16"/>
+  <object id="141" name="goombas" x="816.5" y="175.5" width="16" height="16"/>
   <object id="142" name="goombas" x="2768" y="176" width="16" height="16"/>
-  <object id="143" name="goombas" x="560" y="176" width="16" height="16"/>
   <object id="148" name="goombas" x="1920" y="176" width="16" height="16"/>
+  <object id="217" name="goombas" x="400.5" y="176.5" width="15.5" height="15.5"/>
+  <object id="222" name="goombas" x="848.5" y="176" width="15" height="15"/>
+  <object id="223" name="goombas" x="1328.25" y="48" width="15.5" height="15.75"/>
+  <object id="224" name="goombas" x="1344.25" y="48.25" width="15.25" height="15.5"/>
+  <object id="225" name="goombas" x="1616" y="176.25" width="15.5" height="15.5"/>
+  <object id="227" name="goombas" x="1648" y="176.25" width="15.75" height="15.75"/>
+  <object id="229" name="goombas" x="1952.25" y="176" width="15.25" height="15.75"/>
+  <object id="230" name="goombas" x="2096" y="176.25" width="16" height="15.5"/>
+  <object id="231" name="goombas" x="2128.25" y="176.25" width="15.5" height="15.25"/>
+  <object id="233" name="goombas" x="2800" y="176.333" width="15.3333" height="15.3333"/>
  </objectgroup>
  <objectgroup name="Turtles">
-  <object id="150" name="turtles" x="400" y="176" width="16" height="16"/>
-  <object id="151" name="turtles" x="864" y="176" width="16" height="16"/>
-  <object id="152" name="turtles" x="2352" y="176" width="16" height="16"/>
+  <object id="228" name="turtles" x="1744" y="176.25" width="15.5" height="15.25"/>
  </objectgroup>
 </map>

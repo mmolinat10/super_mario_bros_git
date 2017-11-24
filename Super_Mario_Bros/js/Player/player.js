@@ -7,7 +7,7 @@ marioBros.marioPrefab = function(game,x,y)
     this.velocity = gameOptions.playerSpeed;
     this.jump = gameOptions.playerJump;
     this.die = gameOptions.die;
-   
+    this.bigMario = false;
     //this.state = 'mario';
 
     this.game.physics.arcade.enable(this);
