@@ -1,4 +1,4 @@
-marioBros.marioPrefab = function(game,x,y)
+marioBros.marioPrefab = function(game,x,y,level)
 {
     Phaser.Sprite.call(this,game,x,y,'mario');
     this.anchor.setTo(0.5);
@@ -10,7 +10,7 @@ marioBros.marioPrefab = function(game,x,y)
     this.bigMario = false;
     //this.state = 'mario';
 
-    this.game.physics.arcade.enable(this);
+    this.game.physics.arcade.enable(this, Phaser.Physics.ARCADE);
     this.body.gravity.y = gameOptions.playerGravity;
 
     this.body.collideWorldBounds = true;
@@ -24,6 +24,7 @@ marioBros.marioPrefab = function(game,x,y)
     this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
     this.levelMario = 'level1';    
+    this.level = level;
 };
 marioBros.marioPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.marioPrefab.prototype.constructor = marioBros.marioPrefab;
@@ -43,7 +44,7 @@ marioBros.marioPrefab.prototype.update = function(){
             this.frame = 0;
         }
 
-        if (this.body.blocked.down) {
+        if (this.body.onFloor()) {
             if(!this.runKey.isDown){
                this.animations.play('right');
             }else{
@@ -64,7 +65,7 @@ marioBros.marioPrefab.prototype.update = function(){
         else if (this.body.velocity.x > 0) {
             this.frame = 12;
         }
-        if (this.body.blocked.down) {
+        if (this.body.onFloor()) {
             if(!this.runKey.isDown){
                this.animations.play('left');
             }else{
@@ -78,7 +79,7 @@ marioBros.marioPrefab.prototype.update = function(){
         else if (this.body.velocity.x < 0) {
             this.body.acceleration.x = 300;
         }
-        if (this.body.velocity.x > -5 && this.body.velocity.x < 5 && this.body.blocked.down) {
+        if (this.body.velocity.x > -5 && this.body.velocity.x < 5 && this.body.onFloor()) {
             this.body.velocity.x = 0;
             this.animations.stop();
             if (this.animations.currentAnim.name == 'left') {
@@ -89,7 +90,7 @@ marioBros.marioPrefab.prototype.update = function(){
         }
     }
 
-    if ((this.cursors.up.isDown || this.space.isDown) && this.body.blocked.down) {
+    if ((this.cursors.up.isDown || this.space.isDown) && this.body.onFloor()) {
         this.jumpTimer = 1;
         this.body.velocity.y = -220;
        
@@ -118,6 +119,7 @@ marioBros.marioPrefab.prototype.update = function(){
    
     if(this.die){
        this.dieSound.play();
+        //animacion morir
        this.die = false;
         
     }

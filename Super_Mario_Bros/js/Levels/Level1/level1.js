@@ -120,13 +120,15 @@ marioBros.level1.prototype = {
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.escape = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         
-        this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25);
-        this.game.add.existing(this.player);       
-       
         this.brick = [];
         this.createBlocksPrefabs();
         this.goomba = [];
         this.createGoombasPrefabs();
+        
+        this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25, this);
+        this.game.add.existing(this.player);       
+       
+       
         
          
         this.camera.follow(this.player, null, 1, 0);
@@ -134,7 +136,6 @@ marioBros.level1.prototype = {
     },
     
     update:function(){      
-        
         
         this.collisionLayers();
         /*
