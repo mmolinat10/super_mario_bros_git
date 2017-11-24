@@ -69,11 +69,7 @@ function finishLevelDoor(player){
 }
 
 function dead(player){
-    this.createBlocksPrefabs();
-    this.goomba = [];
-    this.createGoombasPrefabs();
-    player.body.position.x = 50;
-    player.body.position.y = this.game.world.height/3-30;
+    this.state.start('loadLevel');
     player.die = true;    
     this.soundLevel1.stop();
     

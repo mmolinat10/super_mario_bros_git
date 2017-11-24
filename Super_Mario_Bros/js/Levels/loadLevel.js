@@ -36,6 +36,7 @@ marioBros.loadLevel.prototype = {
     update: function () {
         this.timeCheck = this.game.time.now;
         if(this.timeCheck>= this.timeInit + 2500){
+            //pasar en el startGame un parametro con el nivel que toca cargar
             this.startGame();
         }
         
@@ -44,7 +45,7 @@ marioBros.loadLevel.prototype = {
     },
 
     startGame: function () {
-
+        //habria que pasar una variable levelMario del player
         this.state.start('level1');
     }
     

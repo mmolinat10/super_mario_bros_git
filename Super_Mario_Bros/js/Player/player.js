@@ -23,7 +23,7 @@ marioBros.marioPrefab = function(game,x,y)
     this.cursors = this.game.input.keyboard.createCursorKeys(); 
     this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
-        
+    this.levelMario = 'level1';    
 };
 marioBros.marioPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.marioPrefab.prototype.constructor = marioBros.marioPrefab;
