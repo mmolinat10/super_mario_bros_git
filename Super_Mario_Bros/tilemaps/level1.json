@@ -928,6 +928,17 @@
                  "width":16.125,
                  "x":1760,
                  "y":64
+                }, 
+                {
+                 "height":16,
+                 "id":237,
+                 "name":"bricksFlowerOrMushroom",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":15.875,
+                 "x":336.125,
+                 "y":128
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1168,27 +1179,6 @@
                  "width":10,
                  "x":1058.42,
                  "y":526.667
-                }],
-         "opacity":1,
-         "type":"objectgroup",
-         "visible":true,
-         "x":0,
-         "y":0
-        }, 
-        {
-         "draworder":"topdown",
-         "name":"BricksMushroom",
-         "objects":[
-                {
-                 "height":16,
-                 "id":156,
-                 "name":"bricksMushroom",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":16,
-                 "x":336,
-                 "y":127.909
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1704,15 +1694,15 @@
                  "y":176.25
                 }, 
                 {
-                 "height":15.3333333333333,
+                 "height":15.3333,
                  "id":233,
                  "name":"goombas",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":15.333333333333,
+                 "width":15.3333,
                  "x":2800,
-                 "y":176.333333333333
+                 "y":176.333
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1741,7 +1731,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":234,
+ "nextobjectid":238,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.3",

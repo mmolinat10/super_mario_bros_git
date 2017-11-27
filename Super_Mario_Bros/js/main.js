@@ -10,10 +10,8 @@ var gameOptions = {
     playerSpeed:70,
     playerJump:300,
     lifes:3,
-    die:false
+    coins:0,
+    score:0
 };
-
-
-
 
 

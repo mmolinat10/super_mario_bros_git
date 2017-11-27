@@ -69,10 +69,7 @@ function finishLevelDoor(player){
 }
 
 function dead(player){
-    this.state.start('loadLevel');
     player.die = true;    
-    this.soundLevel1.stop();
-    
 }
 
 function deadEnemy(enemy){
@@ -83,10 +80,6 @@ function deadEnemy(enemy){
 
 marioBros.level1.prototype = {
     init:function(){
-      
-        //this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        
-        //this.game.physics.arcade.gravity.y = gameOptions.playerGravity;
         this.game.world.setBounds(0,0,gameOptions.level1Width,gameOptions.level1Height);
     },
     
@@ -97,6 +90,7 @@ marioBros.level1.prototype = {
     },
    
     create:function(){
+
         this.soundLevel1 = this.game.add.audio('level1');
         this.soundLevel1.loopFull();
         
@@ -121,30 +115,28 @@ marioBros.level1.prototype = {
         this.escape = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
         
         this.brick = [];
+        this.brickCoin = [];
+        this.brickCoinsA = [];
+        this.brickFlowerOrMushroom = [];
+        this.brickStar = [];
+        this.brickInvisible = [];
         this.createBlocksPrefabs();
+        
         this.goomba = [];
         this.createGoombasPrefabs();
         
         this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25, this);
         this.game.add.existing(this.player);       
        
-       
-        
-         
         this.camera.follow(this.player, null, 1, 0);
+        //this.camera.x = 1300; comprovar que los goombas colisionan con los bloques rompibles..(aun no funciona bien)
+        
         
     },
     
     update:function(){      
         
         this.collisionLayers();
-        /*
-        pause..
-        if(this.escape.isDown && !this.game.paused){
-            this.game.paused = true;
-        }else if(this.escape.isDown && this.game.paused){
-            this.game.paused = false;  
-        }*/
         
         if(this.escape.isDown){
             this.startMenu();
@@ -161,14 +153,8 @@ marioBros.level1.prototype = {
     createLayers: function(){
         this.backgroundColor = this.map.createLayer('Background_Color');
         this.graphicLayer = this.map.createLayer('Graphic_Layer');
-        //this.bricksLayer = this.map.createLayer('Bricks');
-        //this.brickStarLayer = this.map.createLayer('BrickStar');
-        //this.bricksMushroomLayer = this.map.createLayer('BricksMushroom');
-        //this.bricksFlowerOrMushroomLayer = this.map.createLayer('BricksFlowerOrMushroom');
-        //this.bricksCoinLayer = this.map.createLayer('BricksCoin');
-        //this.brickCoinsLayer = this.map.createLayer('BrickCoins');
+
         this.pipesAccessLevelLayer = this.map.createLayer('PipesAccessLevel');
-        //this.bricksInvisible1UPLayer = this.map.createLayer('BricksInvisible1UP');
         this.pipesAccessLayer = this.map.createLayer('PipesAccess');
         this.exitPipesLayer = this.map.createLayer('ExitPipes');
         this.finishLevelLayer = this.map.createLayer('FinishLevel');
@@ -208,9 +194,6 @@ marioBros.level1.prototype = {
         this.bricks = this.game.add.physicsGroup(); 
         this.map.createFromObjects('Bricks', 'bricks', '', 0, true, false, this.bricks);
         
-        this.bricksMushroom = this.game.add.physicsGroup(); 
-        this.map.createFromObjects('BricksMushroom', 'bricksMushroom', '', 0, true, false, this.bricksMushroom);
-        
         this.bricksFlowerOrMushroom = this.game.add.physicsGroup(); 
         this.map.createFromObjects('BricksFlowerOrMushroom', 'bricksFlowerOrMushroom', '', 0, true, false, this.bricksFlowerOrMushroom);
         
@@ -240,12 +223,6 @@ marioBros.level1.prototype = {
         
         
         this.map.setCollision([1,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
-        //this.map.setCollision(2,true,this.bricksLayer);
-        //this.map.setCollision(25,true,this.bricksCoinLayer);
-        //this.map.setCollision(25,true,this.bricksFlowerOrMushroomLayer);
-        //this.map.setCollision(25,true,this.bricksMushroomLayer);
-        //this.map.setCollision(2,true,this.brickStarLayer);
-        //this.map.setCollision(2,true,this.brickCoinsLayer);
         this.map.setCollision([265,266],true,this.pipesAccessLayer);
         this.map.setCollision([267,300],true,this.exitPipesLayer);
         //this.map.setCollision(29,true,this.bricksInvisible1UPLayer);
@@ -255,12 +232,7 @@ marioBros.level1.prototype = {
     
     collisionLayers: function(){
         this.game.physics.arcade.collide(this.player,this.graphicLayer);
-        //this.game.physics.arcade.collide(this.player,this.bricksLayer, brickCollision);
-        //this.game.physics.arcade.collide(this.player,this.bricksCoinLayer, brickCoinCollision);
-        //this.game.physics.arcade.collide(this.player,this.bricksMushroomLayer, brickMushroomCollision);
-        //this.game.physics.arcade.collide(this.player,this.bricksFlowerOrMushroomLayer, brickFlowerOrMushroomCollision);
-        //this.game.physics.arcade.collide(this.player,this.brickStarLayer, brickStarCollision);
-        //this.game.physics.arcade.collide(this.player,this.brickCoinsLayer, brickCoinsCollision);
+
         this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
         this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
         this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
@@ -284,40 +256,24 @@ marioBros.level1.prototype = {
             this.brickPos = this.bricks.children[i];
             this.brick.push(new marioBros.brickPrefab(this.game,this.brickPos.x,this.brickPos.y+16, this));
             this.game.add.existing(this.brick[i]);
-            //console.log(i); num de object layers bricks
         }
         
-        
-        this.brickCoin = [];
         this.brickCoinPos;
         
         for(var i = 0; i < this.bricksCoin.children.length; i++){
             this.brickCoinPos = this.bricksCoin.children[i];
             this.brickCoin.push(new marioBros.brickCoinPrefab(this.game,this.brickCoinPos.x,this.brickCoinPos.y+16, this));
             this.game.add.existing(this.brickCoin[i]);
-            //console.log(i); num de object layers bricks
         }
         
-        
-        this.brickCoinsA = [];
         this.brickCoinsPos;
         
         for(var i = 0; i < this.brickCoins.children.length; i++){
             this.brickCoinsPos = this.brickCoins.children[i];
             this.brickCoinsA.push(new marioBros.brickCoinsPrefab(this.game,this.brickCoinsPos.x,this.brickCoinsPos.y+16, this));
             this.game.add.existing(this.brickCoinsA[i]);
-            //console.log(i); num de object layers bricks
         }
-        
-        this.brickMushroom = [];
-        this.brickMushroomPos;
-        for(var i = 0; i < this.bricksMushroom.length; i++){
-            this.brickMushroomPos = this.bricksMushroom.children[i];
-            this.brickMushroom.push(new marioBros.brickMushroomPrefab(this.game,this.brickMushroomPos.x,this.brickMushroomPos.y+16, this));
-            this.game.add.existing(this.brickMushroom[i]);
-        }
-        
-        this.brickFlowerOrMushroom = [];
+                
         this.brickFlowerOrMushroomPos;
         for(var i = 0; i < this.bricksFlowerOrMushroom.length; i++){
             this.brickFlowerOrMushroomPos = this.bricksFlowerOrMushroom.children[i];
@@ -325,7 +281,6 @@ marioBros.level1.prototype = {
             this.game.add.existing(this.brickFlowerOrMushroom[i]);
         }
         
-        this.brickStar = [];
         this.brickStarPos;
         for(var i = 0; i < this.bricksStar.length; i++){
             this.brickStarPos = this.bricksStar.children[i];
@@ -333,7 +288,6 @@ marioBros.level1.prototype = {
             this.game.add.existing(this.brickStar[i]);
         }
         
-        this.brickInvisible = [];
         this.brickInvisiblePos;
         for(var i = 0; i < this.bricksInvisible1UP.length; i++){
             this.brickInvisiblePos = this.bricksInvisible1UP.children[i];
@@ -350,6 +304,10 @@ marioBros.level1.prototype = {
             this.goomba.push(new marioBros.goombaPrefab(this.game,this.goombaPos.x,this.goombaPos.y+16, this));
             this.game.add.existing(this.goomba[i]);
         }
+    },
+    
+    stopBackgroundAudioLevel: function(){
+        this.soundLevel1.stop();
     }
 };
 

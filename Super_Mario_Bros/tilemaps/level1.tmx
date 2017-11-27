@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="240" height="39" tilewidth="16" tileheight="16" nextobjectid="234">
+<map version="1.0" tiledversion="1.0.3" orientation="orthogonal" renderorder="right-down" width="240" height="39" tilewidth="16" tileheight="16" nextobjectid="238">
  <tileset firstgid="1" name="tileset_levels" tilewidth="16" tileheight="16" spacing="2" margin="1" tilecount="924" columns="33">
   <image source="tileset_levels.png" width="594" height="504"/>
   <tile id="0">
@@ -753,6 +753,7 @@
  <objectgroup name="BricksFlowerOrMushroom">
   <object id="162" name="bricksFlowerOrMushroom" x="1264" y="127.875" width="15.75" height="16.125"/>
   <object id="166" name="bricksFlowerOrMushroom" x="1760" y="64" width="16.125" height="16.125"/>
+  <object id="237" name="bricksFlowerOrMushroom" x="336.125" y="128" width="15.875" height="16"/>
  </objectgroup>
  <objectgroup name="BricksInvisible1UP">
   <object id="160" name="bricksInvisible1UP" x="1008" y="112" width="15.75" height="15.75"/>
@@ -777,9 +778,6 @@
   <object id="203" name="coins" x="1026.33" y="526.576" width="9.90909" height="13.9091"/>
   <object id="204" name="coins" x="1042.06" y="526.667" width="10.5455" height="14"/>
   <object id="205" name="coins" x="1058.42" y="526.667" width="10" height="13.8182"/>
- </objectgroup>
- <objectgroup name="BricksMushroom">
-  <object id="156" name="bricksMushroom" x="336" y="127.909" width="16" height="16"/>
  </objectgroup>
  <objectgroup name="Bricks">
   <object id="85" name="bricks" x="2752" y="128" width="16" height="16"/>

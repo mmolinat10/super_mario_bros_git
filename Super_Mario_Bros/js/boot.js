@@ -14,8 +14,7 @@ marioBros.boot.prototype = {
         this.scale.pageAlignVertically = true;
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         this.game.scale.setMinMax(200, 100, 600, 400);
-        
-        
+        this.game.physics.startSystem(Phaser.Physics.ARCADE);
        
         //this.scale.setGameSize(gameOptions.gameWidth*2, gameOptions.gameHeight*2);
     },

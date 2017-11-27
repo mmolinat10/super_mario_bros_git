@@ -14,13 +14,12 @@ marioBros.preloader.prototype = {
         this.load.image('cursor', 'img/UI/Menu/cursor.png');
         this.load.tilemap('level1','tilemaps/level1.json',null,Phaser.Tilemap.TILED_JSON);
         this.load.image('tileset_levels','tilemaps/tileset_levels.png');
-        this.load.spritesheet('mario', 'img/Player/Mario Small/Other_version/small_mario.png', 16, 16);
+        this.load.spritesheet('marioSmall', 'img/Player/Mario Small/Other_version/small_mario.png', 16, 16);
         this.load.spritesheet('brick', 'img/Levels/brick.png', 16, 16);
         this.load.spritesheet('brickCoin', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.spritesheet('brickCoins', 'img/Levels/brick.png', 16, 16);
-        this.load.spritesheet('brickStar', 'img/Levels/brick.png', 16, 16);
+        this.load.spritesheet('brickStar', 'img/Levels/brickStar.png', 16, 16);
         this.load.spritesheet('brickFlowerOrMushroom', 'img/Levels/questionMarkBlock.png', 16, 16);
-        this.load.spritesheet('brickMushroom', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.spritesheet('brickInvisible1UP', 'img/Levels/invisibleBlock.png', 16, 16);
         this.load.spritesheet('goomba', 'img/Enemies/Goomba/goomba.png', 16, 16);
         

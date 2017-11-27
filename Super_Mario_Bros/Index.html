@@ -16,13 +16,11 @@
         <script src="js/Levels/brick.js"></script>
         <script src="js/Levels/brickCoin.js"></script>
         <script src="js/Levels/brickCoins.js"></script>
-        <script src="js/Levels/brickMushroom.js"></script>
         <script src="js/Levels/brickStar.js"></script>
         <script src="js/Levels/brickFlowerOrMushroom.js"></script>
         <script src="js/Levels/brickInvisible1UP.js"></script>
         <script src="js/Levels/Level1/level1.js"></script>
-        <script src="js/Enemies/Goomba/goomba.js"></script>
-        
+        <script src="js/Enemies/Goomba/goomba.js"></script>        
         
         <style>
             body{
@@ -41,6 +39,9 @@
         window.onload = function() {
 
             var game = new Phaser.Game(gameOptions.gameWidth,gameOptions.gameHeight,Phaser.AUTO,'gameFrame');
+            game.global = {
+                onGroundBrick:false
+            }
             
             game.state.add('boot', marioBros.boot);
             game.state.add('preloader', marioBros.preloader);
