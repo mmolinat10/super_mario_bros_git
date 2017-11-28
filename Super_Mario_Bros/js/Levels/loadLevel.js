@@ -25,7 +25,7 @@ marioBros.loadLevel.prototype = {
         
         this.marioLifes = this.add.image(this.textCoins.position.x-5, this.textCoins.position.y +100, 'marioLoadScreen');
         
-        this.textLifes = this.add.text(this.textCoins.position.x+15, this.textCoins.position.y +100, textLifes, style4);
+        this.textLifes = this.add.text(this.textCoins.position.x+15, this.textCoins.position.y +100, "x  "+  gameOptions.lifes, style4);
         
         this.game.stage.backgroundColor = '#000000';
         

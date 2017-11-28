@@ -135,7 +135,7 @@ marioBros.level1.prototype = {
     },
     
     update:function(){      
-                   
+       
         this.collisionLayers();
         
         if(this.escape.isDown){

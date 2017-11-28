@@ -67,7 +67,7 @@ marioBros.preloader.prototype = {
         
         textTimeLoadScreen = "TIME";
         
-        textLifes= "x  3"
+        textLifes= "x  " + gameOptions.lifes;
 
     },
 

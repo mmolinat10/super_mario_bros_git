@@ -11,7 +11,7 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.jump = gameOptions.playerJump;
     this.die = false;
     this.scale.setTo(0.8,1); //lo hago porque si no las colisiones con bloques muy juntos no lo hace bien
-    
+    this.lives;
     this.game.physics.arcade.enable(this);
     this.body.gravity.y = gameOptions.playerGravity;
 
@@ -60,7 +60,7 @@ function collisionBlock(player, block){
 
 marioBros.marioPrefab.prototype.update = function(){
     this.timeCheck = this.game.time.now;
-
+   // gameOptions.lifes = this.lives;
     this.collisionsMario();
     
     this.checkIsGroundMario();
@@ -345,6 +345,7 @@ marioBros.marioPrefab.prototype.addScore = function(numScore){
 marioBros.marioPrefab.prototype.loseLife = function(){
    if(gameOptions.lifes > 0){
         gameOptions.lifes -= 1;
+       this.lives -=1;
     }
     else{
         this.gameOver();
