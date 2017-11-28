@@ -60,7 +60,8 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.createObject = function() {
             this.mushroom.body.velocity.x += 100;
         }
         else{
-            //flor
+         this.flower = new marioBros.flowerPrefab(this.game,this.x,this.y-16,this.level);
+         this.game.add.existing(this.flower);
         }
         
     }

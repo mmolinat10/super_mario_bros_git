@@ -16,6 +16,7 @@ marioBros.preloader.prototype = {
         this.load.image('tileset_levels','tilemaps/tileset_levels.png');
         this.load.spritesheet('marioSmall', 'img/Player/Mario Small/small_mario.png', 16, 16);
         this.load.spritesheet('marioBig', 'img/Player/Mario Big/big_mario.png', 16, 32);
+        this.load.spritesheet('marioFire', 'img/Player/Mario Fire/fire_mario.png', 16, 32);
         this.load.spritesheet('brick', 'img/Levels/brick.png', 16, 16);
         this.load.spritesheet('brickCoin', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.spritesheet('brickCoins', 'img/Levels/brickCoins.png', 16, 16);
@@ -25,6 +26,7 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('goomba', 'img/Enemies/Goomba/goomba.png', 16, 16);
         this.load.spritesheet('star', 'img/Items/star.png', 16, 16);
         this.load.spritesheet('mushroom', 'img/Items/mushroom.png', 16, 16);
+        this.load.spritesheet('flower', 'img/Items/flower.png', 16, 16);
         this.load.spritesheet('1UP', 'img/Items/1up_mushroom.png', 16, 16);
         
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');

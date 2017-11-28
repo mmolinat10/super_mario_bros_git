@@ -110,7 +110,15 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
             this.timeInitChangeToSmall = this.game.time.now;
             this.changeToSmall = true;
         }
-        
+        else if(this.level.player.marioFlower && !this.level.player.bigMario && !this.level.player.marioStar)
+            {
+            this.level.player.marioFlower = false;
+            this.level.player.bigMario = true;
+            this.level.player.animations.stop();
+            this.level.player.loadTexture('marioBig');
+            this.level.player.body.setSize(16, 16);
+            this.timeInitChangeToSmall = this.game.time.now;
+            }
         if(this.level.player.marioStar || this.diedOnBrick){
             //tiempo en morir
             this.timeInit = this.game.time.now;

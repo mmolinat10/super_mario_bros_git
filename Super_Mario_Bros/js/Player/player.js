@@ -7,6 +7,8 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.animations.add('rightSmall', [2, 3, 4], 10, true);
     this.animations.add('leftBig', [10, 9, 8], 10, true);
     this.animations.add('rightBig', [2, 3, 4], 10, true);
+    this.animations.add('leftFire', [10, 9, 8], 10, true);
+    this.animations.add('rightFire', [2, 3, 4], 10, true);
     this.velocity = gameOptions.playerSpeed;
     this.jump = gameOptions.playerJump;
     this.die = false;
@@ -20,6 +22,7 @@ marioBros.marioPrefab = function(game,x,y,level)
 
     this.jumpSmallSound = this.game.add.audio('jumpSmall');
     this.jumpBigSound = this.game.add.audio('jumpBig');
+    this.jumpFireSound = this.game.add.audio('jumpFire');
     this.dieSound = this.game.add.audio('mariodie');
     
     this.jumpTimer = 0;
@@ -41,6 +44,7 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.bigMario = false;
     this.invulnerableTime = 12000;
     this.marioStar = false;
+    this.marioFlower = false;
     this.timeCheck;
     this.timeInit;
     this.timeInitDie;
@@ -242,6 +246,71 @@ marioBros.marioPrefab.prototype.moveBigMario = function(){
             this.animations.stop();
             
             if (this.animations.currentAnim.name == 'leftBig') {
+                this.frame = 11;
+            } 
+            else {
+                this.frame = 1;
+            }            
+        }
+    }
+};
+marioBros.marioPrefab.prototype.moveFireMario = function(){
+    if (this.cursors.right.isDown) {
+
+        this.body.acceleration.x = 300;
+        if (this.body.velocity.x > 100 && !this.runKey.isDown) {
+            this.body.velocity.x = 100;
+        }
+        else if(this.body.velocity.x > 150 && this.runKey.isDown){
+            this.body.velocity.x = 150;
+        }
+        else if (this.body.velocity.x < 0) {
+            this.frame = 0;
+        }
+
+        if (this.onGround) {
+            
+            if(!this.runKey.isDown){
+                this.animations.play('rightFire');
+            }
+            else{
+                this.animations.play('rightFire', 15, true);
+            }            
+        }
+    }
+    else if (this.cursors.left.isDown) {
+
+        this.body.acceleration.x = -300;
+        if (this.body.velocity.x < -100 && !this.runKey.isDown) {
+            this.body.velocity.x = -100;
+        }
+        else if(this.body.velocity.x < -150 && this.runKey.isDown){
+            this.body.velocity.x = -150;
+        }
+        else if (this.body.velocity.x > 0) {
+            this.frame = 12;
+        }
+        if (this.onGround) {
+            
+            if(!this.runKey.isDown){
+                this.animations.play('leftFire');
+            }
+            else{
+                this.animations.play('leftFire', 15, true);
+            }            
+        }
+    } else {
+        if (this.body.velocity.x > 0) {
+            this.body.acceleration.x = -300;
+        }
+        else if (this.body.velocity.x < 0) {
+            this.body.acceleration.x = 300;
+        }
+        if ((this.body.velocity.x > -5 && this.body.velocity.x < 5) && this.onGround) {
+            this.body.velocity.x = 0;
+            this.animations.stop();
+            
+            if (this.animations.currentAnim.name == 'leftFire') {
                 this.frame = 11;
             } 
             else {
