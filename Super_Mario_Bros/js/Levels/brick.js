@@ -32,7 +32,6 @@ marioBros.brickPrefab.prototype.playBlock = function() {
 };
 
 marioBros.brickPrefab.prototype.update = function(){
-    
 };
 
 

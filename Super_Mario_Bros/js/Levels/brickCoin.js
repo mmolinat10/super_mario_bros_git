@@ -11,6 +11,7 @@ marioBros.brickCoinPrefab = function(game,x,y,level)
     this.body.immovable = true;
     this.level = level;
     this.isCollisioned = false;
+    this.score;
         
 };
 marioBros.brickCoinPrefab.prototype = Object.create(Phaser.Sprite.prototype);

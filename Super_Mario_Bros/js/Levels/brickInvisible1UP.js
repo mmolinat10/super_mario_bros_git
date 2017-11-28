@@ -13,6 +13,7 @@ marioBros.brickInvisible1UPPrefab = function(game,x,y,level)
     this.level = level;
     this.isCollisioned = false;
     downCollision = false;
+    this.mushroom1UP;
         
 };
 marioBros.brickInvisible1UPPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -29,6 +30,7 @@ marioBros.brickInvisible1UPPrefab.prototype.playBlock = function() {
             //aparición de la vida encima del bloque y que se desplaze a la derecha
             //animación de bloque estatico (ya no hay nada)
             this.animations.stop();
+            this.create1UpMushroom();
             console.log("vida");
         }
         else{
@@ -40,6 +42,15 @@ marioBros.brickInvisible1UPPrefab.prototype.playBlock = function() {
        this.level.player.onGround = true;
     }
 }
+
+marioBros.brickInvisible1UPPrefab.prototype.create1UpMushroom = function() {
+    if(this.isCollisioned == true) {
+        this.mushroom1UP = new marioBros.mushroom1UPPrefab(this.game,this.x,this.y-16,this.level); 
+        this.game.add.existing(this.mushroom1UP);
+        this.mushroom1UP.body.velocity.y -= 250;
+        this.mushroom1UP.body.velocity.x += 100;
+    }
+};
 
 marioBros.brickInvisible1UPPrefab.prototype.update = function(){
     if(!this.isCollisioned){

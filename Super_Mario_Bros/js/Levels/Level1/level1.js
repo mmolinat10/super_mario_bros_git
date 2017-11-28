@@ -135,7 +135,7 @@ marioBros.level1.prototype = {
     },
     
     update:function(){      
-        
+                   
         this.collisionLayers();
         
         if(this.escape.isDown){
@@ -225,13 +225,11 @@ marioBros.level1.prototype = {
         this.map.setCollision([1,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
         this.map.setCollision([265,266],true,this.pipesAccessLayer);
         this.map.setCollision([267,300],true,this.exitPipesLayer);
-        //this.map.setCollision(29,true,this.bricksInvisible1UPLayer);
         this.map.setCollision([267,300],true,this.pipesAccessLevelLayer);
         this.map.setCollision([281,314],true,this.finishLevelLayer);
     },
     
     collisionLayers: function(){
-        this.game.physics.arcade.collide(this.player,this.graphicLayer);
 
         this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
         this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
@@ -243,8 +241,6 @@ marioBros.level1.prototype = {
         
         this.game.physics.arcade.overlap(this.player,this.doorFinalLevel, finishLevelDoor, null, this);
         
-        
-        this.game.physics.arcade.collide(this.goomba,this.graphicLayer);
         this.game.physics.arcade.overlap(this.goomba, this.deadZones, deadEnemy, null, this);
         
     },
@@ -308,6 +304,10 @@ marioBros.level1.prototype = {
     
     stopBackgroundAudioLevel: function(){
         this.soundLevel1.stop();
+    },
+    
+    playBackgroundAudioLevel: function(){
+        this.soundLevel1.loopFull();
     }
 };
 

@@ -12,6 +12,8 @@ marioBros.brickFlowerOrMushroomPrefab = function(game,x,y,level)
     this.body.immovable = true;
     this.level = level;
     this.isCollisioned = false;
+    this.mushroom;
+    this.flower;
         
 };
 marioBros.brickFlowerOrMushroomPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -28,12 +30,14 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.playBlock = function() {
                 //aparición del champiñon encima del bloque y que se desplaze a la derecha
                 //animación de bloque estatico (ya no hay nada)
                 this.animations.stop();
+                this.createObject();
                 console.log("mushroom");
             }
             else{
                 //sonido de la flor al aparecer y sonido bump
                 //aparición de la flor con su animacion encima del bloque sin moverse
                 //animación de bloque estatico (ya no hay nada)
+                this.createObject();
                 console.log("flower");
             }
         }
@@ -45,7 +49,22 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.playBlock = function() {
     if(this.body.touching.up && this.level.player.body.touching.down){
        this.level.player.onGround = true;
     }
-}
+};
+
+marioBros.brickFlowerOrMushroomPrefab.prototype.createObject = function() {
+    if(this.isCollisioned == true) {
+        if(!this.level.player.bigMario){
+            this.mushroom = new marioBros.mushroomPrefab(this.game,this.x,this.y-16,this.level); 
+            this.game.add.existing(this.mushroom);
+            this.mushroom.body.velocity.y -= 250;
+            this.mushroom.body.velocity.x += 100;
+        }
+        else{
+            //flor
+        }
+        
+    }
+};
 
 marioBros.brickFlowerOrMushroomPrefab.prototype.update = function(){
     if(!this.isCollisioned){

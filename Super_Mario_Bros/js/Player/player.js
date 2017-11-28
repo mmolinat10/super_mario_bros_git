@@ -5,10 +5,11 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.anchor.setTo(0.5);
     this.animations.add('leftSmall', [10, 9, 8], 10, true);
     this.animations.add('rightSmall', [2, 3, 4], 10, true);
+    this.animations.add('leftBig', [10, 9, 8], 10, true);
+    this.animations.add('rightBig', [2, 3, 4], 10, true);
     this.velocity = gameOptions.playerSpeed;
     this.jump = gameOptions.playerJump;
-    this.die = gameOptions.die;
-    
+    this.die = false;
     this.scale.setTo(0.8,1); //lo hago porque si no las colisiones con bloques muy juntos no lo hace bien
     
     this.game.physics.arcade.enable(this);
@@ -18,6 +19,7 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.checkWorldBounds = true;
 
     this.jumpSmallSound = this.game.add.audio('jumpSmall');
+    this.jumpBigSound = this.game.add.audio('jumpBig');
     this.dieSound = this.game.add.audio('mariodie');
     
     this.jumpTimer = 0;
@@ -27,6 +29,7 @@ marioBros.marioPrefab = function(game,x,y,level)
     //this.levelMario = 'level1';    
     this.level = level;
     
+    this.collGraphicLayer;
     this.collBrick;
     this.collBrickCoin;
     this.collBrickCoins;
@@ -36,7 +39,15 @@ marioBros.marioPrefab = function(game,x,y,level)
     
     this.onGround = false;
     this.bigMario = false;
-    this.invulnerableTime = 100;
+    this.invulnerableTime = 12000;
+    this.marioStar = false;
+    this.timeCheck;
+    this.timeInit;
+    this.timeInitDie;
+    this.createTime = false;
+    this.marioStarSound = this.game.add.audio('marioStarSound');
+    this.timeAnimationDie = 3000;
+    this.createTimeDie = false;
     
 };
 
@@ -48,28 +59,59 @@ function collisionBlock(player, block){
 }
 
 marioBros.marioPrefab.prototype.update = function(){
+    this.timeCheck = this.game.time.now;
+
     this.collisionsMario();
     
     this.checkIsGroundMario();
     
-    if(this.bigMario){
-        //faltan los spritesheets al igual que el small mario
-        this.moveBigMario();
-        this.jumpBigMario();
-        if(this.cursors.down.isDown){
-          //funcion para agacharse
-           //this.crouch()
+    if(!this.die){
+        if(this.bigMario){
+            this.moveBigMario();
+            this.jumpBigMario();
+            if((this.cursors.down.isDown && this.checkIsGroundMario && !this.cursors.left.isDown && !this.cursors.right.isDown)){
+              //funcion para agacharse
+                this.crouch()
+            }
         }
-    }
-    else{
-        this.moveSmallMario();
-        this.jumpSmallMario();
+        else{
+            this.moveSmallMario();
+            this.jumpSmallMario();
+        }
     }
     
     if(this.die){
-        this.dieMario();
+        this.body.velocity.x = 0;
+        this.body.acceleration = 0;
+        if(!this.createTime){
+            this.createTime = true;
+            this.timeInitDie = this.game.time.now;
+            this.dieMario();
+        }
+    
+        //animacion morir
+        this.frame = 6;
+        if(this.timeCheck>= this.timeInitDie + this.timeAnimationDie){
+            this.level.state.start('loadLevel');
+            this.die = false;
+            this.dieSound.stop();
+        }
     }
     
+    if(this.timeCheck>= this.timeInit + this.invulnerableTime){
+        this.marioStar = false;
+        this.marioStarSound.stop();
+        this.level.soundLevel1.resume();
+    }
+    
+    if(this.marioStar){
+        if(!this.createTime){
+            this.level.soundLevel1.pause();
+            this.marioStarSound.play();
+            this.createTime = true;
+            this.timeInit = this.game.time.now;
+        }
+    }    
     
 };
 
@@ -150,7 +192,7 @@ marioBros.marioPrefab.prototype.moveBigMario = function(){
             this.body.velocity.x = 150;
         }
         else if (this.body.velocity.x < 0) {
-            //this.frame = 0;
+            this.frame = 0;
         }
 
         if (this.onGround) {
@@ -173,7 +215,7 @@ marioBros.marioPrefab.prototype.moveBigMario = function(){
             this.body.velocity.x = -150;
         }
         else if (this.body.velocity.x > 0) {
-            //this.frame = 12;
+            this.frame = 12;
         }
         if (this.onGround) {
             
@@ -196,10 +238,10 @@ marioBros.marioPrefab.prototype.moveBigMario = function(){
             this.animations.stop();
             
             if (this.animations.currentAnim.name == 'leftBig') {
-                //this.frame = 11;
+                this.frame = 11;
             } 
             else {
-                //this.frame = 1;
+                this.frame = 1;
             }            
         }
     }
@@ -232,17 +274,17 @@ marioBros.marioPrefab.prototype.jumpSmallMario = function(){
 
 marioBros.marioPrefab.prototype.jumpBigMario = function(){
     if ((this.cursors.up.isDown || this.space.isDown) && this.onGround) {
-        //this.jumpBigSound.play();
+        this.jumpBigSound.play();
         this.jumpTimer = 1;
         this.body.velocity.y = -220;
         
-        /*if ((this.animations.currentAnim.name == 'leftBig') || (this.frame == 11)) {
+        if ((this.animations.currentAnim.name == 'leftBig') || (this.frame == 11)) {
             this.animations.stop();
-            //this.frame = 7;
+            this.frame = 7;
         } else {
             this.animations.stop();
-            //this.frame = 5;
-        }*/
+            this.frame = 5;
+        }
     } else if ((this.cursors.up.isDown || this.space.isDown) && (this.jumpTimer != 0)) {
         if (this.jumpTimer > 15 || this.body.velocity.y == 0) {
             this.jumpTimer = 0;
@@ -256,22 +298,25 @@ marioBros.marioPrefab.prototype.jumpBigMario = function(){
 };
 
 marioBros.marioPrefab.prototype.crouch = function(){
-   
+   this.frame = 6;
 };
 
 marioBros.marioPrefab.prototype.collisionsMario = function(){
-    this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBlock, null,this);
-    this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin, collisionBlock, null,this);
-    this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA, collisionBlock, null,this);
-    this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom, collisionBlock, null,this);
-    this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar, collisionBlock, null,this);
+    if(!this.die){
+        this.collGraphicLayer = this.game.physics.arcade.collide(this,this.level.graphicLayer);
+        this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBlock, null,this);
+        this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin, collisionBlock, null,this);
+        this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA, collisionBlock, null,this);
+        this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom, collisionBlock, null,this);
+        this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar, collisionBlock, null,this);
     
-    if(!downCollision){
-       this.collBrickInvisible1UP = this.game.physics.arcade.overlap(this, this.level.brickInvisible,collisionBlock, null, this);
+        if(!downCollision){
+           this.collBrickInvisible1UP = this.game.physics.arcade.overlap(this, this.level.brickInvisible,collisionBlock, null, this);
+        }
+        else{
+            this.collBrickInvisible1UP = this.game.physics.arcade.collide(this, this.level.brickInvisible,collisionBlock, null, this);
+        }  
     }
-    else{
-        this.collBrickInvisible1UP = this.game.physics.arcade.collide(this, this.level.brickInvisible,collisionBlock, null, this);
-    }   
     
 };
 
@@ -308,14 +353,10 @@ marioBros.marioPrefab.prototype.loseLife = function(){
 
 marioBros.marioPrefab.prototype.dieMario = function(){
    if(this.die){
+       this.body.velocity.y -= 200;
        this.level.stopBackgroundAudioLevel();
        this.loseLife();
-       this.dieSound.play();
-        //animacion morir
-       this.level.state.start('loadLevel');
-       this.die = false;
-       console.log(gameOptions.lifes);
-        
+       this.dieSound.play();    
     }
 };
 

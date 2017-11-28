@@ -1,11 +1,9 @@
-marioBros.starPrefab = function(game,x,y,level)
+marioBros.mushroom1UPPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'star');
-    this.animations.add('starAnimation',[0,1,2,3], 10, true);
+    Phaser.Sprite.call(this,game,x,y,'1UP');
     this.game.physics.arcade.enable(this);
     //this.body.immovable = true;
-    this.speed = 30;
-    this.bounce = 400;
+    this.speed = 50;
     this.direction = 1;
     this.level = level;
     this.body.gravity.y = gameOptions.playerGravity;
@@ -18,22 +16,25 @@ marioBros.starPrefab = function(game,x,y,level)
     this.collBrickFlowerOrMushroom;
     this.collBrickStar;
     this.collGraphicLayer;
-    this.timeAlive = 15000;
+    this.timeAlive = 5000;
     this.timeCheck;
     this.timeInit;
     this.createTime = false;
     this.score;
 };
-marioBros.starPrefab.prototype = Object.create(Phaser.Sprite.prototype);
-marioBros.starPrefab.prototype.constructor = marioBros.starPrefab;
+marioBros.mushroom1UPPrefab.prototype = Object.create(Phaser.Sprite.prototype);
+marioBros.mushroom1UPPrefab.prototype.constructor = marioBros.mushroom1UPPrefab;
 
-marioBros.starPrefab.prototype.update = function(){
+marioBros.mushroom1UPPrefab.prototype.update = function(){
     this.timeCheck = this.game.time.now;
     
     this.graphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
-
+    this.collBrick = this.game.physics.arcade.collide(this, this.level.brick);
+    this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin);
+    this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA);
+    this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom);
+    this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
     this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
-    this.animations.play('starAnimation');
     
     if(this.body.blocked.right || this.body.blocked.left){
         this.direction *= -1;        
@@ -44,14 +45,12 @@ marioBros.starPrefab.prototype.update = function(){
     }
     
     if(this.playerCollisioned){
-        this.level.player.marioStar = true;
+        this.level.player.winLife(1);
         this.kill();
     }
+    
     else{
         this.move();
-        if(this.graphicLayer){
-            this.body.velocity.y -= this.bounce;
-        }
     }
     
     if(!this.createTime){
@@ -62,7 +61,6 @@ marioBros.starPrefab.prototype.update = function(){
    
 };
 
-marioBros.starPrefab.prototype.move = function(){
+marioBros.mushroom1UPPrefab.prototype.move = function(){
     this.body.velocity.x = this.speed * this.direction;
 };
-
