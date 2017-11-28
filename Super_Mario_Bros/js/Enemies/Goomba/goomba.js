@@ -19,7 +19,9 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.timeCheck;
     this.timeInit;
     this.timeInitChangeToSmall;
+    this.timeInitChangeToBig;
     this.changeToSmall = false;
+    this.changeToBig = false;
     this.collBrick;
     this.collBrickCoin;
     this.collBrickCoins;
@@ -49,6 +51,7 @@ marioBros.goombaPrefab.prototype.update = function(){
        this.collGraphicLayer = this.game.physics.arcade.collide(this,this.level.graphicLayer);
     }
     else{
+        //tiempo que tarda en morir (animacion)
         if(this.timeCheck>= this.timeInit + 300){
             this.kill();
         }
@@ -73,6 +76,11 @@ marioBros.goombaPrefab.prototype.update = function(){
     //tiempo de invulnerabilidad al pasar de grande a pequeño
     if(this.timeCheck>= this.timeInitChangeToSmall + 2000 && this.changeToSmall){
         this.changeToSmall = false;
+    }
+    
+    //tiempo de invulnerabilidad al pasar de fier mario a big mario
+    else if(this.timeCheck>= this.timeInitChangeToBig + 2000 && this.changeToBig){
+        this.changeToBig = false;
     }
     
     if(this.body.blocked.right || this.body.blocked.left){
@@ -102,7 +110,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
         if(!this.level.player.bigMario && !this.level.player.marioStar && !this.changeToSmall){
            this.level.player.die = true;
         }
-        else if(this.level.player.bigMario && !this.level.player.marioStar){
+        else if(this.level.player.bigMario && !this.level.player.marioStar && !this.level.player.marioFlower && !this.changeToBig){
             this.level.player.bigMario = false; 
             this.level.player.animations.stop();
             this.level.player.loadTexture('marioSmall');
@@ -110,15 +118,16 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
             this.timeInitChangeToSmall = this.game.time.now;
             this.changeToSmall = true;
         }
-        else if(this.level.player.marioFlower && !this.level.player.bigMario && !this.level.player.marioStar)
-            {
+        else if(this.level.player.marioFlower && !this.level.player.marioStar)
+        {
             this.level.player.marioFlower = false;
             this.level.player.bigMario = true;
             this.level.player.animations.stop();
             this.level.player.loadTexture('marioBig');
             this.level.player.body.setSize(16, 32);
-            this.timeInitChangeToSmall = this.game.time.now;
-            }
+            this.timeInitChangeToBig = this.game.time.now;
+            this.changeToBig = true;
+        }
         if(this.level.player.marioStar || this.diedOnBrick){
             //tiempo en morir
             this.timeInit = this.game.time.now;

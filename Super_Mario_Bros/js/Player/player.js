@@ -105,7 +105,7 @@ marioBros.marioPrefab.prototype.update = function(){
             this.dieSound.stop();
         }
     }
-   
+    
     if(this.timeCheck>= this.timeInit + this.invulnerableTime){
         this.marioStar = false;
         this.marioStarSound.stop();
@@ -254,71 +254,6 @@ marioBros.marioPrefab.prototype.moveBigMario = function(){
         }
     }
 };
-marioBros.marioPrefab.prototype.moveFireMario = function(){
-    if (this.cursors.right.isDown) {
-
-        this.body.acceleration.x = 300;
-        if (this.body.velocity.x > 100 && !this.runKey.isDown) {
-            this.body.velocity.x = 100;
-        }
-        else if(this.body.velocity.x > 150 && this.runKey.isDown){
-            this.body.velocity.x = 150;
-        }
-        else if (this.body.velocity.x < 0) {
-            this.frame = 0;
-        }
-
-        if (this.onGround) {
-            
-            if(!this.runKey.isDown){
-                this.animations.play('rightFire');
-            }
-            else{
-                this.animations.play('rightFire', 15, true);
-            }            
-        }
-    }
-    else if (this.cursors.left.isDown) {
-
-        this.body.acceleration.x = -300;
-        if (this.body.velocity.x < -100 && !this.runKey.isDown) {
-            this.body.velocity.x = -100;
-        }
-        else if(this.body.velocity.x < -150 && this.runKey.isDown){
-            this.body.velocity.x = -150;
-        }
-        else if (this.body.velocity.x > 0) {
-            this.frame = 12;
-        }
-        if (this.onGround) {
-            
-            if(!this.runKey.isDown){
-                this.animations.play('leftFire');
-            }
-            else{
-                this.animations.play('leftFire', 15, true);
-            }            
-        }
-    } else {
-        if (this.body.velocity.x > 0) {
-            this.body.acceleration.x = -300;
-        }
-        else if (this.body.velocity.x < 0) {
-            this.body.acceleration.x = 300;
-        }
-        if ((this.body.velocity.x > -5 && this.body.velocity.x < 5) && this.onGround) {
-            this.body.velocity.x = 0;
-            this.animations.stop();
-            
-            if (this.animations.currentAnim.name == 'leftFire') {
-                this.frame = 11;
-            } 
-            else {
-                this.frame = 1;
-            }            
-        }
-    }
-};
 
 marioBros.marioPrefab.prototype.jumpSmallMario = function(){
     if ((this.cursors.up.isDown || this.space.isDown) && this.onGround) {
@@ -417,7 +352,7 @@ marioBros.marioPrefab.prototype.addScore = function(numScore){
 
 marioBros.marioPrefab.prototype.loseLife = function(){
    if(gameOptions.lifes > 0){
-        gameOptions.lifes -= 1;
+       gameOptions.lifes -= 1;
        this.lives -=1;
     }
     else{
@@ -438,7 +373,6 @@ marioBros.marioPrefab.prototype.gameOver = function(){
     gameOptions.lifes = 3; //se reinician las vidas
     gameOptions.coins = 0; //se reinician los coins
     gameOptions.score = 0; //se reinician los puntos
-    this.level.state.start('gameOver');
     //se reinicia al primer nivel
     //....
 };
