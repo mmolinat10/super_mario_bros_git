@@ -116,7 +116,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
             this.level.player.bigMario = true;
             this.level.player.animations.stop();
             this.level.player.loadTexture('marioBig');
-            this.level.player.body.setSize(16, 16);
+            this.level.player.body.setSize(16, 32);
             this.timeInitChangeToSmall = this.game.time.now;
             }
         if(this.level.player.marioStar || this.diedOnBrick){
