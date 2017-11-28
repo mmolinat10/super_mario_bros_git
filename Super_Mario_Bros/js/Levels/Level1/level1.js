@@ -140,7 +140,7 @@ marioBros.level1.prototype = {
         this.togglePause();
        
     }
-       
+      this.textLifes = this.add.text(255,300, "x  "+  gameOptions.lifes, style4);
         this.collisionLayers();
         
         if(this.escape.isDown){
@@ -324,6 +324,7 @@ marioBros.level1.prototype = {
              this.isPausedLevel = false; 
           }
     }
+   
 };
 
 

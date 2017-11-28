@@ -105,7 +105,7 @@ marioBros.marioPrefab.prototype.update = function(){
             this.dieSound.stop();
         }
     }
-    
+   
     if(this.timeCheck>= this.timeInit + this.invulnerableTime){
         this.marioStar = false;
         this.marioStarSound.stop();
@@ -438,6 +438,7 @@ marioBros.marioPrefab.prototype.gameOver = function(){
     gameOptions.lifes = 3; //se reinician las vidas
     gameOptions.coins = 0; //se reinician los coins
     gameOptions.score = 0; //se reinician los puntos
+    this.level.state.start('gameOver');
     //se reinicia al primer nivel
     //....
 };
