@@ -59,13 +59,14 @@ function collisionBlock(player, block){
 }
 
 marioBros.marioPrefab.prototype.update = function(){
+    
     this.timeCheck = this.game.time.now;
    // gameOptions.lifes = this.lives;
     this.collisionsMario();
     
     this.checkIsGroundMario();
     
-    if(!this.die){
+    if(!this.die && !this.level.isPausedLevel){
         if(this.bigMario){
             this.moveBigMario();
             this.jumpBigMario();
@@ -78,6 +79,9 @@ marioBros.marioPrefab.prototype.update = function(){
             this.moveSmallMario();
             this.jumpSmallMario();
         }
+    }
+    else{
+        this.animations.stop();
     }
     
     if(this.die){

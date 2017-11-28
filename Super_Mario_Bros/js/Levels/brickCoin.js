@@ -28,7 +28,8 @@ marioBros.brickCoinPrefab.prototype.playBlock = function() {
             //animación bloque al ser golpeada..moneda aparece con la puntuación
             //animación de bloque estatico (ya no hay nada)
             this.animations.stop();
-            console.log("moneda");
+            console.log("moneda"); 
+            this.level.player.addCoins(1);
         }
         else{
             //sonido bump

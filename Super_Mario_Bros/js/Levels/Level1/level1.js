@@ -11,7 +11,7 @@ marioBros.level1 = function (game) {
     this.space;
     this.escape;
     this.jumpTimer;
-
+    this.isPausedLevel = false;
 };
 
 function pipeAccess(player){
@@ -113,6 +113,7 @@ marioBros.level1.prototype = {
         this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
         this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
         this.escape = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+        this.p = this.game.input.keyboard.addKey(Phaser.Keyboard.P);
         
         this.brick = [];
         this.brickCoin = [];
@@ -135,6 +136,10 @@ marioBros.level1.prototype = {
     },
     
     update:function(){      
+    if(this.p.isDown){
+        this.togglePause();
+       
+    }
        
         this.collisionLayers();
         
@@ -308,6 +313,16 @@ marioBros.level1.prototype = {
     
     playBackgroundAudioLevel: function(){
         this.soundLevel1.loopFull();
+    },
+    togglePause:function(){
+      
+        this.game.physics.arcade.isPaused = (this.game.physics.arcade.isPaused) ? false : true;
+          if( this.game.physics.arcade.isPaused){
+              this.isPausedLevel = true;
+          }
+            else{
+             this.isPausedLevel = false; 
+          }
     }
 };
 

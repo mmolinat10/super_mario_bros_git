@@ -14,7 +14,7 @@ marioBros.loadLevel.prototype = {
         this.coin = this.add.image(this.textPoints.position.x+this.textPoints.width+15, this.textPoints.position.y, 'coinLoadScreen');
         this.coin.scale.setTo(0.8);
         
-        this.textCoins = this.add.text(this.coin.position.x+this.coin.width, this.textPoints.position.y, textCoins, style5);
+        this.textCoins = this.add.text(this.coin.position.x+this.coin.width, this.textPoints.position.y, gameOptions.coins, style5);
         
         this.textWorldLoadScreen = this.add.text(this.textCoins.position.x+this.textCoins.width+10, this.textLoadScreenPoints.position.y, textWorldLoadScreen, style4);
         this.textWorld = this.add.text(this.textCoins.position.x+this.textCoins.width+25, this.textPoints.position.y, textWorld, style5);
