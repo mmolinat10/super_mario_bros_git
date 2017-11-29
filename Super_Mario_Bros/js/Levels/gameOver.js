@@ -4,10 +4,10 @@ marioBros.gameOver = function (game) {
 };
 
 marioBros.gameOver.prototype = {
-/*
+
     create: function () {
 
-        this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
+       /* this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
         this.textPoints = this.add.text(30, 20, textPoints, style5);
         
         
@@ -27,26 +27,27 @@ marioBros.gameOver.prototype = {
         
         this.textLifes = this.add.text(this.textCoins.position.x+15, this.textCoins.position.y +100, "x  "+  gameOptions.lifes, style4);
         
-        this.game.stage.backgroundColor = 'perdiste';
+      */
+         this.gameOverText = this.add.text(gameOptions.gameWidth/2, gameOptions.gameHeight/2, "GAME OVER", style5);
         
-        
+        this.game.stage.backgroundColor = '#000000';
         this.timeInit = this.game.time.now;
     },
 
     update: function () {
         this.timeCheck = this.game.time.now;
-        if(this.timeCheck>= this.timeInit + 2500){
+        if(this.timeCheck>= this.timeInit + 3500){
             //pasar en el startGame un parametro con el nivel que toca cargar
-            this.startLevel();
+            this.startMenu();
         }
         
         
         
     },
 
-    startLevel: function () {
+    startMenu: function () {
         //habria que pasar una variable levelMario del player
-        this.state.start('level1');
+        this.state.start('menu');
     }
-    */
+    
 };
