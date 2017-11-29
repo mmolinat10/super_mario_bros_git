@@ -52,6 +52,7 @@ marioBros.goombaPrefab.prototype.update = function(){
     else{
         //tiempo que tarda en morir (animacion)
         if(this.timeCheck>= this.timeInit + 300){
+            //this.level.player.addScore(200);
             this.kill();
         }
     }
@@ -68,6 +69,7 @@ marioBros.goombaPrefab.prototype.update = function(){
         this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
     }else{
         if(this.timeCheck>= this.timeInit + 150){
+            //this.level.player.addScore(200);
             this.kill();
         }
     }
