@@ -8,7 +8,7 @@ marioBros.loadLevel.prototype = {
     create: function () {
 
         this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
-        this.textPoints = this.add.text(30, 20, textPoints, style5);
+        this.textPoints = this.add.text(30, 20, gameOptions.score, style5);
         
         
         this.coin = this.add.image(this.textPoints.position.x+this.textPoints.width+15, this.textPoints.position.y, 'coinLoadScreen');
@@ -39,9 +39,6 @@ marioBros.loadLevel.prototype = {
             //pasar en el startGame un parametro con el nivel que toca cargar
             this.startGame();
         }
-        
-        
-        
     },
 
     startGame: function () {

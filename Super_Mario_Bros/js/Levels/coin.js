@@ -12,9 +12,7 @@ marioBros.coinPrefab = function(game,x,y,level)
     
     
     //this.body.immovable = true;
-    
-    this.level.player.addScore(200);
-    this.level.player.addCoins(1);
+   
     this.collWithPlayer;
 };
 marioBros.coinPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -24,6 +22,7 @@ marioBros.coinPrefab.prototype.update = function(){
     this.collWithPlayer = this.game.physics.arcade.overlap(this, this.level.player);
     
     if(this.collWithPlayer){
+         gameOptions.score +=200;
        this.kill();
     }
    

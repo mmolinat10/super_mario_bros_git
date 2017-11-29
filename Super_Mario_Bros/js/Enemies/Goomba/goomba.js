@@ -69,7 +69,7 @@ marioBros.goombaPrefab.prototype.update = function(){
         this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
     }else{
         if(this.timeCheck>= this.timeInit + 150){
-            //this.level.player.addScore(200);
+           
             this.kill();
         }
     }
@@ -96,6 +96,8 @@ marioBros.goombaPrefab.prototype.update = function(){
 marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
     if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die){
         this.level.player.body.velocity.y -= 200; //mini jump al matar al goomba
+     gameOptions.score +=100;
+        this.level.player.score +=100;
         this.dieGoomba = true;
         this.animations.stop();
         this.deadAnimationGoomba = this.animations.play('died');
@@ -126,6 +128,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
         }
         if(this.level.player.marioStar || this.diedOnBrick){
             //tiempo en morir
+             
             this.dieAnimation();
         }
     }

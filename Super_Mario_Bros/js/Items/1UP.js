@@ -45,7 +45,7 @@ marioBros.mushroom1UPPrefab.prototype.update = function(){
     }
     
     if(this.playerCollisioned){
-        this.level.player.winLife(1);
+        gameOptions.lifes +=1;
         this.kill();
     }
     

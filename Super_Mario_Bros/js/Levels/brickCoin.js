@@ -30,7 +30,8 @@ marioBros.brickCoinPrefab.prototype.playBlock = function() {
             this.coin = new marioBros.coinOfBlockPrefab(this.game,this.x,this.y-16,this.level); 
             this.game.add.existing(this.coin);
             this.coin.body.velocity.y -= 350;
-            this.level.player.addCoins(1);
+            gameOptions.coins +=1;
+            gameOptions.score +=200;
         }
         else{
             //sonido bump

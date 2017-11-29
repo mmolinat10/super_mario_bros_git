@@ -40,6 +40,7 @@ function collisionFireBricks(fireBall, block){
 };
 
 function collisionGoombaFireBall(fireBall, goomba){
+     gameOptions.score +=100;
     goomba.dieAnimation();
     this.animations.stop();
     this.fireDie = true;
@@ -61,6 +62,7 @@ marioBros.fireballPrefab.prototype.update = function(){
 
     
     if(this.body.blocked.right || this.body.blocked.left || this.body.position.y >= gameOptions.level1Height){
+        
         this.animations.stop();
         this.fireDie = true;
         this.scale.setTo(0.8,0.8);

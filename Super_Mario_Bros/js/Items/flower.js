@@ -18,6 +18,7 @@ marioBros.flowerPrefab.prototype.update = function(){
     this.animations.play('flowerAnimation');
     
     if(this.playerCollisioned){
+        gameOptions.score +=1000;
         this.level.player.marioFlower = true;
         this.level.player.loadTexture('marioFire');
         this.level.player.body.setSize(16, 32);

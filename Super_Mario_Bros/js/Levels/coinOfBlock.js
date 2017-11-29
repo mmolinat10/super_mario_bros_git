@@ -6,7 +6,7 @@ marioBros.coinOfBlockPrefab = function(game,x,y,level)
     //this.body.immovable = true;
     this.level = level;
     this.body.gravity.y = gameOptions.playerGravity;
-    this.level.player.addScore(200);
+   
     
     this.timeAlive = 500;
     this.timeCheck;

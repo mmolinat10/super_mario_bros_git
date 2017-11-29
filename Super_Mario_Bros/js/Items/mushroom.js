@@ -45,6 +45,7 @@ marioBros.mushroomPrefab.prototype.update = function(){
     }
     
     if(this.playerCollisioned){
+        gameOptions.score +=1000;
         this.level.player.bigMario = true;
         this.level.player.animations.stop();
         this.level.player.loadTexture('marioBig');
