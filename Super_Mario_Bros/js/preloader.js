@@ -29,6 +29,11 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('mushroom', 'img/Items/mushroom.png', 16, 16);
         this.load.spritesheet('flower', 'img/Items/flower.png', 16, 16);
         this.load.spritesheet('1UP', 'img/Items/1up_mushroom.png', 16, 16);
+        this.load.spritesheet('coinOfBlock', 'img/Items/coinBlock.png', 16, 16);
+        this.load.image('marioLoadScreen', 'img/UI/Load/marioSmallIdle.png');
+        this.load.image('coinLoadScreen', 'img/UI/Load/coin1.png');
+        this.load.image('coin1', 'img/Items/coin.png');
+        this.load.image('coin2', 'img/Items/coin_2.png');
         
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
         this.load.audio('jumpSmall', 'sounds/Player/jumpSmall.wav');
@@ -37,8 +42,7 @@ marioBros.preloader.prototype = {
         this.load.audio('pipe', 'sounds/Player/pipe.wav');
         this.load.audio('pause', 'sounds/pause.wav');
         this.load.audio('marioStarSound', 'sounds/Player/marioStarSound.mp3');
-        this.load.image('marioLoadScreen', 'img/UI/Load/marioSmallIdle.png');
-        this.load.image('coinLoadScreen', 'img/UI/Load/coin1.png');
+    
         
         //menu textos
         text1Player = "1-Player";

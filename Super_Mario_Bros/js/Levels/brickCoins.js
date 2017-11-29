@@ -8,9 +8,8 @@ marioBros.brickCoinsPrefab = function(game,x,y,level)
 
     this.body.immovable = true;
     this.level = level;
-    this.contadorVecesGolpeado = 0;
-    this.score;
-        
+    this.contadorVecesGolpeado = 0;    
+    this.coin;
 };
 marioBros.brickCoinsPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.brickCoinsPrefab.prototype.constructor = marioBros.brickCoinsPrefab;
@@ -24,7 +23,10 @@ marioBros.brickCoinsPrefab.prototype.playBlock = function() {
             this.tweenBlock.to({y: this.y -8}, 100, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);
             //sonido bump y moneda
             //al ser golpeada..moneda aparece con la puntuación
-            console.log("moneda");
+            this.coin = new marioBros.coinOfBlockPrefab(this.game,this.x,this.y-16,this.level); 
+            this.game.add.existing(this.coin);
+            this.coin.body.velocity.y -= 350;
+            this.level.player.addCoins(1);
         }else{
             this.animations.stop();
             //animación de bloque estatico (ya no hay mas monedas)
