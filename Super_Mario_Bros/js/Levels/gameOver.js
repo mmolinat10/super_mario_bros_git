@@ -4,7 +4,7 @@ marioBros.gameOver = function (game) {
 };
 
 marioBros.gameOver.prototype = {
-
+/*
     create: function () {
 
         this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
@@ -48,5 +48,5 @@ marioBros.gameOver.prototype = {
         //habria que pasar una variable levelMario del player
         this.state.start('level1');
     }
-    
+    */
 };

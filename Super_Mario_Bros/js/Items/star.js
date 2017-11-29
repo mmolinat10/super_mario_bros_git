@@ -12,11 +12,6 @@ marioBros.starPrefab = function(game,x,y,level)
     this.body.collideWorldBounds = true;
     this.checkWorldBounds = true; 
     this.playerCollisioned;
-    this.collBrick;
-    this.collBrickCoin;
-    this.collBrickCoins;
-    this.collBrickFlowerOrMushroom;
-    this.collBrickStar;
     this.collGraphicLayer;
     this.timeAlive = 15000;
     this.timeCheck;
@@ -30,7 +25,7 @@ marioBros.starPrefab.prototype.constructor = marioBros.starPrefab;
 marioBros.starPrefab.prototype.update = function(){
     this.timeCheck = this.game.time.now;
     
-    this.graphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
+    this.collGraphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
 
     this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
     this.animations.play('starAnimation');
@@ -49,7 +44,7 @@ marioBros.starPrefab.prototype.update = function(){
     }
     else{
         this.move();
-        if(this.graphicLayer){
+        if(this.collGraphicLayer){
             this.body.velocity.y -= this.bounce;
         }
     }

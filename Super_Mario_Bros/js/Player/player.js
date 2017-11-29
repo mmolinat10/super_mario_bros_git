@@ -9,6 +9,7 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.animations.add('rightBig', [2, 3, 4], 10, true);
     this.animations.add('leftFire', [10, 9, 8], 10, true);
     this.animations.add('rightFire', [2, 3, 4], 10, true);
+    this.animations.add('attackFire', [13,14,15,16,17], 10, true);
     this.velocity = gameOptions.playerSpeed;
     this.jump = gameOptions.playerJump;
     this.die = false;
@@ -22,13 +23,14 @@ marioBros.marioPrefab = function(game,x,y,level)
 
     this.jumpSmallSound = this.game.add.audio('jumpSmall');
     this.jumpBigSound = this.game.add.audio('jumpBig');
-    this.jumpFireSound = this.game.add.audio('jumpFire');
+    //this.jumpFireSound = this.game.add.audio('jumpFire');
     this.dieSound = this.game.add.audio('mariodie');
     
     this.jumpTimer = 0;
     this.cursors = this.game.input.keyboard.createCursorKeys(); 
     this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
     this.runKey = this.game.input.keyboard.addKey(Phaser.Keyboard.CONTROL);
+    this.fireKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SHIFT);
     //this.levelMario = 'level1';    
     this.level = level;
     
@@ -52,7 +54,11 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.marioStarSound = this.game.add.audio('marioStarSound');
     this.timeAnimationDie = 3000;
     this.createTimeDie = false;
-    
+    this.fireBall;
+    this.direction;
+    this.timeFireBallFinish = false;
+    this.timeInitFire;
+    this.firstTimeFire = false;
 };
 
 marioBros.marioPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -70,7 +76,7 @@ marioBros.marioPrefab.prototype.update = function(){
     
     this.checkIsGroundMario();
     
-    if(!this.die && !this.level.isPausedLevel){
+    if(!this.die){
         if(this.bigMario){
             this.moveBigMario();
             this.jumpBigMario();
@@ -121,11 +127,32 @@ marioBros.marioPrefab.prototype.update = function(){
         }
     }    
     
+    if(this.marioFlower){
+        if(this.fireKey.isDown ){
+            
+            this.animations.stop();
+            //adaptar a dirección izquierda y derecha
+            this.animations.play('attackFire');
+            
+            if(!this.firstTimeFire){
+                this.firstTimeFire = true;
+                this.timeInitFire = this.game.time.now;
+               
+                this.createFireBall();
+            }
+            
+            if(this.timeCheck>= this.timeInitFire + 800){
+                this.createFireBall();
+            }
+            
+        }
+    }
+    
 };
 
 marioBros.marioPrefab.prototype.moveSmallMario = function(){
     if (this.cursors.right.isDown) {
-
+        this.direction = 1;
         this.body.acceleration.x = 300;
         if (this.body.velocity.x > 100 && !this.runKey.isDown) {
             this.body.velocity.x = 100;
@@ -148,7 +175,7 @@ marioBros.marioPrefab.prototype.moveSmallMario = function(){
         }
     }
     else if (this.cursors.left.isDown) {
-
+        this.direction = -1;
         this.body.acceleration.x = -300;
         if (this.body.velocity.x < -100 && !this.runKey.isDown) {
             this.body.velocity.x = -100;
@@ -191,7 +218,8 @@ marioBros.marioPrefab.prototype.moveSmallMario = function(){
 
 marioBros.marioPrefab.prototype.moveBigMario = function(){
     if (this.cursors.right.isDown) {
-
+        this.direction = 1;
+        
         this.body.acceleration.x = 300;
         if (this.body.velocity.x > 100 && !this.runKey.isDown) {
             this.body.velocity.x = 100;
@@ -214,7 +242,7 @@ marioBros.marioPrefab.prototype.moveBigMario = function(){
         }
     }
     else if (this.cursors.left.isDown) {
-
+        this.direction = -1;
         this.body.acceleration.x = -300;
         if (this.body.velocity.x < -100 && !this.runKey.isDown) {
             this.body.velocity.x = -100;
@@ -336,6 +364,19 @@ marioBros.marioPrefab.prototype.checkIsGroundMario = function(){
     if(this.body.onFloor()){
        this.onGround = true;
     }
+};
+        
+marioBros.marioPrefab.prototype.createFireBall = function() {
+    this.timeInitFire = this.game.time.now;
+    
+    if(this.direction == 1){
+       this.fireBall = new marioBros.fireballPrefab(this.game,this.x+5,this.y-8,this.level);
+    }
+    else{
+        this.fireBall = new marioBros.fireballPrefab(this.game,this.x-20,this.y-8,this.level);
+    }
+    this.game.add.existing(this.fireBall); 
+    this.fireBall.body.velocity.x = this.fireBall.speed * this.direction;
 };
 
 marioBros.marioPrefab.prototype.winLife = function(numLife){

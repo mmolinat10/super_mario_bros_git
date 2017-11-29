@@ -19,9 +19,7 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.timeCheck;
     this.timeInit;
     this.timeInitChangeToSmall;
-    this.timeInitChangeToBig;
     this.changeToSmall = false;
-    this.changeToBig = false;
     this.collBrick;
     this.collBrickCoin;
     this.collBrickCoins;
@@ -31,6 +29,7 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.diedOnBrick = false;
     this.touchBrick = false;
     this.score;
+    this.fireBallColl = false;
 };
 marioBros.goombaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.goombaPrefab.prototype.constructor = marioBros.goombaPrefab;
@@ -78,11 +77,6 @@ marioBros.goombaPrefab.prototype.update = function(){
         this.changeToSmall = false;
     }
     
-    //tiempo de invulnerabilidad al pasar de fier mario a big mario
-    else if(this.timeCheck>= this.timeInitChangeToBig + 2000 && this.changeToBig){
-        this.changeToBig = false;
-    }
-    
     if(this.body.blocked.right || this.body.blocked.left){
         this.direction *= -1;        
     }
@@ -98,7 +92,7 @@ marioBros.goombaPrefab.prototype.update = function(){
 
 
 marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
-    if(this.body.touching.up && this.level.player.body.touching.down){
+    if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die){
         this.level.player.body.velocity.y -= 200; //mini jump al matar al goomba
         this.dieGoomba = true;
         this.animations.stop();
@@ -110,7 +104,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
         if(!this.level.player.bigMario && !this.level.player.marioStar && !this.changeToSmall){
            this.level.player.die = true;
         }
-        else if(this.level.player.bigMario && !this.level.player.marioStar && !this.level.player.marioFlower && !this.changeToBig){
+        else if(this.level.player.bigMario && !this.level.player.marioStar && !this.level.player.marioFlower){
             this.level.player.bigMario = false; 
             this.level.player.animations.stop();
             this.level.player.loadTexture('marioSmall');
@@ -121,18 +115,22 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
         else if(this.level.player.marioFlower && !this.level.player.marioStar)
         {
             this.level.player.marioFlower = false;
-            this.level.player.bigMario = true;
+            this.level.player.bigMario = false;
             this.level.player.animations.stop();
-            this.level.player.loadTexture('marioBig');
-            this.level.player.body.setSize(16, 32);
-            this.timeInitChangeToBig = this.game.time.now;
-            this.changeToBig = true;
+            this.level.player.loadTexture('marioSmall');
+            this.level.player.body.setSize(16, 16);
+            this.timeInitChangeToSmall = this.game.time.now;
+            this.changeToSmall = true;
         }
         if(this.level.player.marioStar || this.diedOnBrick){
             //tiempo en morir
-            this.timeInit = this.game.time.now;
-            this.dieStarOrOnBrickGoomba = true;
-            this.angle = -180;
+            this.dieAnimation();
         }
     }
+};
+
+marioBros.goombaPrefab.prototype.dieAnimation = function() {
+    this.timeInit = this.game.time.now;
+    this.dieStarOrOnBrickGoomba = true;
+    this.angle = -180;
 };

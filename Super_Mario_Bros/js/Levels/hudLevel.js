@@ -4,10 +4,10 @@ marioBros.hudLevel = function (game) {
 };
 
 marioBros.hudLevel.prototype = {
-    
+    /*
     create: function () {
  this.textPoints = this.add.text(30, 20, textPoints, style5);
-    /*    this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
+       this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
        
         
         this.coin = this.add.image(this.textPoints.position.x+this.textPoints.width+15, this.textPoints.position.y, 'coinLoadScreen');
@@ -25,7 +25,7 @@ marioBros.hudLevel.prototype = {
         this.marioLifes = this.add.image(this.textCoins.position.x-5, this.textCoins.position.y +100, 'marioLoadScreen');
         
         this.textLifes = this.add.text(this.textCoins.position.x+15, this.textCoins.position.y +100, "x  "+  gameOptions.lifes, style4);
-    */
+    
    
     },
 
@@ -33,5 +33,5 @@ marioBros.hudLevel.prototype = {
        
         
     },
-
+*/
 };
