@@ -10,8 +10,6 @@ marioBros.level1 = function (game) {
     this.runKey;
     this.space;
     this.escape;
-    
-   
 };
 
 function pipeAccess(player){
@@ -90,7 +88,7 @@ marioBros.level1.prototype = {
     },
    
     create:function(){
-
+        this.nameLevel = "level1";
         this.soundLevel1 = this.game.add.audio('level1');
         this.soundLevel1.loopFull();
         this.game.paused = false;
@@ -124,12 +122,15 @@ marioBros.level1.prototype = {
         this.brickInvisible = [];
         this.createBlocksPrefabs();
         
+        this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25, this);
+        this.game.add.existing(this.player);       
+        
         this.goomba = [];
         this.createGoombasPrefabs();
         
-        this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25, this);
-        this.game.add.existing(this.player);       
-       
+        this.coinsAlone = [];
+        this.createCoinsPrefabs();
+        
         this.camera.follow(this.player, null, 1, 0);
         //this.camera.x = 1300; comprovar que los goombas colisionan con los bloques rompibles..(aun no funciona bien)
         
@@ -312,6 +313,16 @@ marioBros.level1.prototype = {
             this.goombaPos = this.goombas.children[i];
             this.goomba.push(new marioBros.goombaPrefab(this.game,this.goombaPos.x,this.goombaPos.y+16, this));
             this.game.add.existing(this.goomba[i]);
+        }
+    },
+    
+    createCoinsPrefabs: function(){
+        
+        this.coinPos;
+        for(var i = 0; i < this.coins.length; i++){
+            this.coinPos = this.coins.children[i];
+            this.coinsAlone.push(new marioBros.coinPrefab(this.game,this.coinPos.x,this.coinPos.y+16, this));
+            this.game.add.existing(this.coinsAlone[i]);
         }
     },
     

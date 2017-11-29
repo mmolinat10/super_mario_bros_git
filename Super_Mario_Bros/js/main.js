@@ -12,7 +12,6 @@ var gameOptions = {
     lifes:3,
     coins:0,
     score:0
-    
-}
+};
 
 
