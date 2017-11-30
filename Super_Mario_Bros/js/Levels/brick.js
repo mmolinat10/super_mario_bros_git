@@ -20,7 +20,7 @@ marioBros.brickPrefab.prototype.playBlock = function() {
             this.tweenBlock.to({y: this.y -8}, 100, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);
             //sonido bump
         }
-        else{
+        else if(this.level.player.bigMario || this.level.player.marioFlower){
             //como es grande destruye el bloque...animacion y kill
             //sonido de que se destruye el bloque
             this.kill();

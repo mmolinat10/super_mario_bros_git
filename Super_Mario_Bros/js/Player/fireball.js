@@ -2,10 +2,10 @@ marioBros.fireballPrefab = function(game,x,y,level)
 {
     Phaser.Sprite.call(this,game,x,y,'fireBall');
     this.animations.add('fireBallAnimation',[0,1,2,3], 15, true);
-    this.animations.add('fireBallDie',[4,5,6], 5);
+    this.animations.add('fireBallDie',[4,5,6], 15);
     this.game.physics.arcade.enable(this);
     //this.body.immovable = true;
-    this.speed = 70;
+    this.speed = 110;
     this.bounce = 150;
     this.level = level;
     this.body.gravity.y = gameOptions.playerGravity;
@@ -31,7 +31,7 @@ function collisionFireBricks(fireBall, block){
         this.animations.stop();
         this.fireDie = true;
         fireBall.scale.setTo(0.8,0.8);
-        this.animations.play('fireBallDie',10, false, true);
+        this.animations.play('fireBallDie',15, false, true);
     }
     else{
         fireBall.body.velocity.y -= this.bounce;
@@ -47,7 +47,7 @@ function collisionGoombaFireBall(fireBall, goomba){
     this.animations.stop();
     this.fireDie = true;
     fireBall.scale.setTo(0.8,0.8);
-    this.animations.play('fireBallDie',10, false, true);    
+    this.animations.play('fireBallDie',15, false, true);    
     
 };
 
