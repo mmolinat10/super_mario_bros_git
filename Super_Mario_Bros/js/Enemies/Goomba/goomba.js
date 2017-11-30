@@ -95,6 +95,8 @@ marioBros.goombaPrefab.prototype.update = function(){
 marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
     if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die){
         this.level.player.body.velocity.y -= 200; //mini jump al matar al goomba
+        this.stompSound = this.game.add.audio('stomp');
+        this.stompSound.play();
         gameOptions.score +=100;
         changeHUD = true;
         this.dieGoomba = true;

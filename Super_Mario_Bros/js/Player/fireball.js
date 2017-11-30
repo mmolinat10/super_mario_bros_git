@@ -21,6 +21,8 @@ marioBros.fireballPrefab = function(game,x,y,level)
     this.score;
     this.animations.play('fireBallAnimation');
     this.fireDie = false;
+    this.fireBallSound = this.game.add.audio('fireballSound');
+    this.fireBallSound.play();
 
 };
 marioBros.fireballPrefab.prototype = Object.create(Phaser.Sprite.prototype);

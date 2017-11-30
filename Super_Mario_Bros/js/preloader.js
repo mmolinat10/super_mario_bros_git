@@ -42,6 +42,16 @@ marioBros.preloader.prototype = {
         this.load.audio('pipe', 'sounds/Player/pipe.wav');
         this.load.audio('pause', 'sounds/pause.wav');
         this.load.audio('marioStarSound', 'sounds/Player/marioStarSound.mp3');
+        this.load.audio('runningOutOfTime', 'sounds/Levels/runningOutOfTime.wav');
+        this.load.audio('brickSmash', 'sounds/Levels/brick.wav');
+        this.load.audio('coinSound', 'sounds/Levels/coin.wav');
+        this.load.audio('1upSound', 'sounds/Levels/1up.wav');
+        this.load.audio('stomp', 'sounds/Enemies/stomp.wav');
+        this.load.audio('powerup_appears', 'sounds/Levels/powerup_appears.wav');
+        this.load.audio('powerup', 'sounds/Levels/powerup.wav');
+        this.load.audio('bump', 'sounds/Levels/bump.wav');
+        this.load.audio('fireballSound', 'sounds/Player/fireball.wav');
+        
         
         style = { font: "12px Arial", fill: "#ffffff", align: "center"};
         style2 = { font: "24px Arial", fill: "#ffffff", align: "center"};

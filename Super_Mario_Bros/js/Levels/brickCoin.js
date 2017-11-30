@@ -26,6 +26,8 @@ marioBros.brickCoinPrefab.prototype.playBlock = function() {
             //sonido bump y moneda
             //animación bloque al ser golpeada..moneda aparece con la puntuación
             //animación de bloque estatico (ya no hay nada)
+            this.coinSound = this.game.add.audio('coinSound');
+            this.coinSound.play();
             this.animations.stop();
             this.coin = new marioBros.coinOfBlockPrefab(this.game,this.x,this.y-16,this.level); 
             this.game.add.existing(this.coin);
@@ -36,6 +38,8 @@ marioBros.brickCoinPrefab.prototype.playBlock = function() {
         }
         else{
             //sonido bump
+            this.bumpSound = this.game.add.audio('bump');
+            this.bumpSound.play();
         }
         
     }

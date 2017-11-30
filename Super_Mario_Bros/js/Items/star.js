@@ -39,6 +39,8 @@ marioBros.starPrefab.prototype.update = function(){
     }
     
     if(this.playerCollisioned){
+        this.powerupSound = this.game.add.audio('powerup');
+        this.powerupSound.play();
         gameOptions.score +=1000;
         changeHUD = true;
         this.level.player.marioStar = true;

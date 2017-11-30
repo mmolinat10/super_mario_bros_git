@@ -45,6 +45,8 @@ marioBros.mushroom1UPPrefab.prototype.update = function(){
     }
     
     if(this.playerCollisioned){
+        this.lifeSound = this.game.add.audio('1upSound');
+        this.lifeSound.play();
         gameOptions.lifes +=1;
         this.kill();
     }

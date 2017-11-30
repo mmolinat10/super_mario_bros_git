@@ -28,10 +28,14 @@ marioBros.brickCoinsPrefab.prototype.playBlock = function() {
             this.coin.body.velocity.y -= 350;
             gameOptions.coins +=1;
             gameOptions.score +=200;
+            this.coinSound = this.game.add.audio('coinSound');
+            this.coinSound.play();
         }else{
             this.animations.stop();
             //animación de bloque estatico (ya no hay mas monedas)
             //sonido bump
+            this.bumpSound = this.game.add.audio('bump');
+            this.bumpSound.play();
         }
     }
     

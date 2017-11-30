@@ -22,6 +22,8 @@ marioBros.coinPrefab.prototype.update = function(){
     this.collWithPlayer = this.game.physics.arcade.overlap(this, this.level.player);
     
     if(this.collWithPlayer){
+        this.coinSound = this.game.add.audio('coinSound');
+        this.coinSound.play();
         gameOptions.score +=200;
         gameOptions.coins +=1;
         changeHUD = true;

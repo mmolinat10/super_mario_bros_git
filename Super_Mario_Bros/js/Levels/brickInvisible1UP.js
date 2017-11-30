@@ -29,12 +29,16 @@ marioBros.brickInvisible1UPPrefab.prototype.playBlock = function() {
             //sonido de la vida al aparecer
             //aparición de la vida encima del bloque y que se desplaze a la derecha
             //animación de bloque estatico (ya no hay nada)
+            this.powerUpAppearsSound = this.game.add.audio('powerup_appears');
+            this.powerUpAppearsSound.play();
             this.animations.stop();
             this.create1UpMushroom();
             console.log("vida");
         }
         else{
             //sonido bump
+            this.bumpSound = this.game.add.audio('bump');
+            this.bumpSound.play();
         }
     }
     

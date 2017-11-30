@@ -109,6 +109,8 @@ marioBros.level1.prototype = {
                 
         gameOptions.numLevel = 1;
         this.soundLevel1 = this.game.add.audio('level1');
+        this.runningOutOfTime = this.game.add.audio('runningOutOfTime');
+        this.runningOutOfTimeOnce = false;
         this.soundLevel1.loopFull();
         this.game.paused = false;
         this.pipeLevel1 = this.game.add.audio('pipe');
@@ -152,6 +154,10 @@ marioBros.level1.prototype = {
         
         this.camera.follow(this.player, null, 1, 0);
         this.game.time.events.loop(1000, function(){
+            if(gameOptions.time < 100 && !this.runningOutOfTimeOnce){
+                this.runningOutOfTimeOnce = true;
+                this.runningOutOfTime.play();
+            }
             if(gameOptions.time > 0){
                 gameOptions.time -= 1;
                 changeHUD = true;        

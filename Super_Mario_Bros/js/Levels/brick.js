@@ -19,10 +19,14 @@ marioBros.brickPrefab.prototype.playBlock = function() {
             this.tweenBlock = this.game.add.tween(this.position);
             this.tweenBlock.to({y: this.y -8}, 100, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);
             //sonido bump
+            this.bumpSound = this.game.add.audio('bump');
+            this.bumpSound.play();
         }
         else if(this.level.player.bigMario || this.level.player.marioFlower){
             //como es grande destruye el bloque...animacion y kill
             //sonido de que se destruye el bloque
+            this.brickSmash = this.game.add.audio('brickSmash');
+            this.brickSmash.play();
             this.kill();
         }
     }

@@ -29,11 +29,15 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.playBlock = function() {
                 //sonido del champiñon al aparecer y sonido bump
                 //aparición del champiñon encima del bloque y que se desplaze a la derecha
                 //animación de bloque estatico (ya no hay nada)
+                this.powerUpAppearsSound = this.game.add.audio('powerup_appears');
+                this.powerUpAppearsSound.play();
                 this.animations.stop();
                 this.createObject();
                 console.log("mushroom");
             }
             else{
+                this.powerUpAppearsSound = this.game.add.audio('powerup_appears');
+                this.powerUpAppearsSound.play();
                 //sonido de la flor al aparecer y sonido bump
                 //aparición de la flor con su animacion encima del bloque sin moverse
                 //animación de bloque estatico (ya no hay nada)
@@ -43,6 +47,8 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.playBlock = function() {
         }
         else{
             //sonido bump
+            this.bumpSound = this.game.add.audio('bump');
+            this.bumpSound.play();
         }
     }
     

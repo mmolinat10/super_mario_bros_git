@@ -24,12 +24,16 @@ marioBros.brickStarPrefab.prototype.playBlock = function() {
             //sonido de la estrella al aparecer
             //aparición de la estrella encima del bloque y que se desplaze a la derecha botando en el terreno al colisionar
             //animación de bloque estatico (ya no hay nada)
+            this.powerUpAppearsSound = this.game.add.audio('powerup_appears');
+            this.powerUpAppearsSound.play();
             this.animations.stop();
             this.createStar();
             console.log("estrella");
         }
         else{
             //sonido bump
+            this.bumpSound = this.game.add.audio('bump');
+            this.bumpSound.play();
         }
     }
 }
