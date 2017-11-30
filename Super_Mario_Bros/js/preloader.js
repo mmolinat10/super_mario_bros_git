@@ -51,6 +51,7 @@ marioBros.preloader.prototype = {
         this.load.audio('powerup', 'sounds/Levels/powerup.wav');
         this.load.audio('bump', 'sounds/Levels/bump.wav');
         this.load.audio('fireballSound', 'sounds/Player/fireball.wav');
+        this.load.audio('gameoverSound', 'sounds/Levels/gameover.wav');
         
         
         style = { font: "12px Arial", fill: "#ffffff", align: "center"};
