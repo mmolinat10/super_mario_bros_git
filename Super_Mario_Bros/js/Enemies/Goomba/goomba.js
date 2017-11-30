@@ -96,8 +96,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
     if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die){
         this.level.player.body.velocity.y -= 200; //mini jump al matar al goomba
         gameOptions.score +=100;
-        /*changeHUD = true;
-        textPointsLevel.text = gameOptions.score;*/
+        changeHUD = true;
         this.dieGoomba = true;
         this.animations.stop();
         this.deadAnimationGoomba = this.animations.play('died');
@@ -138,6 +137,6 @@ marioBros.goombaPrefab.prototype.dieAnimation = function() {
     this.timeInit = this.game.time.now;
     this.dieStarOrOnBrickGoomba = true;
     gameOptions.score +=100;
-    //changeHUD = true;
+    changeHUD = true;
     this.angle = -180;
 };

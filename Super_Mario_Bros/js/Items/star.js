@@ -39,6 +39,8 @@ marioBros.starPrefab.prototype.update = function(){
     }
     
     if(this.playerCollisioned){
+        gameOptions.score +=1000;
+        changeHUD = true;
         this.level.player.marioStar = true;
         this.kill();
     }

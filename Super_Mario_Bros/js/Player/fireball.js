@@ -40,7 +40,9 @@ function collisionFireBricks(fireBall, block){
 };
 
 function collisionGoombaFireBall(fireBall, goomba){
-     gameOptions.score +=100;
+    gameOptions.score +=100;
+    changeHUD = true;
+
     goomba.dieAnimation();
     this.animations.stop();
     this.fireDie = true;

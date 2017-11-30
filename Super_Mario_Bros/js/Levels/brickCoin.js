@@ -32,6 +32,7 @@ marioBros.brickCoinPrefab.prototype.playBlock = function() {
             this.coin.body.velocity.y -= 350;
             gameOptions.coins +=1;
             gameOptions.score +=200;
+            changeHUD = true;
         }
         else{
             //sonido bump

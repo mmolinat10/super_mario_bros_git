@@ -6,6 +6,14 @@ var textWorldLevel;
 var textTimeHUDLevel;
 var textTimeLevel;
 var changeHUD = false;
+var textPoints;
+var textCoins;
+var textTime;
+var textPointsHUD;
+var coin;
+var textWorldHUD;
+var textWorld;
+var textTimeHUD;
 
 marioBros.level1 = function (game) {
 
@@ -149,10 +157,18 @@ marioBros.level1.prototype = {
     },
     
     update:function(){   
-        /*if(changeHUD){
+        if(changeHUD){
+            textTimeHUD.destroy();
+            textWorld.destroy();
+            textWorldHUD.destroy();
+            coin.destroy();
+            textPointsHUD.destroy();
+            textPoints.destroy();
+            textCoins.destroy();
+            textTime.destroy();
             this.loadHud();
             changeHUD = false;
-        }*/
+        }
         
        
         this.collisionLayers();
@@ -377,28 +393,28 @@ marioBros.level1.prototype = {
         textTimeHUDLevel = "TIME";
         textTimeLevel = gameOptions.time;
         
-        this.textPointsHUD = this.add.text(30, 10, textPointsHUDLevel, style);
-        this.textPointsHUD.fixedToCamera = true;
-        this.textPoints = this.add.text(30, 20, textPointsLevel, style5);
-        this.textPoints.fixedToCamera = true;
+        textPointsHUD = this.add.text(30, 10, textPointsHUDLevel, style);
+        textPointsHUD.fixedToCamera = true;
+        textPoints = this.add.text(30, 20, textPointsLevel, style5);
+        textPoints.fixedToCamera = true;
         
         
-        this.coin = this.add.image(75,20, 'coin1');
-        this.coin.scale.setTo(0.8);
-        this.coin.fixedToCamera = true;
+        coin = this.add.image(75,20, 'coin1');
+        coin.scale.setTo(0.8);
+        coin.fixedToCamera = true;
         
-        this.textCoins = this.add.text(90, 20, textCoinsLevel, style5);
-        this.textCoins.fixedToCamera = true;
+        textCoins = this.add.text(90, 20, textCoinsLevel, style5);
+        textCoins.fixedToCamera = true;
         
-        this.textWorldLoadScreen = this.add.text(130, 10, textWorldHUDLevel, style);
-        this.textWorldLoadScreen.fixedToCamera = true;
-        this.textWorld = this.add.text(144, 20, textWorldLevel, style);
-        this.textWorld.fixedToCamera = true;
+        textWorldHUD = this.add.text(130, 10, textWorldHUDLevel, style);
+        textWorldHUD.fixedToCamera = true;
+        textWorld = this.add.text(144, 20, textWorldLevel, style);
+        textWorld.fixedToCamera = true;
         
-        this.textTimeHUD = this.add.text(200, 10, textTimeHUDLevel, style);
-        this.textTimeHUD.fixedToCamera = true;
-        this.textTime = this.add.text(205, 20, textTimeLevel, style);
-        this.textTime.fixedToCamera = true;
+        textTimeHUD = this.add.text(200, 10, textTimeHUDLevel, style);
+        textTimeHUD.fixedToCamera = true;
+        textTime = this.add.text(205, 20, textTimeLevel, style);
+        textTime.fixedToCamera = true;
     }
    
 };
