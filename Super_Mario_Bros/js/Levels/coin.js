@@ -23,6 +23,7 @@ marioBros.coinPrefab.prototype.update = function(){
     
     if(this.collWithPlayer){
         gameOptions.score +=200;
+        gameOptions.coins +=1;
         changeHUD = true;
         this.kill();
     }
