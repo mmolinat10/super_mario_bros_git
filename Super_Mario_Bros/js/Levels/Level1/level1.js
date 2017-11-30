@@ -151,12 +151,20 @@ marioBros.level1.prototype = {
         this.createCoinsPrefabs();
         
         this.camera.follow(this.player, null, 1, 0);
-        
+        this.game.time.events.loop(1000, function(){
+            if(gameOptions.time > 0){
+                gameOptions.time -= 1;
+                changeHUD = true;        
+            }
+            
+        }, this);
         this.loadHud();
 
     },
     
     update:function(){   
+       
+        
         if(changeHUD){
             textTimeHUD.destroy();
             textWorld.destroy();

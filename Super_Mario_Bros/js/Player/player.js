@@ -106,12 +106,14 @@ marioBros.marioPrefab.prototype.update = function(){
         this.frame = 6;
         if(this.timeCheck>= this.timeInitDie + this.timeAnimationDie){
             if(gameOptions.lifes > 0){
-            this.level.state.start('loadLevel');
-            this.die = false;
-            this.dieSound.stop();
-            }else{
-           this.gameOver();
-        }
+                gameOptions.time = 400;
+                this.level.state.start('loadLevel');
+                this.die = false;
+                this.dieSound.stop();
+            }
+            else{
+               this.gameOver();
+            }
         }
         
     }
@@ -150,6 +152,10 @@ marioBros.marioPrefab.prototype.update = function(){
             }
             
         }
+    }
+    
+    if(gameOptions.time <= 0){
+       this.die = true;
     }
     
 };
@@ -418,6 +424,7 @@ marioBros.marioPrefab.prototype.gameOver = function(){
     gameOptions.lifes = 3; //se reinician las vidas
     gameOptions.coins = 0; //se reinician los coins
     gameOptions.score = 0; //se reinician los puntos
+    gameOptions.time = 400; // se reinicia el tiempo
    this.level.state.start('gameOver');
     //se reinicia al primer nivel
     //....
