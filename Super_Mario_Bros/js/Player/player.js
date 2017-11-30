@@ -421,10 +421,9 @@ marioBros.marioPrefab.prototype.dieMario = function(){
 };
 
 marioBros.marioPrefab.prototype.gameOver = function(){
-    gameOptions.lifes = 3; //se reinician las vidas
-    gameOptions.coins = 0; //se reinician los coins
-    gameOptions.score = 0; //se reinician los puntos
-    gameOptions.time = 400; // se reinicia el tiempo
+    //cargar variable en el ranking antes de reiniciar las vidas, coins, score y tiempo en gameOver.js
+    //funcion para cargar variables en el ranking
+
    this.level.state.start('gameOver');
     //se reinicia al primer nivel
     //....

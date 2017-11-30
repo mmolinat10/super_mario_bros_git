@@ -158,7 +158,7 @@ marioBros.level1.prototype = {
                 this.runningOutOfTimeOnce = true;
                 this.runningOutOfTime.play();
             }
-            if(gameOptions.time > 0){
+            if(gameOptions.time > 0 && !this.player.die){
                 gameOptions.time -= 1;
                 changeHUD = true;        
             }
