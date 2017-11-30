@@ -4,28 +4,68 @@ marioBros.loadLevel = function (game) {
 };
 
 marioBros.loadLevel.prototype = {
-
+    
+    preload: function(){
+        //textos e info del loadScreen (antes del lvl)
+        textLoadScreenPoints = "MARIO";
+        
+        if(gameOptions.score < 10){
+           textPoints = "0"+gameOptions.score;
+        }
+        else{
+            textPoints = gameOptions.score;
+        }
+        
+        if(gameOptions.coins < 10){
+            textCoins = "x"+"0"+gameOptions.coins;
+        }
+        else{
+            textCoins = "x"+gameOptions.coins;
+        }
+        
+        textWorldLoadScreen = "WORLD";
+        if(gameOptions.numLevel == 1){
+           textWorld = "1-1";
+        }
+        else if(gameOptions.numLevel == 11){
+            textWorld = "1-2";   
+        }
+        
+        if(gameOptions.numLevel == 1){
+            textWorldLvlCenter = "WORLD 1 - 1";
+        }
+        else if(gameOptions.numLevel == 11){
+             textWorldLvlCenter = "WORLD 1 - 2";  
+        }
+        
+        textTimeLoadScreen = "TIME";
+        
+        textLifes= "x  " + gameOptions.lifes;
+    
+        
+    },
+    
     create: function () {
 
-        this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style4);
-        this.textPoints = this.add.text(30, 20, gameOptions.score, style5);
+        this.textLoadScreenPoints = this.add.text(30, 10, textLoadScreenPoints, style);
+        this.textPoints = this.add.text(30, 20, textPoints, style5);
         
         
-        this.coin = this.add.image(this.textPoints.position.x+this.textPoints.width+15, this.textPoints.position.y, 'coinLoadScreen');
+        this.coin = this.add.image(75,20, 'coinLoadScreen');
         this.coin.scale.setTo(0.8);
         
-        this.textCoins = this.add.text(this.coin.position.x+this.coin.width, this.textPoints.position.y, gameOptions.coins, style5);
+        this.textCoins = this.add.text(90, 20, textCoins, style5);
         
-        this.textWorldLoadScreen = this.add.text(this.textCoins.position.x+this.textCoins.width+10, this.textLoadScreenPoints.position.y, textWorldLoadScreen, style4);
-        this.textWorld = this.add.text(this.textCoins.position.x+this.textCoins.width+25, this.textPoints.position.y, textWorld, style5);
+        this.textWorldLoadScreen = this.add.text(130, 10, textWorldLoadScreen, style);
+        this.textWorld = this.add.text(144, 20, textWorld, style);
         
-        this.textTimeLoadScreen = this.add.text(this.textWorldLoadScreen.position.x+this.textWorldLoadScreen.width+15, this.textWorldLoadScreen.position.y, textTimeLoadScreen, style4);
+        this.textTimeLoadScreen = this.add.text(200, 10, textTimeLoadScreen, style);
         
-        this.textWorldLvlCenter = this.add.text(this.textCoins.position.x-20, this.textCoins.position.y +70, textWorldLvlCenter, style);
+        this.textWorldLvlCenter = this.add.text(90, 90, textWorldLvlCenter, style);
         
-        this.marioLifes = this.add.image(this.textCoins.position.x-5, this.textCoins.position.y +100, 'marioLoadScreen');
+        this.marioLifes = this.add.image(104, 115, 'marioLoadScreen');
         
-        this.textLifes = this.add.text(this.textCoins.position.x+15, this.textCoins.position.y +100, "x  "+  gameOptions.lifes, style4);
+        this.textLifes = this.add.text(125, 115, textLifes, style);
         
         this.game.stage.backgroundColor = '#000000';
         

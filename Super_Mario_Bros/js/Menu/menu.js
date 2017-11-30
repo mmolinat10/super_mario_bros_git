@@ -9,7 +9,21 @@ marioBros.menu = function (game) {
 };
 
 marioBros.menu.prototype = {
-
+    
+    preload: function(){
+        //menu textos
+        text1Player = "1-Player";
+        
+        text2Player = "2-Players";
+        
+        textRanking = "Ranking";
+        
+        textRankingScene = "Scene Ranking";
+        
+        textTwoPlayersScene = "Scene Two Players";
+        
+    },
+    
     create: function () {
 
         this.title = this.add.sprite(0, -50, 'title');

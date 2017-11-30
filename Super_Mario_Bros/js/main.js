@@ -11,7 +11,9 @@ var gameOptions = {
     playerJump:300,
     lifes:3,
     coins:0,
-    score:0
+    score:0,
+    numLevel:1,
+    time:400
 };
 
 

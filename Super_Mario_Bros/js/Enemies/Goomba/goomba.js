@@ -52,7 +52,6 @@ marioBros.goombaPrefab.prototype.update = function(){
     else{
         //tiempo que tarda en morir (animacion)
         if(this.timeCheck>= this.timeInit + 300){
-            //this.level.player.addScore(200);
             this.kill();
         }
     }
@@ -96,8 +95,9 @@ marioBros.goombaPrefab.prototype.update = function(){
 marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
     if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die){
         this.level.player.body.velocity.y -= 200; //mini jump al matar al goomba
-     gameOptions.score +=100;
-        this.level.player.score +=100;
+        gameOptions.score +=100;
+        /*changeHUD = true;
+        textPointsLevel.text = gameOptions.score;*/
         this.dieGoomba = true;
         this.animations.stop();
         this.deadAnimationGoomba = this.animations.play('died');
@@ -137,5 +137,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
 marioBros.goombaPrefab.prototype.dieAnimation = function() {
     this.timeInit = this.game.time.now;
     this.dieStarOrOnBrickGoomba = true;
+    gameOptions.score +=100;
+    //changeHUD = true;
     this.angle = -180;
 };

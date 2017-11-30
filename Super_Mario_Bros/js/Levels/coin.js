@@ -1,7 +1,7 @@
 marioBros.coinPrefab = function(game,x,y,level)
 {
     this.level = level;
-    if(this.level.nameLevel == "level1"){
+    if(gameOptions.numLevel == 1){
        Phaser.Sprite.call(this,game,x,y,'coin2');
     }
     /*else{
@@ -22,8 +22,8 @@ marioBros.coinPrefab.prototype.update = function(){
     this.collWithPlayer = this.game.physics.arcade.overlap(this, this.level.player);
     
     if(this.collWithPlayer){
-         gameOptions.score +=200;
-       this.kill();
+        gameOptions.score +=200;
+        this.kill();
     }
    
 };

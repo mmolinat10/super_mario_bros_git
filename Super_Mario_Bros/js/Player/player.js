@@ -69,9 +69,6 @@ function collisionBlock(player, block){
 }
 
 marioBros.marioPrefab.prototype.update = function(){
-    console.log(gameOptions.score);
-     console.log(gameOptions.coins);
-       console.log(gameOptions.lifes);
     this.timeCheck = this.game.time.now;
    // gameOptions.lifes = this.lives;
     this.collisionsMario();

@@ -1,3 +1,12 @@
+var textPointsHUDLevel;
+var textPointsLevel;
+var textCoinsLevel;
+var textWorldHUDLevel;
+var textWorldLevel;
+var textTimeHUDLevel;
+var textTimeLevel;
+var changeHUD = false;
+
 marioBros.level1 = function (game) {
 
     //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
@@ -82,13 +91,15 @@ marioBros.level1.prototype = {
     },
     
     preload:function(){
-     
+        
+
 
     
     },
    
     create:function(){
-        this.nameLevel = "level1";
+                
+        gameOptions.numLevel = 1;
         this.soundLevel1 = this.game.add.audio('level1');
         this.soundLevel1.loopFull();
         this.game.paused = false;
@@ -132,14 +143,18 @@ marioBros.level1.prototype = {
         this.createCoinsPrefabs();
         
         this.camera.follow(this.player, null, 1, 0);
-        //this.camera.x = 1300; comprovar que los goombas colisionan con los bloques rompibles..(aun no funciona bien)
         
-        
+        this.loadHud();
+
     },
     
-    update:function(){      
-       /* this.gameOverText = this.add.text(0, 0,gameOptions.coins, style5);
-        this.gameOverText.fixedToCamera = true;*/
+    update:function(){   
+        /*if(changeHUD){
+            this.loadHud();
+            changeHUD = false;
+        }*/
+        
+       
         this.collisionLayers();
         
         if(this.escape.isDown){
@@ -333,13 +348,57 @@ marioBros.level1.prototype = {
     playBackgroundAudioLevel: function(){
         this.soundLevel1.loopFull();
     },
-    togglePause:function(){
-        if(this.p.isDown){
-            this.game.paused = true;
-    }
-       else{
-           this.game.paused = false;
-       }
+    
+    loadHud:function(){
+        textPointsHUDLevel = "MARIO";
+
+        if(gameOptions.score < 10){
+           textPointsLevel = "0"+gameOptions.score;
+        }
+        else{
+            textPointsLevel = gameOptions.score;
+        }
+
+        if(gameOptions.coins < 10){
+            textCoinsLevel = "x"+"0"+gameOptions.coins;
+        }
+        else{
+            textCoinsLevel = "x"+gameOptions.coins;
+        }
+
+        textWorldHUDLevel = "WORLD";
+        if(gameOptions.numLevel == 1){
+           textWorldLevel = "1-1";
+        }
+        else if(gameOptions.numLevel == 11){
+            textWorldLevel = "1-2";
+        }
+
+        textTimeHUDLevel = "TIME";
+        textTimeLevel = gameOptions.time;
+        
+        this.textPointsHUD = this.add.text(30, 10, textPointsHUDLevel, style);
+        this.textPointsHUD.fixedToCamera = true;
+        this.textPoints = this.add.text(30, 20, textPointsLevel, style5);
+        this.textPoints.fixedToCamera = true;
+        
+        
+        this.coin = this.add.image(75,20, 'coin1');
+        this.coin.scale.setTo(0.8);
+        this.coin.fixedToCamera = true;
+        
+        this.textCoins = this.add.text(90, 20, textCoinsLevel, style5);
+        this.textCoins.fixedToCamera = true;
+        
+        this.textWorldLoadScreen = this.add.text(130, 10, textWorldHUDLevel, style);
+        this.textWorldLoadScreen.fixedToCamera = true;
+        this.textWorld = this.add.text(144, 20, textWorldLevel, style);
+        this.textWorld.fixedToCamera = true;
+        
+        this.textTimeHUD = this.add.text(200, 10, textTimeHUDLevel, style);
+        this.textTimeHUD.fixedToCamera = true;
+        this.textTime = this.add.text(205, 20, textTimeLevel, style);
+        this.textTime.fixedToCamera = true;
     }
    
 };

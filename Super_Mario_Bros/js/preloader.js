@@ -31,7 +31,7 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('1UP', 'img/Items/1up_mushroom.png', 16, 16);
         this.load.spritesheet('coinOfBlock', 'img/Items/coinBlock.png', 16, 16);
         this.load.image('marioLoadScreen', 'img/UI/Load/marioSmallIdle.png');
-        this.load.image('coinLoadScreen', 'img/UI/Load/coin1.png');
+        this.load.image('coinLoadScreen', 'img/UI/Load/coin2.png');
         this.load.image('coin1', 'img/Items/coin.png');
         this.load.image('coin2', 'img/Items/coin_2.png');
         
@@ -42,39 +42,12 @@ marioBros.preloader.prototype = {
         this.load.audio('pipe', 'sounds/Player/pipe.wav');
         this.load.audio('pause', 'sounds/pause.wav');
         this.load.audio('marioStarSound', 'sounds/Player/marioStarSound.mp3');
-    
         
-        //menu textos
-        text1Player = "1-Player";
         style = { font: "12px Arial", fill: "#ffffff", align: "center"};
-        
-        text2Player = "2-Players";
-        
-        textRanking = "Ranking";
-        
-        textRankingScene = "Scene Ranking";
         style2 = { font: "24px Arial", fill: "#ffffff", align: "center"};
-        
-        textTwoPlayersScene = "Scene Two Players";
         style3 = { font: "20px Arial", fill: "#ffffff", align: "center"};
-        
-        //textos e info del loadScreen (antes del lvl)
-        textLoadScreenPoints = "MARIO";
-        style4 = {font: "12px Arial", fill: "#ffffff", align: "left"};
-        style5 = {font: "14px Arial", fill: "#ffffff", align: "left"};
-        
-        textPoints = "000000";
-        
-        textCoins = "x"+"00";
-        
-        textWorldLoadScreen = "WORLD";
-        textWorld = "1-1"
-        
-        textWorldLvlCenter = "WORLD 1 - 1"
-        
-        textTimeLoadScreen = "TIME";
-        
-        textLifes= "x  " + gameOptions.lifes;
+        //style4 = {font: "12px Arial", fill: "#ffffff", align: "left"};
+        style5 = {font: "14px Arial", fill: "#ffffff", align: "center"};
 
     },
 
