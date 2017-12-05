@@ -57,7 +57,7 @@ marioBros.goombaPrefab.prototype.update = function(){
     }
     
     if(!this.dieGoomba){
-        if(!this.dieStarGoomba){
+        if(!this.dieStarGoomba && this.level.player.die == false){
            this.collPlayerGoomba = this.game.physics.arcade.collide(this, this.level.player,this.collisionPlayerGoomba, null, this);
         }
 
