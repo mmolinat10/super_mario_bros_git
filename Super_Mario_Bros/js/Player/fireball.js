@@ -54,6 +54,16 @@ function collisionGoombaFireBall(fireBall, goomba){
 };
 
 marioBros.fireballPrefab.prototype.update = function(){
+
+    //parte derecha camara
+    if(this.game.camera.x < this.x-(256)){
+        this.kill();
+    }
+    //parte izquierda camara
+    if(this.x <= this.game.camera.x-16){
+        this.kill();
+    }
+    
     this.timeCheckDie = this.game.time.now; 
     
     this.collGraphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);

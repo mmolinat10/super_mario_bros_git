@@ -23,6 +23,10 @@ marioBros.starPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.starPrefab.prototype.constructor = marioBros.starPrefab;
 
 marioBros.starPrefab.prototype.update = function(){
+    if(this.x <= this.game.camera.x-16){
+        this.kill();
+    }
+    
     this.timeCheck = this.game.time.now;
     
     this.collGraphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);

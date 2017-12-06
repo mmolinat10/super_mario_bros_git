@@ -19,6 +19,10 @@ marioBros.coinPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.coinPrefab.prototype.constructor = marioBros.coinPrefab;
 
 marioBros.coinPrefab.prototype.update = function(){    
+    if(this.body.position.x <= this.game.camera.x-16){
+        this.kill();
+    }
+    
     this.collWithPlayer = this.game.physics.arcade.overlap(this, this.level.player);
     
     if(this.collWithPlayer){

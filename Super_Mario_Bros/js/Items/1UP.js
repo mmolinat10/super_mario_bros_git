@@ -26,6 +26,9 @@ marioBros.mushroom1UPPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.mushroom1UPPrefab.prototype.constructor = marioBros.mushroom1UPPrefab;
 
 marioBros.mushroom1UPPrefab.prototype.update = function(){
+    if(this.x <= this.game.camera.x-16){
+        this.kill();
+    }
     this.timeCheck = this.game.time.now;
     
     this.graphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);

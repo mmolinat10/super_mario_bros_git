@@ -11,7 +11,9 @@ marioBros.flowerPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.flowerPrefab.prototype.constructor = marioBros.flowerPrefab;
 
 marioBros.flowerPrefab.prototype.update = function(){
-    
+    if(this.x <= this.game.camera.x-16){
+        this.kill();
+    }
     this.graphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
 
     this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
@@ -22,9 +24,17 @@ marioBros.flowerPrefab.prototype.update = function(){
         this.powerupSound.play();
         gameOptions.score +=1000;
         changeHUD = true;
-        this.level.player.marioFlower = true;
-        this.level.player.loadTexture('marioFire');
-        this.level.player.body.setSize(16, 32);
+        if(!this.level.player.bigMario){
+            this.level.player.bigMario = true;
+            this.level.player.loadTexture('marioBig');
+            this.level.player.body.setSize(16, 32);
+        }
+        else{
+            this.level.player.marioFlower = true;
+            this.level.player.loadTexture('marioFire');
+            this.level.player.body.setSize(16, 32);
+        }
+        
         this.kill();
     }    
    

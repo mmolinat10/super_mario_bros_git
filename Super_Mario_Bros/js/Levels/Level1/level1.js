@@ -14,6 +14,7 @@ var coin;
 var textWorldHUD;
 var textWorld;
 var textTimeHUD;
+var moveCamera = true;
 
 marioBros.level1 = function (game) {
 
@@ -36,9 +37,8 @@ function pipeAccess(player){
             player.body.position.y = 420;
             this.camera.y = 400;
             this.camera.x = 896;
-            this.pipeLevel1.play();
-            this.camera.follow(this.player, null, 0, 0);
-        
+            this.pipeLevel1.play();  
+            moveCamera = false;
         }
     }  
     
@@ -58,9 +58,9 @@ function pipeExit(player){
             player.body.position.x = exitPipeValue.x+8;
             player.body.position.y = exitPipeValue.y;
             this.camera.y -= 400;
-            this.camera.x -= 896;
+            this.camera.x = exitPipeValue.x-100;
             this.pipeLevel1.play();
-            this.camera.follow(this.player, null, 1, 0);
+            moveCamera = true;
         }
     }
 }
@@ -105,8 +105,7 @@ marioBros.level1.prototype = {
     
     },
    
-    create:function(){
-                
+    create:function(){        
         gameOptions.numLevel = 1;
         this.soundLevel1 = this.game.add.audio('level1');
         this.runningOutOfTime = this.game.add.audio('runningOutOfTime');
@@ -152,7 +151,8 @@ marioBros.level1.prototype = {
         this.coinsAlone = [];
         this.createCoinsPrefabs();
         
-        this.camera.follow(this.player, null, 1, 0);
+        //this.camera.follow(this.player, null, 1, 0);
+        
         this.game.time.events.loop(1000, function(){
             if(gameOptions.time < 100 && !this.runningOutOfTimeOnce){
                 this.runningOutOfTimeOnce = true;
@@ -165,11 +165,15 @@ marioBros.level1.prototype = {
             
         }, this);
         this.loadHud();
-
+       
     },
     
     update:function(){   
-       
+        
+        if (this.cursors.right.isDown && moveCamera)
+        {
+            this.game.camera.x += (this.player.x - this.game.camera.x) * 0.02;
+        }
         
         if(changeHUD){
             textTimeHUD.destroy();
@@ -186,7 +190,7 @@ marioBros.level1.prototype = {
         
        
         this.collisionLayers();
-        
+
         if(this.escape.isDown){
             this.startMenu();
         }
@@ -289,7 +293,6 @@ marioBros.level1.prototype = {
     },
     
     collisionLayers: function(){
-
         this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
         this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
         this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);

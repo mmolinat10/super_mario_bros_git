@@ -71,6 +71,12 @@ function collisionBlock(player, block){
 }
 
 marioBros.marioPrefab.prototype.update = function(){
+
+    if(this.body.x <= this.game.camera.x && this.cursors.left.isDown){
+        this.body.x = this.game.camera.x;
+        this.body.velocity.x = 0;
+    }
+    
     this.timeCheck = this.game.time.now;
    // gameOptions.lifes = this.lives;
     this.collisionsMario();

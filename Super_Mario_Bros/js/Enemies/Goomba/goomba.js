@@ -44,6 +44,10 @@ function collisionBricksGoomba(player, brick) {
 }
 
 marioBros.goombaPrefab.prototype.update = function(){
+    if(this.body.position.x < this.game.camera.x-16){
+        this.kill();
+    }
+    
     this.timeCheck = this.game.time.now;    
     
     if(!this.dieStarOrOnBrickGoomba){
