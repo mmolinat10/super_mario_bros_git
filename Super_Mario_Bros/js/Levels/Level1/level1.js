@@ -148,6 +148,9 @@ marioBros.level1.prototype = {
         this.goomba = [];
         this.createGoombasPrefabs();
         
+        this.koopa = [];
+        this.createKoopasPrefabs();
+        
         this.coinsAlone = [];
         this.createCoinsPrefabs();
         
@@ -361,6 +364,16 @@ marioBros.level1.prototype = {
             this.goombaPos = this.goombas.children[i];
             this.goomba.push(new marioBros.goombaPrefab(this.game,this.goombaPos.x,this.goombaPos.y+16, this));
             this.game.add.existing(this.goomba[i]);
+        }
+    },
+    
+    createKoopasPrefabs: function(){
+        
+        this.koopaPos;
+        for(var i = 0; i < this.turtles.length; i++){
+            this.koopaPos = this.turtles.children[i];
+            this.koopa.push(new marioBros.koopaPrefab(this.game,this.koopaPos.x,this.koopaPos.y+16, this));
+            this.game.add.existing(this.koopa[i]);
         }
     },
     

@@ -15,8 +15,9 @@ marioBros.flowerPrefab.prototype.update = function(){
         this.kill();
     }
     this.graphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
-
-    this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
+    if(!this.level.player.die){
+        this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
+    }
     this.animations.play('flowerAnimation');
     
     if(this.playerCollisioned){

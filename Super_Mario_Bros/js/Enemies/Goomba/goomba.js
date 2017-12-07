@@ -1,6 +1,13 @@
 marioBros.goombaPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'goomba');
+    this.level = level;
+    if(gameOptions.numLevel == 1){
+       Phaser.Sprite.call(this,game,x,y,'goombaRed');
+    }
+    else if(gameOptions.numLevel == 11){
+       Phaser.Sprite.call(this,game,x,y,'goombaBlue');     
+    }
+    
     this.animations.add('walk',[0,1],10,true);
     this.deadAnimationGoomba = this.animations.add('died',[2],15);
     this.game.physics.arcade.enable(this);
@@ -8,7 +15,6 @@ marioBros.goombaPrefab = function(game,x,y,level)
     //this.body.immovable = true;
     this.speed = 30;
     this.direction = -1;
-    this.level = level;
     this.dieGoomba = false;
     this.dieStarOrOnBrickGoomba = false;
     this.body.gravity.y = gameOptions.playerGravity;
@@ -26,10 +32,12 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.collBrickFlowerOrMushroom;
     this.collBrickStar;
     this.collGraphicLayer;
+    this.collKoopaGoomba;
     this.diedOnBrick = false;
     this.touchBrick = false;
     this.score;
     this.fireBallColl = false;
+    this.dieByKoopa = false;
 };
 marioBros.goombaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.goombaPrefab.prototype.constructor = marioBros.goombaPrefab;
@@ -42,6 +50,14 @@ function collisionBricksGoomba(player, brick) {
     }
     
 }
+
+function collisionKoopaGoomba(goomba, koopa) {
+    if(koopa.moveSquish){
+        koopa.counterKoopaDies += 1;
+        this.dieByKoopa = true;
+        this.dieAnimation(); 
+    }
+};
 
 marioBros.goombaPrefab.prototype.update = function(){
     if(this.body.position.x < this.game.camera.x-16){
@@ -61,8 +77,9 @@ marioBros.goombaPrefab.prototype.update = function(){
     }
     
     if(!this.dieGoomba){
-        if(!this.dieStarGoomba && this.level.player.die == false){
-           this.collPlayerGoomba = this.game.physics.arcade.collide(this, this.level.player,this.collisionPlayerGoomba, null, this);
+        if(!this.dieStarGoomba && this.level.player.die == false && !this.dieByKoopa){
+            this.collPlayerGoomba = this.game.physics.arcade.collide(this, this.level.player,this.collisionPlayerGoomba, null, this);
+            this.collKoopaGoomba = this.game.physics.arcade.overlap(this, this.level.koopa, collisionKoopaGoomba, null, this);
         }
 
         this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBricksGoomba,null,this);
@@ -133,11 +150,12 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
         }
         if(this.level.player.marioStar || this.diedOnBrick){
             //tiempo en morir
-             
+            this.dieStarGoomba = true;
             this.dieAnimation();
         }
     }
 };
+
 
 marioBros.goombaPrefab.prototype.dieAnimation = function() {
     this.timeInit = this.game.time.now;

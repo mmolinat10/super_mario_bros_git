@@ -18,11 +18,13 @@ marioBros.fireballPrefab = function(game,x,y,level)
     this.collBrickStar;
     this.collGraphicLayer;
     this.killGoomba;
+    this.killKoopa;
     this.score;
     this.animations.play('fireBallAnimation');
     this.fireDie = false;
     this.fireBallSound = this.game.add.audio('fireballSound');
     this.fireBallSound.play();
+    this.touchEnemy = false;
 
 };
 marioBros.fireballPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -42,10 +44,23 @@ function collisionFireBricks(fireBall, block){
 };
 
 function collisionGoombaFireBall(fireBall, goomba){
-    gameOptions.score +=100;
+    this.touchEnemy = true;
+
+    //la puntuació en aquest cas es a goomba.js
+    goomba.dieAnimation();
+    this.animations.stop();
+    this.fireDie = true;
+    fireBall.scale.setTo(0.8,0.8);
+    this.animations.play('fireBallDie',60, false, true);    
+    
+};
+
+function collisionKoopaFireBall(fireBall, koopa){
+    this.touchEnemy = true;
+    gameOptions.score +=500;
     changeHUD = true;
 
-    goomba.dieAnimation();
+    koopa.dieAnimation();
     this.animations.stop();
     this.fireDie = true;
     fireBall.scale.setTo(0.8,0.8);
@@ -72,8 +87,14 @@ marioBros.fireballPrefab.prototype.update = function(){
     this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA,collisionFireBricks, null, this);
     this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom,collisionFireBricks, null, this);
     this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar,collisionFireBricks, null, this);
-    this.killGoomba = this.game.physics.arcade.collide(this, this.level.goomba,collisionGoombaFireBall, null, this);
+    
+    if(!this.touchEnemy){
+        this.killGoomba = this.game.physics.arcade.collide(this, this.level.goomba,collisionGoombaFireBall, null, this);
+    
+        this.killKoopa = this.game.physics.arcade.collide(this, this.level.koopa,collisionKoopaFireBall, null, this);
 
+    }
+    
     
     if(this.body.blocked.right || this.body.blocked.left || this.body.position.y >= gameOptions.level1Height){
         

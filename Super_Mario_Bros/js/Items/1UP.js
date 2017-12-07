@@ -37,7 +37,9 @@ marioBros.mushroom1UPPrefab.prototype.update = function(){
     this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA);
     this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom);
     this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
-    this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
+    if(!this.level.player.die){
+        this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
+    }
     
     if(this.body.blocked.right || this.body.blocked.left){
         this.direction *= -1;        

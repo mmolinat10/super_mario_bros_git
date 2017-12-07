@@ -24,7 +24,14 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('brickStar', 'img/Levels/brickStar.png', 16, 16);
         this.load.spritesheet('brickFlowerOrMushroom', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.spritesheet('brickInvisible1UP', 'img/Levels/invisibleBlock.png', 16, 16);
-        this.load.spritesheet('goomba', 'img/Enemies/Goomba/goomba.png', 16, 16);
+        this.load.spritesheet('goombaRed', 'img/Enemies/Goomba/goomba_red.png', 16, 16);
+        this.load.spritesheet('goombaBlue', 'img/Enemies/Goomba/goomba_blue.png', 16, 16);
+        this.load.spritesheet('koopaGreen', 'img/Enemies/Koopa/koopa_green.png', 16, 24);
+        this.load.spritesheet('koopaGreenSquish', 'img/Enemies/Koopa/koopa_green_squish.png', 16, 16);
+        this.load.spritesheet('koopaBlue', 'img/Enemies/Koopa/koopa_blue.png', 16, 24);
+        this.load.spritesheet('koopaBlueSquish', 'img/Enemies/Koopa/koopa_blue_squish.png', 16, 16);
+        this.load.spritesheet('piranyaGreen', 'img/Enemies/Piranya/piranya_green.png', 16, 24);
+        this.load.spritesheet('piranyaBlue', 'img/Enemies/Piranya/piranya_blue.png', 16, 24);
         this.load.spritesheet('star', 'img/Items/star.png', 16, 16);
         this.load.spritesheet('mushroom', 'img/Items/mushroom.png', 16, 16);
         this.load.spritesheet('flower', 'img/Items/flower.png', 16, 16);

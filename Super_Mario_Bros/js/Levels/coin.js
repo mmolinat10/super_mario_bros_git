@@ -23,7 +23,9 @@ marioBros.coinPrefab.prototype.update = function(){
         this.kill();
     }
     
-    this.collWithPlayer = this.game.physics.arcade.overlap(this, this.level.player);
+    if(!this.level.player.die){
+        this.collWithPlayer = this.game.physics.arcade.overlap(this, this.level.player);
+    }
     
     if(this.collWithPlayer){
         this.coinSound = this.game.add.audio('coinSound');

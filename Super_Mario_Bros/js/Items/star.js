@@ -31,7 +31,10 @@ marioBros.starPrefab.prototype.update = function(){
     
     this.collGraphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
 
-    this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
+    if(!this.level.player.die){
+       this.playerCollisioned = this.game.physics.arcade.overlap(this, this.level.player);
+    }
+    
     this.animations.play('starAnimation');
     
     if(this.body.blocked.right || this.body.blocked.left){
