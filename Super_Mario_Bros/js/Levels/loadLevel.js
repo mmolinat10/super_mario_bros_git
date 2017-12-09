@@ -83,7 +83,12 @@ marioBros.loadLevel.prototype = {
 
     startGame: function () {
         //habria que pasar una variable levelMario del player
-        this.state.start('level1');
+        if(gameOptions.numLevel == 1){
+            this.state.start('level1');
+        }
+        else if(gameOptions.numLevel == 11){
+            this.state.start('level2');
+        }
     }
     
 };

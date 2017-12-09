@@ -2,7 +2,7 @@ marioBros.koopaPrefab = function(game,x,y,level)
 {
     this.level = level;
     if(gameOptions.numLevel == 1){
-       Phaser.Sprite.call(this,game,x,y,'koopaGreen');
+       Phaser.Sprite.call(this,game,x-400,y-400,'koopaGreen');
     }
     else if(gameOptions.numLevel == 11){
        Phaser.Sprite.call(this,game,x,y,'koopaBlue');     
@@ -33,8 +33,6 @@ marioBros.koopaPrefab = function(game,x,y,level)
     this.collBrickFlowerOrMushroom;
     this.collBrickStar;
     this.collGraphicLayer;
-    this.diedOnBrick = false;
-    this.touchBrick = false;
     this.score;
     this.fireBallColl = false;
     this.squishMode = false;
@@ -45,18 +43,47 @@ marioBros.koopaPrefab = function(game,x,y,level)
     this.dieTimeOutSquish = false;
     this.counterKoopaDies = 0;
     this.manyEnemiesDead = false;
+    this.dieByKoopa = false;
 };
 marioBros.koopaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.koopaPrefab.prototype.constructor = marioBros.koopaPrefab;
 
-function collisionBricksKoopa(player, brick) {
-    this.touchBrick = true;
-    if((brick.body.touching.down && player.body.touching.up) && (this.touchBrick)){
-        this.diedOnBrick = true;
-        console.log("mggfgol");
+function collisionBricksKoopa(koopa, brick) {
+    if(brick.playerIsTouching && koopa.body.touching.down){
+        this.angle = -180;
+        brick.playerIsTouching = false;
+        if(!this.level.player.marioStar){
+            gameOptions.score +=100;
+            changeHUD = true;
+        }
+        //this.dieKoopa = true;
+        koopa.animations.stop();
+        if(gameOptions.numLevel == 1){
+            koopa.loadTexture('koopaGreenSquish');
+        }
+        else if(gameOptions.numLevel == 11){
+            koopa.loadTexture('koopaBlueSquish');
+        }
+        koopa.body.setSize(16, 16);
+        koopa.frame = 0;
+        koopa.squishMode = true;
+        koopa.moveSquish = false; 
+        koopa.timeToStartMovementSquish = this.game.time.now;  
+        //koopa.body.immovable = true;
+        koopa.body.velocity.x = 0;
+        koopa.startNoSquish = this.game.time.now;
     }
-    
 }
+
+function collisionKoopaKoopa(koopa, koopa2) {
+    if(koopa2.moveSquish){
+        koopa2.counterKoopaDies += 1;
+        gameOptions.score +=500;
+        changeHUD = true;
+        this.dieByKoopa = false;
+        this.dieAnimation();
+    }
+};
 
 marioBros.koopaPrefab.prototype.update = function(){
     //parte izquierda camara
@@ -76,15 +103,16 @@ marioBros.koopaPrefab.prototype.update = function(){
     }
     
     if(!this.dieKoopa){
-        if(!this.dieStarKoopa && !this.level.player.die && !this.dieTimeOutSquish){
-           this.collPlayerKoopa = this.game.physics.arcade.collide(this, this.level.player,this.collisionPlayerKoopa, null, this);
+        if(!this.dieStarKoopa && !this.level.player.die && !this.dieTimeOutSquish && !this.dieByKoopa && !this.dieStarOrOnBrickKoopa){
+            this.collPlayerKoopa = this.game.physics.arcade.collide(this, this.level.player,this.collisionPlayerKoopa, null, this);
+            this.collKoopaKoopa = this.game.physics.arcade.overlap(this, this.level.koopa, collisionKoopaKoopa, null, this);
+            this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBricksKoopa,null,this);
+            this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin);
+            this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA);
+            this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom);
+            this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
         }
 
-        this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBricksKoopa,null,this);
-        this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin);
-        this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA);
-        this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom);
-        this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
     }else{
         if(this.timeCheck>= this.timeInit + 150){
             this.kill();
@@ -123,12 +151,17 @@ marioBros.koopaPrefab.prototype.update = function(){
             this.animations.play('squish',5,true);
         }
         if(this.timeCheck>= this.startNoSquish + 5500){
+            if(this.angle < 0){
+               this.angle = 0;
+            }
             if(gameOptions.numLevel == 1){
                 this.loadTexture('koopaGreen');
             }
             else if(gameOptions.numLevel == 11){
                 this.loadTexture('koopaBlue');
             }
+            
+            
             this.body.setSize(16, 24);
             this.animations.stop();
             this.animations.play("walk");
@@ -137,7 +170,7 @@ marioBros.koopaPrefab.prototype.update = function(){
         }
     }
     
-    if(this.moveSquish && this.timeCheck>= this.timeToMoveSquish + 5000 && !this.dieTimeOutSquish){
+    if(this.moveSquish && this.timeCheck>= this.timeToMoveSquish + 1500 && !this.dieTimeOutSquish){
         this.dieTimeOutSquish = true;
         this.dieAnimation();
        
@@ -205,7 +238,7 @@ marioBros.koopaPrefab.prototype.collisionPlayerKoopa = function() {
         }
         
     }
-    if(this.level.player.marioStar || this.diedOnBrick){
+    if(this.level.player.marioStar){
         this.dieStarKoopa = true;
         gameOptions.score +=500;
         changeHUD = true;

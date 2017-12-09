@@ -76,7 +76,8 @@ marioBros.gameOver.prototype = {
         gameOptions.coins = 0; //se reinician los coins
         gameOptions.score = 0; //se reinician los puntos
         gameOptions.time = 400; // se reinicia el tiempo
-        //habria que pasar una variable levelMario del player
+        gameOptions.numLevel = 1;
+
         this.state.start('menu');
     }
     

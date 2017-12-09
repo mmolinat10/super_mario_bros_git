@@ -9,7 +9,8 @@ marioBros.brickStarPrefab = function(game,x,y,level)
     this.level = level;
     this.isCollisioned = false;
     this.star;
-        
+    this.playerIsTouching = false;
+    
 };
 marioBros.brickStarPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.brickStarPrefab.prototype.constructor = marioBros.brickStarPrefab;
@@ -17,6 +18,8 @@ marioBros.brickStarPrefab.prototype.constructor = marioBros.brickStarPrefab;
 marioBros.brickStarPrefab.prototype.playBlock = function() {
     if(this.body.touching.down && this.level.player.body.touching.up){
         if(!this.isCollisioned){
+            this.playerIsTouching = true;
+
             this.isCollisioned = true;
             this.tweenBlock = this.game.add.tween(this.position);
             this.tweenBlock.to({y: this.y -8}, 100, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);

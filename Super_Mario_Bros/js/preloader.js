@@ -1,4 +1,5 @@
 
+
 marioBros.preloader = function (game) {
 
  
@@ -13,12 +14,14 @@ marioBros.preloader.prototype = {
         this.load.image('title', 'img/UI/Menu/title.png');
         this.load.image('cursor', 'img/UI/Menu/cursor.png');
         this.load.tilemap('level1','tilemaps/level1.json',null,Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('level2','tilemaps/level2.json',null,Phaser.Tilemap.TILED_JSON);
         this.load.image('tileset_levels','tilemaps/tileset_levels.png');
         this.load.spritesheet('marioSmall', 'img/Player/Mario Small/small_mario(versionFier).png', 16, 16);
         this.load.spritesheet('marioBig', 'img/Player/Mario Big/big_mario.png', 16, 32);
         this.load.spritesheet('marioFire', 'img/Player/Mario Fire/fire_mario.png', 16, 32);
         this.load.spritesheet('fireBall', 'img/Player/Mario Fire/fireBall.png', 16, 16);
         this.load.spritesheet('brick', 'img/Levels/brick.png', 16, 16);
+        this.load.spritesheet('brick2', 'img/Levels/brick2.png', 16, 16);
         this.load.spritesheet('brickCoin', 'img/Levels/questionMarkBlock.png', 16, 16);
         this.load.spritesheet('brickCoins', 'img/Levels/brickCoins.png', 16, 16);
         this.load.spritesheet('brickStar', 'img/Levels/brickStar.png', 16, 16);
@@ -43,6 +46,7 @@ marioBros.preloader.prototype = {
         this.load.image('coin2', 'img/Items/coin_2.png');
         
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
+        this.load.audio('level2', 'sounds/Levels/Level1_2/level1_2.mp3');
         this.load.audio('jumpSmall', 'sounds/Player/jumpSmall.wav');
         this.load.audio('jumpBig', 'sounds/Player/jumpBig.wav');
         this.load.audio('mariodie', 'sounds/Player/mariodie.wav');

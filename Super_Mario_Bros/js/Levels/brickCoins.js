@@ -10,12 +10,16 @@ marioBros.brickCoinsPrefab = function(game,x,y,level)
     this.level = level;
     this.contadorVecesGolpeado = 0;    
     this.coin;
+    this.playerIsTouching = false;
+
 };
 marioBros.brickCoinsPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.brickCoinsPrefab.prototype.constructor = marioBros.brickCoinsPrefab;
 
 marioBros.brickCoinsPrefab.prototype.playBlock = function() {
     if(this.body.touching.down && this.level.player.body.touching.up){
+        this.playerIsTouching = true;
+
         //no hace falta diferencia entre mario pequeño y grande en el caso de este bloque
         this.contadorVecesGolpeado++;
         if(this.contadorVecesGolpeado <= 8){

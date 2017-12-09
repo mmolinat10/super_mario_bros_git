@@ -4,9 +4,9 @@ marioBros.coinPrefab = function(game,x,y,level)
     if(gameOptions.numLevel == 1){
        Phaser.Sprite.call(this,game,x,y,'coin2');
     }
-    /*else{
-        
-    }*/
+    else if(gameOptions.numLevel == 11){
+        Phaser.Sprite.call(this,game,x,y,'coin2');
+    }
     
     this.game.physics.arcade.enable(this);
     

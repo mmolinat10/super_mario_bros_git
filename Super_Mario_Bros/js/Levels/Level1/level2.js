@@ -16,7 +16,7 @@ var textWorld;
 var textTimeHUD;
 var moveCamera = true;
 
-marioBros.level1 = function (game) {
+marioBros.level2 = function (game) {
 
     //  When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
 
@@ -34,7 +34,9 @@ function pipeAccess(player){
     
     if(player.body.blocked.down){
         if(this.cursors.down.isDown){
-            player.body.position.y = 420;
+            player.body.position.y = 550;
+            this.camera.y = 495;
+            this.camera.x = this.camera.x+60;
             this.pipeLevel1.play();  
             moveCamera = false;
         }
@@ -75,7 +77,6 @@ function pipeNextLevel(player){
 
 function flag(player){
     console.log("bandera");
-    
 }
 
 function finishLevelDoor(player){
@@ -92,7 +93,7 @@ function deadEnemy(enemy){
     
 }
 
-marioBros.level1.prototype = {
+marioBros.level2.prototype = {
     init:function(){
         this.game.world.setBounds(0,0,gameOptions.level1Width,gameOptions.level1Height);
     },
@@ -104,16 +105,17 @@ marioBros.level1.prototype = {
     
     },
    
-    create:function(){        
-        gameOptions.numLevel = 1;
-        this.soundLevel1 = this.game.add.audio('level1');
+    create:function(){      
+        console.log("level2");
+        gameOptions.numLevel = 11;
+        this.soundLevel2 = this.game.add.audio('level2');
         this.runningOutOfTime = this.game.add.audio('runningOutOfTime');
         this.runningOutOfTimeOnce = false;
-        this.soundLevel1.loopFull();
+        this.soundLevel2.loopFull();
         this.game.paused = false;
         this.pipeLevel1 = this.game.add.audio('pipe');
                 
-        this.map = this.game.add.tilemap('level1');
+        this.map = this.game.add.tilemap('level2');
         this.map.addTilesetImage('tileset_levels');
     
         this.createLayers();
@@ -141,20 +143,32 @@ marioBros.level1.prototype = {
         this.brickInvisible = [];
         this.createBlocksPrefabs();
         
-        this.player = new marioBros.marioPrefab(this.game,50,this.game.world.height/3-25, this);
-       
+        this.player = new marioBros.marioPrefab(this.game,70,this.game.world.height/3-25, this);
+        this.player.marioFlower = gameOptions.isMarioFier;
+        this.player.bigMario = gameOptions.isMarioBig;
+        if(this.player.bigMario){
+            this.player.loadTexture('marioBig');
+            this.player.body.setSize(16, 32);
+        }
+        if(this.player.marioFlower){
+            this.player.loadTexture('marioFire');
+            this.player.body.setSize(16, 32);    
+        }
+        
         this.game.add.existing(this.player);       
         
         this.goomba = [];
         this.createGoombasPrefabs();
         
         this.koopa = [];
+        this.redKoopa = [];
         this.createKoopasPrefabs();
         
         this.coinsAlone = [];
         this.createCoinsPrefabs();
         
         //this.camera.follow(this.player, null, 1, 0);
+        this.game.camera.y = 255;
         
         this.game.time.events.loop(1000, function(){
             if(gameOptions.time < 100 && !this.runningOutOfTimeOnce){
@@ -176,11 +190,6 @@ marioBros.level1.prototype = {
         if (this.cursors.right.isDown && moveCamera)
         {
             this.game.camera.x += (this.player.x - this.game.camera.x) * 0.02;
-        }
-        
-        if(!moveCamera){
-            this.camera.y = 400;
-            this.camera.x = 896;
         }
         
         if(changeHUD){
@@ -216,16 +225,8 @@ marioBros.level1.prototype = {
     },
     
     startMenu: function () {
-        this.soundLevel1.stop();
+        this.soundLevel2.stop();
         this.state.start('menu');
-    },
-    
-    startLevel2: function () {
-        this.soundLevel1.stop();
-        gameOptions.numLevel = 11;
-        gameOptions.isMarioBig = this.player.bigMario;
-        gameOptions.isMarioFier = this.player.marioFlower;
-        this.state.start('loadLevel');
     },
     
     
@@ -233,8 +234,8 @@ marioBros.level1.prototype = {
         this.backgroundColor = this.map.createLayer('Background_Color');
         this.graphicLayer = this.map.createLayer('Graphic_Layer');
 
-        this.pipesAccessLevelLayer = this.map.createLayer('PipesAccessLevel');
         this.pipesAccessLayer = this.map.createLayer('PipesAccess');
+        this.pipesAccess2Layer = this.map.createLayer('PipesAccess2');
         this.exitPipesLayer = this.map.createLayer('ExitPipes');
         this.finishLevelLayer = this.map.createLayer('FinishLevel');
     },
@@ -243,11 +244,8 @@ marioBros.level1.prototype = {
         this.pipesAccess = this.game.add.physicsGroup(); 
         this.map.createFromObjects('PipesAccess', 'pipesAccess', '', 0, true, false, this.pipesAccess);
         
-        this.pipesAccessLevel = this.game.add.physicsGroup(); 
-        this.map.createFromObjects('PipesAccessLevel', 'pipesAccessLevel', '', 0, true, false, this.pipesAccessLevel);
-        
-        this.exitPipes = this.game.add.physicsGroup(); 
-        this.map.createFromObjects('ExitPipes', 'exitPipes', '', 0, true, false, this.exitPipes);
+        this.pipesAccess2 = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('PipesAccess2', 'pipesAccess2', '', 0, true, false, this.pipesAccess2);
         
         this.deadZones = this.game.add.physicsGroup(); 
         this.map.createFromObjects('DeadZones', 'deadZones', '', 0, true, false, this.deadZones);
@@ -255,8 +253,14 @@ marioBros.level1.prototype = {
         this.positionExitPipe = this.game.add.physicsGroup();
         this.map.createFromObjects('PositionExitPipe', 'positionExitPipe', '', 0, true, false, this.positionExitPipe);
         
+        this.positionExitPipe2 = this.game.add.physicsGroup();
+        this.map.createFromObjects('PositionExitPipe2', 'positionExitPipe2', '', 0, true, false, this.positionExitPipe2);
+        
         this.turtles = this.game.add.physicsGroup(); 
         this.map.createFromObjects('Turtles', 'turtles', '', 0, true, false, this.turtles);
+        
+        this.redTurtles = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('RedTurtles', 'redTurtles', '', 0, true, false, this.redTurtles);
         
         this.goombas = this.game.add.physicsGroup(); 
         this.map.createFromObjects('Goombas', 'goombas', '', 0, true, false, this.goombas);
@@ -265,7 +269,7 @@ marioBros.level1.prototype = {
         this.map.createFromObjects('BricksCoin', 'bricksCoin', '', 0, true, false, this.bricksCoin);
         
         this.brickCoins = this.game.add.physicsGroup(); 
-        this.map.createFromObjects('BricksCoins', 'brickCoins', '', 0, true, false, this.brickCoins);
+        this.map.createFromObjects('BricksCoins', 'bricksCoins', '', 0, true, false, this.brickCoins);
         
         this.bricksStar = this.game.add.physicsGroup(); 
         this.map.createFromObjects('BricksStar', 'brickStar', '', 0, true, false, this.bricksStar);
@@ -291,32 +295,27 @@ marioBros.level1.prototype = {
     },
     
     setCollisionLayers: function(){
-        //1 bloque suelo
-        //2 bloque rompible
-        //25 bloque interrogante
+        //67 bloque suelo
+        //69 bloque rompible
+        //91 bloque interrogante
         //29 bloque invisible
-        //34 bloques solidos
-        //67 bloque suelo subnivel
-        //69 bloque paredes subnivel 
-        //265 266 267 268 269 298 299 300 301 301 302 Tuberias
+        //100 bloques solidos
+        
+        //265 266 267 268 269 298 299 300 301 301 302, etc.. Tuberias
         
         
-        this.map.setCollision([1,34,67,69,265,266,267,268,269,298,299,300,301,301,302],true,this.graphicLayer);
-        this.map.setCollision([265,266],true,this.pipesAccessLayer);
-        this.map.setCollision([267,300],true,this.exitPipesLayer);
-        this.map.setCollision([267,300],true,this.pipesAccessLevelLayer);
+        this.map.setCollision([67,100,265,266,267,268,269,298,299,300,301,301,302,331,332,333,334,335,364,365,366,367,368],true,this.graphicLayer);
+        this.map.setCollision([331,332],true,this.pipesAccessLayer);
+        this.map.setCollision([333,366],true,this.exitPipesLayer);
+        this.map.setCollision([333,366],true,this.pipesAccess2Layer);
         this.map.setCollision([281,314],true,this.finishLevelLayer);
     },
     
     collisionLayers: function(){
         this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
+        //this.game.physics.arcade.collide(this.player, this.pipesAccess2Layer, pipeAccess2, null, this);
         this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
-        this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
-        this.finishLvl = this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
-        
-        if(this.finishLvl){
-           this.startLevel2();
-        }
+        this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
         
                 
         this.game.physics.arcade.overlap(this.player, this.deadZones, dead, null, this);
@@ -325,7 +324,7 @@ marioBros.level1.prototype = {
         
         this.game.physics.arcade.overlap(this.goomba, this.deadZones, deadEnemy, null, this);
         this.game.physics.arcade.overlap(this.koopa, this.deadZones, deadEnemy, null, this);
-        
+        this.game.physics.arcade.overlap(this.redKoopa, this.deadZones, deadEnemy, null, this);
         
     },
     
@@ -394,6 +393,13 @@ marioBros.level1.prototype = {
             this.koopa.push(new marioBros.koopaPrefab(this.game,this.koopaPos.x,this.koopaPos.y+16, this));
             this.game.add.existing(this.koopa[i]);
         }
+        
+        this.koopaPos2;
+        for(var i = 0; i < this.redTurtles.length; i++){
+            this.koopaPos2 = this.redTurtles.children[i];
+            this.redKoopa.push(new marioBros.koopaPrefab(this.game,this.koopaPos2.x,this.koopaPos2.y+16, this));
+            this.game.add.existing(this.redKoopa[i]);
+        }
     },
     
     createCoinsPrefabs: function(){
@@ -407,11 +413,11 @@ marioBros.level1.prototype = {
     },
     
     stopBackgroundAudioLevel: function(){
-        this.soundLevel1.stop();
+        this.soundLevel2.stop();
     },
     
     playBackgroundAudioLevel: function(){
-        this.soundLevel1.loopFull();
+        this.soundLevel2.loopFull();
     },
     
     loadHud:function(){

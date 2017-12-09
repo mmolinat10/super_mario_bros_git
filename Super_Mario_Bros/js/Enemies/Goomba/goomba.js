@@ -11,6 +11,7 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.animations.add('walk',[0,1],10,true);
     this.deadAnimationGoomba = this.animations.add('died',[2],15);
     this.game.physics.arcade.enable(this);
+    this.anchor.setTo(.5,.5);
     this.animations.play('walk');
     //this.body.immovable = true;
     this.speed = 30;
@@ -33,8 +34,6 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.collBrickStar;
     this.collGraphicLayer;
     this.collKoopaGoomba;
-    this.diedOnBrick = false;
-    this.touchBrick = false;
     this.score;
     this.fireBallColl = false;
     this.dieByKoopa = false;
@@ -42,13 +41,11 @@ marioBros.goombaPrefab = function(game,x,y,level)
 marioBros.goombaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.goombaPrefab.prototype.constructor = marioBros.goombaPrefab;
 
-function collisionBricksGoomba(player, brick) {
-    this.touchBrick = true;
-    if((brick.body.touching.down && player.body.touching.up) && (this.touchBrick)){
-        this.diedOnBrick = true;
-        console.log("mggfgol");
+function collisionBricksGoomba(goomba, brick) {
+    if(brick.playerIsTouching && goomba.body.touching.down){
+        goomba.dieAnimation();
+        brick.playerIsTouching = false;
     }
-    
 }
 
 function collisionKoopaGoomba(goomba, koopa) {
@@ -77,16 +74,17 @@ marioBros.goombaPrefab.prototype.update = function(){
     }
     
     if(!this.dieGoomba){
-        if(!this.dieStarGoomba && this.level.player.die == false && !this.dieByKoopa){
+        if(!this.dieStarGoomba && this.level.player.die == false && !this.dieByKoopa && !this.dieStarOrOnBrickGoomba){
             this.collPlayerGoomba = this.game.physics.arcade.collide(this, this.level.player,this.collisionPlayerGoomba, null, this);
             this.collKoopaGoomba = this.game.physics.arcade.overlap(this, this.level.koopa, collisionKoopaGoomba, null, this);
+            this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBricksGoomba,null,this);
+            this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin, collisionBricksGoomba);
+            this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA, collisionBricksGoomba);
+            this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom, collisionBricksGoomba);
+            this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar,collisionBricksGoomba);
         }
 
-        this.collBrick = this.game.physics.arcade.collide(this, this.level.brick, collisionBricksGoomba,null,this);
-        this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin);
-        this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA);
-        this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom);
-        this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar);
+        
     }else{
         if(this.timeCheck>= this.timeInit + 150){
            
@@ -115,7 +113,7 @@ marioBros.goombaPrefab.prototype.update = function(){
 
 marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
     if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die){
-        this.level.player.body.velocity.y -= 200; //mini jump al matar al goomba
+        this.level.player.body.velocity.y -= 300; //mini jump al matar al goomba
         this.stompSound = this.game.add.audio('stomp');
         this.stompSound.play();
         gameOptions.score +=100;
@@ -148,7 +146,7 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
             this.timeInitChangeToSmall = this.game.time.now;
             this.changeToSmall = true;
         }
-        if(this.level.player.marioStar || this.diedOnBrick){
+        if(this.level.player.marioStar){
             //tiempo en morir
             this.dieStarGoomba = true;
             this.dieAnimation();

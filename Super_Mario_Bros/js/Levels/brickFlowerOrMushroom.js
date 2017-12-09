@@ -14,7 +14,8 @@ marioBros.brickFlowerOrMushroomPrefab = function(game,x,y,level)
     this.isCollisioned = false;
     this.mushroom;
     this.flower;
-        
+    this.playerIsTouching = false;
+    
 };
 marioBros.brickFlowerOrMushroomPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.brickFlowerOrMushroomPrefab.prototype.constructor = marioBros.brickFlowerOrMushroomPrefab;
@@ -22,6 +23,8 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.constructor = marioBros.brickFlo
 marioBros.brickFlowerOrMushroomPrefab.prototype.playBlock = function() {
     if(this.body.touching.down && this.level.player.body.touching.up){
         if(!this.isCollisioned){
+            this.playerIsTouching = true;
+
             this.isCollisioned = true;
             if(!this.level.player.bigMario){
                 this.tweenBlock = this.game.add.tween(this.position);
@@ -36,6 +39,8 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.playBlock = function() {
                 console.log("mushroom");
             }
             else{
+                this.playerIsTouching = true;
+
                 this.powerUpAppearsSound = this.game.add.audio('powerup_appears');
                 this.powerUpAppearsSound.play();
                 //sonido de la flor al aparecer y sonido bump

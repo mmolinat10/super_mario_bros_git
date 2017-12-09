@@ -15,7 +15,6 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.jump = gameOptions.playerJump;
     this.die = false;
     this.scale.setTo(0.8,1); //lo hago porque si no las colisiones con bloques muy juntos no lo hace bien
-    this.lives;
     this.game.physics.arcade.enable(this);
     this.body.gravity.y = gameOptions.playerGravity;
 
@@ -71,14 +70,12 @@ function collisionBlock(player, block){
 }
 
 marioBros.marioPrefab.prototype.update = function(){
-
     if(this.body.x <= this.game.camera.x && this.cursors.left.isDown){
         this.body.x = this.game.camera.x;
         this.body.velocity.x = 0;
     }
     
     this.timeCheck = this.game.time.now;
-   // gameOptions.lifes = this.lives;
     this.collisionsMario();
     
     this.checkIsGroundMario();
@@ -528,7 +525,6 @@ marioBros.marioPrefab.prototype.addScore = function(numScore){
 marioBros.marioPrefab.prototype.loseLife = function(){
    if(gameOptions.lifes > 0){
        gameOptions.lifes -= 1;
-       this.lives -=1;
     }
     else{
         this.gameOver();
@@ -547,8 +543,7 @@ marioBros.marioPrefab.prototype.dieMario = function(){
 marioBros.marioPrefab.prototype.gameOver = function(){
     //cargar variable en el ranking antes de reiniciar las vidas, coins, score y tiempo en gameOver.js
     //funcion para cargar variables en el ranking
-
-   this.level.state.start('gameOver');
+    this.level.state.start('gameOver');
     //se reinicia al primer nivel
     //....
 };
