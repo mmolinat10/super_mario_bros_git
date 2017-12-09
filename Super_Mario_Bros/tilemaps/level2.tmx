@@ -867,40 +867,40 @@
   <object id="603" name="bricksInvisible1UP" x="1424.04" y="256.067" width="15.9778" height="16.0667"/>
  </objectgroup>
  <objectgroup name="Coins">
-  <object id="804" name="coins" x="641.716" y="368.193" width="7.5" height="15.25"/>
-  <object id="805" name="coins" x="658.841" y="320.875" width="7.5" height="15.25"/>
-  <object id="806" name="coins" x="674.909" y="320.807" width="7.5" height="15.25"/>
-  <object id="808" name="coins" x="690.955" y="320.625" width="7.5" height="15.25"/>
-  <object id="809" name="coins" x="707.273" y="320.375" width="7.5" height="15.25"/>
-  <object id="810" name="coins" x="721.716" y="368.5" width="7.5" height="15.25"/>
-  <object id="811" name="coins" x="929.875" y="368.375" width="7.5" height="15.25"/>
-  <object id="812" name="coins" x="946.375" y="368.5" width="7.5" height="15.25"/>
-  <object id="813" name="coins" x="962" y="368.375" width="7.5" height="15.25"/>
-  <object id="814" name="coins" x="977.375" y="368.25" width="7.5" height="15.25"/>
-  <object id="815" name="coins" x="1088.5" y="368.375" width="7.5" height="15.25"/>
-  <object id="816" name="coins" x="1345.92" y="320.042" width="7.5" height="15.25"/>
-  <object id="817" name="coins" x="1361.17" y="320.042" width="7.5" height="15.25"/>
-  <object id="818" name="coins" x="1377.42" y="319.792" width="7.5" height="15.25"/>
-  <object id="819" name="coins" x="1393.17" y="320.042" width="7.5" height="15.25"/>
-  <object id="820" name="coins" x="1425.87" y="320.25" width="7.5" height="15.25"/>
-  <object id="821" name="coins" x="1410.12" y="320" width="7.5" height="15.25"/>
-  <object id="822" name="coins" x="1681.75" y="608.125" width="7.5" height="15.25"/>
-  <object id="823" name="coins" x="1666" y="607.875" width="7.5" height="15.25"/>
-  <object id="824" name="coins" x="1713.63" y="608.25" width="7.5" height="15.25"/>
-  <object id="825" name="coins" x="1697.88" y="608" width="7.5" height="15.25"/>
-  <object id="826" name="coins" x="1745.63" y="608" width="7.5" height="15.25"/>
-  <object id="827" name="coins" x="1729.88" y="607.875" width="7.5" height="15.25"/>
-  <object id="828" name="coins" x="1777.63" y="608.25" width="7.5" height="15.25"/>
-  <object id="829" name="coins" x="1761.88" y="608" width="7.5" height="15.25"/>
-  <object id="832" name="coins" x="1760.65" y="672.396" width="7.5" height="15.25"/>
-  <object id="833" name="coins" x="1648.44" y="672.271" width="7.5" height="15.25"/>
-  <object id="834" name="coins" x="1744.4" y="672.396" width="7.5" height="15.25"/>
-  <object id="835" name="coins" x="1680.52" y="672.521" width="7.5" height="15.25"/>
-  <object id="836" name="coins" x="1696.65" y="672.396" width="7.5" height="15.25"/>
-  <object id="837" name="coins" x="1712.4" y="672.646" width="7.5" height="15.25"/>
-  <object id="838" name="coins" x="1728.65" y="672.271" width="7.5" height="15.25"/>
-  <object id="839" name="coins" x="1776.4" y="672.646" width="7.5" height="15.25"/>
-  <object id="840" name="coins" x="1664.25" y="672.125" width="7.5" height="15.25"/>
+  <object id="804" name="coins" x="647.216" y="372.193" width="7.5" height="11.625"/>
+  <object id="805" name="coins" x="663.216" y="325.25" width="7.5" height="12"/>
+  <object id="806" name="coins" x="678.659" y="324.932" width="7.5" height="12.5"/>
+  <object id="808" name="coins" x="694.455" y="325" width="7.5" height="12.5"/>
+  <object id="809" name="coins" x="711.398" y="325" width="7.5" height="12.75"/>
+  <object id="810" name="coins" x="727.466" y="372.25" width="7.5" height="12.25"/>
+  <object id="811" name="coins" x="935.182" y="371.67" width="7.5" height="12.7045"/>
+  <object id="812" name="coins" x="950.852" y="371.489" width="7.5" height="12.8864"/>
+  <object id="813" name="coins" x="966.886" y="371.205" width="7.5" height="12.8864"/>
+  <object id="814" name="coins" x="982.239" y="371.295" width="7.5" height="12.8864"/>
+  <object id="815" name="coins" x="1094.75" y="372.25" width="7.5" height="12.125"/>
+  <object id="816" name="coins" x="1350.47" y="323.678" width="7.5" height="11.9773"/>
+  <object id="817" name="coins" x="1367.26" y="323.247" width="7.5" height="12.3409"/>
+  <object id="818" name="coins" x="1383.4" y="323.065" width="7.5" height="12.5682"/>
+  <object id="819" name="coins" x="1398.45" y="323.58" width="7.5" height="13.25"/>
+  <object id="820" name="coins" x="1430.19" y="323.617" width="7.5" height="13.6136"/>
+  <object id="821" name="coins" x="1414.49" y="323.523" width="7.5" height="13.25"/>
+  <object id="822" name="coins" x="1687.15" y="612.602" width="7.5" height="12.375"/>
+  <object id="823" name="coins" x="1671.45" y="612.477" width="7.5" height="12.375"/>
+  <object id="824" name="coins" x="1719.4" y="612.295" width="7.5" height="12.75"/>
+  <object id="825" name="coins" x="1703.51" y="612.352" width="7.5" height="12.625"/>
+  <object id="826" name="coins" x="1751.08" y="611.989" width="7.5" height="13.5"/>
+  <object id="827" name="coins" x="1735.52" y="612.295" width="7.5" height="13"/>
+  <object id="828" name="coins" x="1783.21" y="612.17" width="7.5" height="13.375"/>
+  <object id="829" name="coins" x="1767.27" y="612.42" width="7.5" height="13.25"/>
+  <object id="832" name="coins" x="1767.42" y="675.873" width="7.5" height="13"/>
+  <object id="833" name="coins" x="1655.46" y="676.441" width="7.5" height="11.75"/>
+  <object id="834" name="coins" x="1751.91" y="675.691" width="7.5" height="12.875"/>
+  <object id="835" name="coins" x="1686.68" y="676.248" width="7.5" height="12.125"/>
+  <object id="836" name="coins" x="1703.37" y="675.941" width="7.5" height="12.375"/>
+  <object id="837" name="coins" x="1719.31" y="675.998" width="7.5" height="12.5"/>
+  <object id="838" name="coins" x="1735.73" y="675.873" width="7.5" height="12.5"/>
+  <object id="839" name="coins" x="1783.31" y="675.873" width="7.5" height="13.375"/>
+  <object id="840" name="coins" x="1671.1" y="676.477" width="7.5" height="12"/>
  </objectgroup>
  <objectgroup name="Bricks">
   <object id="238" name="bricks" x="0" y="255.938" width="15.9375" height="16.0625"/>

@@ -43,6 +43,8 @@ marioBros.goombaPrefab.prototype.constructor = marioBros.goombaPrefab;
 
 function collisionBricksGoomba(goomba, brick) {
     if(brick.playerIsTouching && goomba.body.touching.down){
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         goomba.dieAnimation();
         brick.playerIsTouching = false;
     }
@@ -50,6 +52,8 @@ function collisionBricksGoomba(goomba, brick) {
 
 function collisionKoopaGoomba(goomba, koopa) {
     if(koopa.moveSquish){
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         koopa.counterKoopaDies += 1;
         this.dieByKoopa = true;
         this.dieAnimation(); 
@@ -147,6 +151,8 @@ marioBros.goombaPrefab.prototype.collisionPlayerGoomba = function() {
             this.changeToSmall = true;
         }
         if(this.level.player.marioStar){
+            this.kickSound = this.game.add.audio('kick');
+            this.kickSound.play();
             //tiempo en morir
             this.dieStarGoomba = true;
             this.dieAnimation();

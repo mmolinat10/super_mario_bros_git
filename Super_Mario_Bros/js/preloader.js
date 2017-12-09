@@ -58,6 +58,7 @@ marioBros.preloader.prototype = {
         this.load.audio('coinSound', 'sounds/Levels/coin.wav');
         this.load.audio('1upSound', 'sounds/Levels/1up.wav');
         this.load.audio('stomp', 'sounds/Enemies/stomp.wav');
+        this.load.audio('kick', 'sounds/Enemies/kick.wav');
         this.load.audio('powerup_appears', 'sounds/Levels/powerup_appears.wav');
         this.load.audio('powerup', 'sounds/Levels/powerup.wav');
         this.load.audio('bump', 'sounds/Levels/bump.wav');

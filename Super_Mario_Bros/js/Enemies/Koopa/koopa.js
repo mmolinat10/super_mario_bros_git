@@ -2,7 +2,7 @@ marioBros.koopaPrefab = function(game,x,y,level)
 {
     this.level = level;
     if(gameOptions.numLevel == 1){
-       Phaser.Sprite.call(this,game,x-400,y-400,'koopaGreen');
+       Phaser.Sprite.call(this,game,x,y,'koopaGreen');
     }
     else if(gameOptions.numLevel == 11){
        Phaser.Sprite.call(this,game,x,y,'koopaBlue');     
@@ -50,6 +50,8 @@ marioBros.koopaPrefab.prototype.constructor = marioBros.koopaPrefab;
 
 function collisionBricksKoopa(koopa, brick) {
     if(brick.playerIsTouching && koopa.body.touching.down){
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         this.angle = -180;
         brick.playerIsTouching = false;
         if(!this.level.player.marioStar){
@@ -77,6 +79,8 @@ function collisionBricksKoopa(koopa, brick) {
 
 function collisionKoopaKoopa(koopa, koopa2) {
     if(koopa2.moveSquish){
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         koopa2.counterKoopaDies += 1;
         gameOptions.score +=500;
         changeHUD = true;
@@ -129,6 +133,8 @@ marioBros.koopaPrefab.prototype.update = function(){
         this.scale.x = -this.direction;
 
         if(this.squishMode){
+            this.kickSound = this.game.add.audio('kick');
+            this.kickSound.play();
             this.body.velocity.x = 0;
             this.body.velocity.x = this.speed*10  * this.direction;
         }
@@ -188,6 +194,8 @@ marioBros.koopaPrefab.prototype.update = function(){
 marioBros.koopaPrefab.prototype.collisionPlayerKoopa = function() {
     
     if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die && !this.squishMode){
+        this.stompSound = this.game.add.audio('stomp');
+        this.stompSound.play();
         this.level.player.body.velocity.y -= 400; //mini jump al matar al koopa
         //this.stompSound = this.game.add.audio('stomp');
         //this.stompSound.play();
@@ -239,6 +247,8 @@ marioBros.koopaPrefab.prototype.collisionPlayerKoopa = function() {
         
     }
     if(this.level.player.marioStar){
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         this.dieStarKoopa = true;
         gameOptions.score +=500;
         changeHUD = true;
@@ -247,6 +257,8 @@ marioBros.koopaPrefab.prototype.collisionPlayerKoopa = function() {
     
     if(this.squishMode  && !this.moveSquish && ((this.body.touching.right || this.body.touching.left) && (this.level.player.body.touching.right ||  this.level.player.body.touching.left))){
         this.body.immovable = false;
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         if(!this.level.player.marioStar){
             gameOptions.score +=400;
             changeHUD = true;
@@ -261,6 +273,9 @@ marioBros.koopaPrefab.prototype.collisionPlayerKoopa = function() {
     else if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die && this.squishMode && !this.moveSquish && this.timeCheck>= this.timeToStartMovementSquish + 300){
         this.level.player.body.velocity.y -= 400;
         this.body.immovable = false;
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
+        
         if(!this.level.player.marioStar){
             gameOptions.score +=500;
             changeHUD = true;
@@ -273,6 +288,8 @@ marioBros.koopaPrefab.prototype.collisionPlayerKoopa = function() {
     }
     
     else if(this.body.touching.up && this.level.player.body.touching.down && !this.level.player.die && this.squishMode && this.moveSquish && this.timeCheck>= this.timeToMoveSquish + 800){
+        this.kickSound = this.game.add.audio('kick');
+        this.kickSound.play();
         this.body.immovable = true;
         this.level.player.body.velocity.y -= 400; //mini jump al matar al koopa
         

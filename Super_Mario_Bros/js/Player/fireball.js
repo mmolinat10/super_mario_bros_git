@@ -44,6 +44,8 @@ function collisionFireBricks(fireBall, block){
 };
 
 function collisionGoombaFireBall(fireBall, goomba){
+    this.kickSound = this.game.add.audio('kick');
+    this.kickSound.play();
     this.touchEnemy = true;
 
     //la puntuació en aquest cas es a goomba.js
@@ -56,6 +58,8 @@ function collisionGoombaFireBall(fireBall, goomba){
 };
 
 function collisionKoopaFireBall(fireBall, koopa){
+    this.kickSound = this.game.add.audio('kick');
+    this.kickSound.play();
     this.touchEnemy = true;
     gameOptions.score +=500;
     changeHUD = true;

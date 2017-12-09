@@ -34,9 +34,9 @@ function pipeAccess(player){
     
     if(player.body.blocked.down){
         if(this.cursors.down.isDown){
-            player.body.position.y = 550;
-            this.camera.y = 495;
-            this.camera.x = this.camera.x+60;
+            player.body.position.x = 1622;
+            player.body.position.y = 555;
+            
             this.pipeLevel1.play();  
             moveCamera = false;
         }
@@ -207,7 +207,10 @@ marioBros.level2.prototype = {
         
        
         this.collisionLayers();
-
+        if(!moveCamera){
+            this.camera.y = 495;
+            this.camera.x = 1600;
+        }
         if(this.escape.isDown){
             this.startMenu();
         }
