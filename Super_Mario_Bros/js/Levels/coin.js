@@ -33,8 +33,8 @@ function collisionBricksCoin(coin, brick) {
             this.coinSound.play();
         }
        
-        this.tweenBlock = this.game.add.tween(this.position);
-        this.tweenBlock.to({y: this.y -60}, 300, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);
+        this.tween = this.game.add.tween(this.position);
+        this.tween.to({y: this.y -60}, 300, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);
         gameOptions.coins +=1;
         gameOptions.score +=200;
         changeHUD = true;

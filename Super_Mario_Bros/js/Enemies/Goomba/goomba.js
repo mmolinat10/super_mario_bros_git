@@ -37,6 +37,7 @@ marioBros.goombaPrefab = function(game,x,y,level)
     this.score;
     this.fireBallColl = false;
     this.dieByKoopa = false;
+    this.dieStarGoomba = false;
 };
 marioBros.goombaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.goombaPrefab.prototype.constructor = marioBros.goombaPrefab;

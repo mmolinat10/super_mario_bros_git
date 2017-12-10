@@ -44,6 +44,7 @@ marioBros.koopaPrefab = function(game,x,y,level)
     this.counterKoopaDies = 0;
     this.manyEnemiesDead = false;
     this.dieByKoopa = false;
+    this.dieStarKoopa = false;
 };
 marioBros.koopaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.koopaPrefab.prototype.constructor = marioBros.koopaPrefab;

@@ -1,6 +1,11 @@
 marioBros.brickCoinPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'brickCoin');
+    if(gameOptions.numLevel == 1){
+       Phaser.Sprite.call(this,game,x,y,'brickCoin');
+    }
+    else if(gameOptions.numLevel == 11){
+       Phaser.Sprite.call(this,game,x,y,'brickCoin2');
+    }
     
     //animacion interrogante y animación de quando canvia al ser golpeada
     this.animations.add('normalBrickCoin', [0, 1, 2], 2, true); 

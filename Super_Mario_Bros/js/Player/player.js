@@ -122,6 +122,8 @@ marioBros.marioPrefab.prototype.update = function(){
         if(this.timeCheck>= this.timeInitDie + this.timeAnimationDie){
             if(gameOptions.lifes > 0){
                 gameOptions.time = 400;
+                gameOptions.isMarioBig = false;
+                gameOptions.isMarioFier = false;
                 this.level.state.start('loadLevel');
                 this.die = false;
                 this.dieSound.stop();
@@ -136,12 +138,22 @@ marioBros.marioPrefab.prototype.update = function(){
     if(this.timeCheck>= this.timeInit + this.invulnerableTime && this.marioStar){
         this.marioStar = false;
         this.marioStarSound.stop();
-        this.level.soundLevel1.resume();
+        if(gameOptions.numLevel == 1){
+            this.level.soundLevel1.resume();
+        }
+        else if(gameOptions.numLevel == 11){
+            this.level.soundLevel2.resume();
+        }
     }
     
     if(this.marioStar){
         if(!this.createTime){
-            this.level.soundLevel1.pause();
+            if(gameOptions.numLevel == 1){
+                this.level.soundLevel1.pause();
+            }
+            else if(gameOptions.numLevel == 11){
+                this.level.soundLevel2.pause();
+            }
             this.marioStarSound.play();
             this.createTime = true;
             this.timeInit = this.game.time.now;
@@ -475,6 +487,10 @@ marioBros.marioPrefab.prototype.collisionsMario = function(){
         this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin, collisionBlock, null,this);
         this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA, collisionBlock, null,this);
         this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom, collisionBlock, null,this);
+        if(gameOptions.numLevel == 11){
+           this.collBrickFlowerOrMushroomType2 = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroomType2, collisionBlock, null,this);
+        }
+        
         this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar, collisionBlock, null,this);
     
         if(!downCollision){

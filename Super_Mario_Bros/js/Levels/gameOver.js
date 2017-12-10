@@ -77,6 +77,8 @@ marioBros.gameOver.prototype = {
         gameOptions.score = 0; //se reinician los puntos
         gameOptions.time = 400; // se reinicia el tiempo
         gameOptions.numLevel = 1;
+        gameOptions.isMarioBig = false;
+        gameOptions.isMarioFier = false;
 
         this.state.start('menu');
     }

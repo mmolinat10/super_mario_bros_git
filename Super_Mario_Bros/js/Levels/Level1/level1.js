@@ -357,7 +357,7 @@ marioBros.level1.prototype = {
         this.brickFlowerOrMushroomPos;
         for(var i = 0; i < this.bricksFlowerOrMushroom.length; i++){
             this.brickFlowerOrMushroomPos = this.bricksFlowerOrMushroom.children[i];
-            this.brickFlowerOrMushroom.push(new marioBros.brickFlowerOrMushroomPrefab(this.game,this.brickFlowerOrMushroomPos.x,this.brickFlowerOrMushroomPos.y+16, this));
+            this.brickFlowerOrMushroom.push(new marioBros.brickFlowerOrMushroomPrefab(this.game,this.brickFlowerOrMushroomPos.x,this.brickFlowerOrMushroomPos.y+16, this,'type1'));
             this.game.add.existing(this.brickFlowerOrMushroom[i]);
         }
         

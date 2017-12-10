@@ -19,6 +19,8 @@ marioBros.fireballPrefab = function(game,x,y,level)
     this.collGraphicLayer;
     this.killGoomba;
     this.killKoopa;
+    this.killPiranyaVerde;
+    this.killPiranyaAzul;
     this.score;
     this.animations.play('fireBallAnimation');
     this.fireDie = false;
@@ -72,6 +74,21 @@ function collisionKoopaFireBall(fireBall, koopa){
     
 };
 
+function collisionPiranyaFireBall(fireBall, piranya){
+    this.kickSound = this.game.add.audio('kick');
+    this.kickSound.play();
+    this.touchEnemy = true;
+    gameOptions.score +=500;
+    changeHUD = true;
+
+    piranya.dieAnimation();
+    this.animations.stop();
+    this.fireDie = true;
+    fireBall.scale.setTo(0.8,0.8);
+    this.animations.play('fireBallDie',60, false, true);    
+    
+};
+
 marioBros.fireballPrefab.prototype.update = function(){
 
     //parte derecha camara
@@ -96,6 +113,9 @@ marioBros.fireballPrefab.prototype.update = function(){
         this.killGoomba = this.game.physics.arcade.collide(this, this.level.goomba,collisionGoombaFireBall, null, this);
     
         this.killKoopa = this.game.physics.arcade.collide(this, this.level.koopa,collisionKoopaFireBall, null, this);
+        
+        this.killPiranyaVerde = this.game.physics.arcade.collide(this, this.level.piranyaVerde,collisionPiranyaFireBall, null, this);
+        this.killPiranyaAzul = this.game.physics.arcade.collide(this, this.level.piranyaAzul,collisionPiranyaFireBall, null, this);
 
     }
     

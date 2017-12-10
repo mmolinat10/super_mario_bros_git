@@ -1,6 +1,12 @@
 marioBros.brickStarPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'brickStar');
+    if(gameOptions.numLevel == 1){
+       Phaser.Sprite.call(this,game,x,y,'brickStar');
+    }
+    else if(gameOptions.numLevel == 11){
+       Phaser.Sprite.call(this,game,x,y,'brickStar2');
+    }
+    
     this.animations.add('normalBrickStar',[0]);
     this.animations.add('collisionedBrickStar',[1]);
         

@@ -51,7 +51,7 @@ marioBros.brickPrefab.prototype.playBlock = function() {
 
 marioBros.brickPrefab.prototype.update = function(){
     this.timeCheck = this.game.time.now; 
-    if(this.timeCheck>= this.timeInit + 50 && this.destroyObject){
+    if(this.timeCheck>= this.timeInit + 80 && this.destroyObject){
         this.kill();
     }
 };

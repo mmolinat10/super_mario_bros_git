@@ -2,7 +2,13 @@ var downCollision;
 
 marioBros.brickInvisible1UPPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'brickInvisible1UP');
+    if(gameOptions.numLevel == 1){
+        Phaser.Sprite.call(this,game,x,y,'brickInvisible1UP');
+    }
+    else if(gameOptions.numLevel == 11){
+       Phaser.Sprite.call(this,game,x,y,'brickInvisible1UP2');   
+    }
+    
     this.animations.add('invisibleBrick', [0]); 
     this.animations.add('collisionedInvisibleBrick', [1]);
         

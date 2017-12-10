@@ -1,10 +1,22 @@
-marioBros.brickFlowerOrMushroomPrefab = function(game,x,y,level)
+marioBros.brickFlowerOrMushroomPrefab = function(game,x,y,level,typeOfBlock)
 {
-    Phaser.Sprite.call(this,game,x,y,'brickFlowerOrMushroom');
-    
-    //animacion interrogante y animación de quando canvia al ser golpeada
-    this.animations.add('normalBrickFlowerOrMushroom', [0, 1, 2], 2, true); 
-    this.animations.add('collisionedBrickFlowerOrMushroom', [3]);
+    this.typeOfBlock = typeOfBlock;
+    if(this.typeOfBlock == 'type1'){
+       if(gameOptions.numLevel == 1){
+            Phaser.Sprite.call(this,game,x,y,'brickFlowerOrMushroom');
+        }
+        else if(gameOptions.numLevel == 11){
+           Phaser.Sprite.call(this,game,x,y,'brickFlowerOrMushroom2');
+        }
+        //animacion interrogante y animación de quando canvia al ser golpeada
+        this.animations.add('normalBrickFlowerOrMushroom', [0, 1, 2], 2, true); 
+        this.animations.add('collisionedBrickFlowerOrMushroom', [3]);
+    }
+    else if(this.typeOfBlock == 'type2'){
+        Phaser.Sprite.call(this,game,x,y,'brickFlowerOrMushroom3');
+        this.animations.add('normalBrickFlowerOrMushroomType2',[0]);
+        this.animations.add('collisionedBrickFlowerOrMushroomType2',[1]);
+    }
     
     this.game.physics.arcade.enable(this);
     //this.body.collideWorldBounds = true;
@@ -80,10 +92,20 @@ marioBros.brickFlowerOrMushroomPrefab.prototype.createObject = function() {
 
 marioBros.brickFlowerOrMushroomPrefab.prototype.update = function(){
     if(!this.isCollisioned){
-       this.animations.play('normalBrickFlowerOrMushroom');
+        if(this.typeOfBlock == 'type1'){
+            this.animations.play('normalBrickFlowerOrMushroom');
+        }
+        else if(this.typeOfBlock == 'type2'){
+            this.animations.play('normalBrickFlowerOrMushroomType2');
+        }
     } 
     else{
-        this.animations.play('collisionedBrickFlowerOrMushroom');
+        if(this.typeOfBlock == 'type1'){
+            this.animations.play('collisionedBrickFlowerOrMushroom');
+        }
+        else if(this.typeOfBlock == 'type2'){
+            this.animations.play('collisionedBrickFlowerOrMushroomType2');
+        }
     }
 };
 

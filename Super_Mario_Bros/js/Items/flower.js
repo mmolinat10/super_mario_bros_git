@@ -1,6 +1,11 @@
 marioBros.flowerPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'flower');
+    if(gameOptions.numLevel == 1){
+        Phaser.Sprite.call(this,game,x,y,'flower');
+    }
+    else if(gameOptions.numLevel == 11){
+        Phaser.Sprite.call(this,game,x,y,'flower2');    
+    }
     this.animations.add('flowerAnimation',[0,1,2,3], 15, true);
     this.game.physics.arcade.enable(this);
     //this.body.immovable = true;

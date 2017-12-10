@@ -1,6 +1,11 @@
 marioBros.brickCoinsPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'brickCoins');
+    if(gameOptions.numLevel == 1){
+       Phaser.Sprite.call(this,game,x,y,'brickCoins');
+    }
+    else if(gameOptions.numLevel == 11){
+       Phaser.Sprite.call(this,game,x,y,'brickCoins2');
+    }
     this.animations.add('normalBrickCoins', [0]); 
     this.animations.add('collisionedBrickCoins', [1]);
     

@@ -1,6 +1,12 @@
 marioBros.mushroom1UPPrefab = function(game,x,y,level)
 {
-    Phaser.Sprite.call(this,game,x,y,'1UP');
+    if(gameOptions.numLevel == 1){
+        Phaser.Sprite.call(this,game,x,y,'1UP');
+    }
+    else if(gameOptions.numLevel == 11){
+       Phaser.Sprite.call(this,game,x,y,'1UP2');     
+    }
+    
     this.game.physics.arcade.enable(this);
     //this.body.immovable = true;
     this.speed = 50;
