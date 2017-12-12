@@ -60,7 +60,10 @@ function pipeAccess2Level2(player){
             player.body.position.y = exitPipeValue.y;
             this.camera.y = player.body.position.y-this.camera.y;
             this.camera.x = player.body.position.x-24;
-            this.pipeLevel1.play();
+            this.soundLevel2.stop();
+            this.pipeLevel1.play(); 
+            this.soundLevel1.loopFull();
+
         }
     }  
     
@@ -130,6 +133,7 @@ marioBros.level2.prototype = {
     create:function(){      
         gameOptions.numLevel = 11;
         this.soundLevel2 = this.game.add.audio('level2');
+        this.soundLevel1 = this.game.add.audio('level1');
         this.runningOutOfTime = this.game.add.audio('runningOutOfTime');
         this.runningOutOfTimeOnce = false;
         this.soundLevel2.loopFull();
@@ -263,7 +267,7 @@ marioBros.level2.prototype = {
     },
     
     startLevel8: function () {
-        this.soundLevel2.stop();
+        this.soundLevel1.stop();
         gameOptions.numLevel = 1;
         gameOptions.isMarioBig = this.player.bigMario;
         gameOptions.isMarioFier = this.player.marioFlower;
