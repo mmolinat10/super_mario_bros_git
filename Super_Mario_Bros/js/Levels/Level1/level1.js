@@ -309,19 +309,21 @@ marioBros.level1.prototype = {
     },
     
     collisionLayers: function(){
-        this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
-        this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
-        this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
-        this.finishLvl = this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
+        if(!this.player.die){
+            
+            this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccess, null, this);
+            this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExit, null, this);
+            this.game.physics.arcade.collide(this.player, this.pipesAccessLevelLayer, pipeNextLevel, null, this);
+            this.finishLvl = this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
         
-        if(this.finishLvl){
-           this.startLevel2();
+            if(this.finishLvl){
+               this.startLevel2();
+            }
+         
+            this.game.physics.arcade.overlap(this.player, this.deadZones, dead, null, this);
+        
+            this.game.physics.arcade.overlap(this.player,this.doorFinalLevel, finishLevelDoor, null, this);
         }
-        
-                
-        this.game.physics.arcade.overlap(this.player, this.deadZones, dead, null, this);
-        
-        this.game.physics.arcade.overlap(this.player,this.doorFinalLevel, finishLevelDoor, null, this);
         
         this.game.physics.arcade.overlap(this.goomba, this.deadZones, deadEnemy, null, this);
         this.game.physics.arcade.overlap(this.koopa, this.deadZones, deadEnemy, null, this);

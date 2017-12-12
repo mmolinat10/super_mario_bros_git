@@ -46,10 +46,10 @@ function pipeAccessLevel2(player){
     
 }
 
-function pipeAccess2(player){
-    
+function pipeAccess2Level2(player){
+
     if(player.body.blocked.right){
-        if(this.cursors.down.isDown){
+        if(this.cursors.right.isDown){
            var exitPipeValue;
             //ejemplo de obtener posicion de object layer
             this.positionExitPipe2.forEach(function(positionExitPipe2){
@@ -58,8 +58,8 @@ function pipeAccess2(player){
             }); 
             player.body.position.x = exitPipeValue.x+8;
             player.body.position.y = exitPipeValue.y;
-            this.camera.y -= 400;
-            this.camera.x = exitPipeValue.x-100;
+            this.camera.y = player.body.position.y-this.camera.y;
+            this.camera.x = player.body.position.x-24;
             this.pipeLevel1.play();
         }
     }  
@@ -163,6 +163,11 @@ marioBros.level2.prototype = {
         this.brickStar = [];
         this.brickInvisible = [];
         this.createBlocksPrefabs();
+        
+        this.platformDown = [];
+        this.platformUp = [];
+        this.createPlatformsPrefabs();
+        
         this.isOverPipes = false;
         
 
@@ -257,6 +262,14 @@ marioBros.level2.prototype = {
         this.state.start('menu');
     },
     
+    startLevel8: function () {
+        this.soundLevel2.stop();
+        gameOptions.numLevel = 1;
+        gameOptions.isMarioBig = this.player.bigMario;
+        gameOptions.isMarioFier = this.player.marioFlower;
+        this.state.start('loadLevel');
+    },
+    
     
     createLayers: function(){        
         this.backgroundColor = this.map.createLayer('Background_Color');
@@ -349,6 +362,13 @@ marioBros.level2.prototype = {
         this.doorFinalLevel = this.game.add.physicsGroup(); 
         this.map.createFromObjects('DoorFinalLevel', 'doorFinalLevel', '', 0, true, false, this.doorFinalLevel);
         
+        this.platformsUp = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('Platforms', 'platformsUp', '', 0, true, false, this.platformsUp);
+        
+        this.platformsDown = this.game.add.physicsGroup(); 
+        this.map.createFromObjects('Platforms', 'platformsDown', '', 0, true, false, this.platformsDown);
+        
+        
     },
     
     setCollisionLayers: function(){
@@ -371,9 +391,14 @@ marioBros.level2.prototype = {
     collisionLayers: function(){
         if(!this.player.die){
             this.game.physics.arcade.collide(this.player, this.pipesAccessLayer, pipeAccessLevel2, null, this);
-            this.game.physics.arcade.collide(this.player, this.pipesAccess2Layer, pipeAccess2, null, this);
+            this.game.physics.arcade.collide(this.player, this.pipesAccess2Layer, pipeAccess2Level2, null, this);
             this.game.physics.arcade.collide(this.player, this.exitPipesLayer, pipeExitLevel2, null, this);
-            this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flagLevel2, null, this);
+            this.finishLvl2 = this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flagLevel2, null, this);
+        
+            if(this.finishLvl2){
+               this.startLevel8();
+            }
+            
             this.game.physics.arcade.overlap(this.player, this.deadZones, deadLevel2, null, this);
             this.game.physics.arcade.overlap(this.player,this.doorFinalLevel, finishLevelDoorLevel2, null, this);
             this.isOverPipes = this.game.physics.arcade.overlap(this.player, this.overPipes);
@@ -469,13 +494,13 @@ marioBros.level2.prototype = {
     },
     
     createPiranyasPrefabs: function(){
-        
+        /*
         this.piranyaVerdePos;
         for(var i = 0; i < this.piranyasVerdes.length; i++){
             this.piranyaVerdePos = this.piranyasVerdes.children[i];
             this.piranyaVerde.push(new marioBros.piranyaPrefab(this.game,this.piranyaVerdePos.x+17,this.piranyaVerdePos.y+63, this, 'green', overPipePosValues[i]));
             this.game.add.existing(this.piranyaVerde[i]);
-        }
+        }*/
         
         this.piranyaAzulPos;
         for(var i = 0; i < this.piranyasAzules.length; i++){
@@ -493,6 +518,23 @@ marioBros.level2.prototype = {
             this.coinsAlone.push(new marioBros.coinPrefab(this.game,this.coinPos.x,this.coinPos.y+16, this));
             this.game.add.existing(this.coinsAlone[i]);
         }
+    },
+    
+    createPlatformsPrefabs: function(){
+        this.platformUpPos;
+        for(var i = 0; i < this.platformsUp.length; i++){
+            this.platformUpPos = this.platformsUp.children[i];
+            this.platformUp.push(new marioBros.platformPrefab(this.game,this.platformUpPos.x,this.platformUpPos.y+16, this, 1));
+            this.game.add.existing(this.platformUp[i]);
+        }
+        
+        this.platformDownPos;
+        for(var i = 0; i < this.platformsDown.length; i++){
+            this.platformDownPos = this.platformsDown.children[i];
+            this.platformDown.push(new marioBros.platformPrefab(this.game,this.platformDownPos.x,this.platformDownPos.y+16, this, -1));
+            this.game.add.existing(this.platformDown[i]);
+        }
+    
     },
     
     stopBackgroundAudioLevel: function(){

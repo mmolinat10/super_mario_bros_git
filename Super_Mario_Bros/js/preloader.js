@@ -53,6 +53,7 @@ marioBros.preloader.prototype = {
         this.load.image('coinLoadScreen', 'img/UI/Load/coin2.png');
         this.load.image('coin1', 'img/Items/coin.png');
         this.load.image('coin2', 'img/Items/coin_2.png');
+        this.load.image('platform', 'img/Levels/platform.png');
         
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
         this.load.audio('level2', 'sounds/Levels/Level1_2/level1_2.mp3');

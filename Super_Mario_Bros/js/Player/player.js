@@ -39,8 +39,11 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.collBrickCoin;
     this.collBrickCoins;
     this.collBrickFlowerOrMushroom;
+    this.collBrickFlowerOrMushroomType2;
     this.collBrickStar;
     this.collBrickInvisible1UP;
+    this.collPlatformUp;
+    this.collPlatformDown;
     
     this.onGround = false;
     this.bigMario = false;
@@ -67,6 +70,10 @@ marioBros.marioPrefab.prototype.constructor = marioBros.marioPrefab;
 
 function collisionBlock(player, block){
     block.playBlock();   
+}
+
+function collisionPlatform(player, platform){
+    platform.playPlatform(); 
 }
 
 marioBros.marioPrefab.prototype.update = function(){
@@ -488,7 +495,9 @@ marioBros.marioPrefab.prototype.collisionsMario = function(){
         this.collBrickCoins = this.game.physics.arcade.collide(this, this.level.brickCoinsA, collisionBlock, null,this);
         this.collBrickFlowerOrMushroom = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroom, collisionBlock, null,this);
         if(gameOptions.numLevel == 11){
-           this.collBrickFlowerOrMushroomType2 = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroomType2, collisionBlock, null,this);
+            this.collBrickFlowerOrMushroomType2 = this.game.physics.arcade.collide(this, this.level.brickFlowerOrMushroomType2, collisionBlock, null,this);
+            this.collPlatformUp = this.game.physics.arcade.collide(this, this.level.platformUp, collisionPlatform, null,this);
+            this.collPlatformDown = this.game.physics.arcade.collide(this, this.level.platformDown, collisionPlatform, null,this);
         }
         
         this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar, collisionBlock, null,this);
@@ -504,7 +513,7 @@ marioBros.marioPrefab.prototype.collisionsMario = function(){
 };
 
 marioBros.marioPrefab.prototype.checkIsGroundMario = function(){
-    if(!this.collBrick && !this.collBrickCoin && !this.collBrickCoins && !this.collBrickFlowerOrMushroom && !this.collBrickStar &&  !this.collBrickInvisible1UP && !this.body.onFloor()){
+    if(!this.collBrick && !this.collBrickCoin && !this.collBrickCoins && !this.collBrickFlowerOrMushroom && !this.collBrickStar &&  !this.collBrickInvisible1UP && !this.body.onFloor() && !this.collPlatformDown && !this.collPlatformUp && !this.collBrickFlowerOrMushroomType2){
        this.onGround = false;
     }
     
