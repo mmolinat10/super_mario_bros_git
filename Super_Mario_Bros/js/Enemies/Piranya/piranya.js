@@ -1,8 +1,7 @@
-marioBros.piranyaPrefab = function(game,x,y,level,typeOfPiranya, posOverPipe)
+marioBros.piranyaPrefab = function(game,x,y,level,typeOfPiranya)
 {
     this.level = level;
     this.typeOfPiranya = typeOfPiranya;
-    this.posOverPipe = posOverPipe;
     
     if(this.typeOfPiranya == 'green'){
         Phaser.Sprite.call(this,game,x,y,'piranyaGreen');
@@ -20,7 +19,6 @@ marioBros.piranyaPrefab = function(game,x,y,level,typeOfPiranya, posOverPipe)
         this.position.y = 200;
     }
     this.animations.play('eat');
-    this.speed = 10;
    
     this.diePiranya = false;
    
@@ -30,26 +28,27 @@ marioBros.piranyaPrefab = function(game,x,y,level,typeOfPiranya, posOverPipe)
     this.timeInit;
     this.timeInitChangeToSmall;
     this.changeToSmall = false;
+    this.speed = 10;
    
     this.collGraphicLayer;
     this.score;
     this.fireBallColl = false;
     this.dieStarPiranya = false;
+    this.hiddenPiranya = this.position.y;
+    this.limitMovementPiranya = this.hiddenPiranya-27;
+    this.limitHeight = false;
+
    
-    if(this.typeOfPiranya == 'blue'){
-        this.tween = game.add.tween(this.position).to( { y: this.posOverPipe.y-8 }, 4000, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);
-    }
-    else if('green'){
-        this.tween = game.add.tween(this.position).to( { y: this.posOverPipe.y-8 }, 4000, Phaser.Easing.Sinusoidal.In, true, 0, 0, true);     
-    }
 };
 marioBros.piranyaPrefab.prototype = Object.create(Phaser.Sprite.prototype);
 marioBros.piranyaPrefab.prototype.constructor = marioBros.piranyaPrefab;
 
 marioBros.piranyaPrefab.prototype.update = function(){
+    this.timeNow = this.game.time.now;
     
-    
-    this.tween.repeat(-1);
+    if(this.playerVisible){
+        this.move();
+    }
         
     //parte izquierda camara
     if(this.x <= this.game.camera.x-16){
@@ -57,9 +56,6 @@ marioBros.piranyaPrefab.prototype.update = function(){
     }
     this.timeCheck = this.game.time.now;    
     
-   
-    //this.collGraphicLayer = this.game.physics.arcade.collide(this,this.level.graphicLayer);
-
     
     if(!this.diePiranya){
         if(!this.dieStarPiranya && !this.level.player.die){
@@ -80,16 +76,48 @@ marioBros.piranyaPrefab.prototype.update = function(){
     if(this.game.physics.arcade.distanceBetween(this, this.level.player) < 400 || this.playerVisible){
         if(!this.playerVisible){
            this.playerVisible = true;
-        }
+        }    
         
-        //this.body.velocity.x = this.speed * this.direction;
+    }
     
-        
+    if(this.level.exitPipeDetect){
+        this.body.velocity.y = 0;
+        this.position.y = this.hiddenPiranya;
+        this.limitHeight = true;
+        this.level.exitPipeDetect = false;
     }
     
 };
 
 
+marioBros.piranyaPrefab.prototype.move = function() {
+
+    
+    
+        if(this.y >= this.limitMovementPiranya && !this.limitHeight){
+            if(!this.level.isOverPipes || this.game.physics.arcade.distanceBetween(this, this.level.player) > 40){
+                this.body.velocity.y = this.speed * -1;
+            }
+        }
+
+        if(this.y <= this.limitMovementPiranya && !this.limitHeight){
+            this.body.velocity.y = 0;
+            this.limitHeight = true;
+        }
+
+        if(this.y <= this.limitMovementPiranya && this.limitHeight){
+            this.body.velocity.y = this.speed;
+        }
+
+        if(this.y >= this.hiddenPiranya && this.limitHeight){
+            this.body.velocity.y = 0;
+            this.limitHeight = false;
+        }
+    
+    
+    
+    
+},
 
 marioBros.piranyaPrefab.prototype.collisionPlayerPiranya = function() {
     

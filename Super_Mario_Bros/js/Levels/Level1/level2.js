@@ -15,7 +15,6 @@ var textWorldHUD;
 var textWorld;
 var textTimeHUD;
 var moveCamera = true;
-var overPipePosValues = [];
 
 marioBros.level2 = function (game) {
 
@@ -74,6 +73,8 @@ function pipeExitLevel2(player){
 
     if(player.body.blocked.right){
         if(this.cursors.right.isDown){
+            this.exitPipeDetect = true;
+            
             var exitPipeValue;
             //ejemplo de obtener posicion de object layer
             this.positionExitPipe.forEach(function(positionExitPipe){
@@ -139,6 +140,7 @@ marioBros.level2.prototype = {
         this.soundLevel2.loopFull();
         this.game.paused = false;
         this.pipeLevel1 = this.game.add.audio('pipe');
+        this.exitPipeDetect = false;
                 
         this.map = this.game.add.tilemap('level2');
         this.map.addTilesetImage('tileset_levels');        
@@ -172,9 +174,10 @@ marioBros.level2.prototype = {
         this.platformUp = [];
         this.createPlatformsPrefabs();
         
-        this.isOverPipes = false;
-        
 
+        //1250
+        //400
+        
         this.player = new marioBros.marioPrefab(this.game,65,this.game.world.height/3-25, this);
         this.player.marioFlower = gameOptions.isMarioFier;
         this.player.bigMario = gameOptions.isMarioBig;
@@ -201,7 +204,7 @@ marioBros.level2.prototype = {
         this.coinsAlone = [];
         this.createCoinsPrefabs();
         
-        //this.camera.follow(this.player, null, 1, 0);
+        this.camera.follow(this.player, null, 1, 0);
         this.game.camera.y = 255;
         
         this.game.time.events.loop(1000, function(){
@@ -279,7 +282,7 @@ marioBros.level2.prototype = {
         this.backgroundColor = this.map.createLayer('Background_Color');
         
         //la piranyas van aqui porque interesa esconderlas detras de la tuberia
-        
+        this.isOverPipes = false;
         this.piranyasVerdes = this.game.add.physicsGroup();
         
         this.map.createFromObjects('PiranyaVerde', 'piranyaVerde', '', 0, true, false, this.piranyasVerdes);
@@ -302,15 +305,6 @@ marioBros.level2.prototype = {
         
         this.overPipes = this.game.add.physicsGroup(); 
         this.map.createFromObjects('OverPipe', 'overPipe', '', 0, true, false, this.overPipes);
-        
-        var overPipeValue;
-            //ejemplo de obtener posicion de object layer
-            this.overPipes.forEach(function(overPipes){
-                overPipes.body.immovable = true;
-                overPipeValue = overPipes;
-                overPipePosValues.push(overPipeValue);
-            }); 
-        
         
         this.pipesAccess = this.game.add.physicsGroup(); 
         this.map.createFromObjects('PipesAccess', 'pipesAccess', '', 0, true, false, this.pipesAccess);
@@ -498,18 +492,18 @@ marioBros.level2.prototype = {
     },
     
     createPiranyasPrefabs: function(){
-        /*
+        
         this.piranyaVerdePos;
         for(var i = 0; i < this.piranyasVerdes.length; i++){
             this.piranyaVerdePos = this.piranyasVerdes.children[i];
-            this.piranyaVerde.push(new marioBros.piranyaPrefab(this.game,this.piranyaVerdePos.x+17,this.piranyaVerdePos.y+63, this, 'green', overPipePosValues[i]));
+            this.piranyaVerde.push(new marioBros.piranyaPrefab(this.game,this.piranyaVerdePos.x+17,this.piranyaVerdePos.y+63, this, 'green'));
             this.game.add.existing(this.piranyaVerde[i]);
-        }*/
+        }
         
         this.piranyaAzulPos;
         for(var i = 0; i < this.piranyasAzules.length; i++){
             this.piranyaAzulPos = this.piranyasAzules.children[i];
-            this.piranyaAzul.push(new marioBros.piranyaPrefab(this.game,this.piranyaAzulPos.x+17,this.piranyaAzulPos.y+63, this, 'blue',overPipePosValues[i]));
+            this.piranyaAzul.push(new marioBros.piranyaPrefab(this.game,this.piranyaAzulPos.x+17,this.piranyaAzulPos.y+63, this, 'blue'));
             this.game.add.existing(this.piranyaAzul[i]);
         }
     },    
