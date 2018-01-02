@@ -204,7 +204,7 @@ marioBros.level2.prototype = {
         this.coinsAlone = [];
         this.createCoinsPrefabs();
         
-        this.camera.follow(this.player, null, 1, 0);
+        //this.camera.follow(this.player, null, 1, 0);
         this.game.camera.y = 255;
         
         this.game.time.events.loop(1000, function(){

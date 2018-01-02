@@ -28,7 +28,7 @@ marioBros.piranyaPrefab = function(game,x,y,level,typeOfPiranya)
     this.timeInit;
     this.timeInitChangeToSmall;
     this.changeToSmall = false;
-    this.speed = 10;
+    this.speed = 8;
    
     this.collGraphicLayer;
     this.score;
@@ -37,6 +37,7 @@ marioBros.piranyaPrefab = function(game,x,y,level,typeOfPiranya)
     this.hiddenPiranya = this.position.y;
     this.limitMovementPiranya = this.hiddenPiranya-27;
     this.limitHeight = false;
+    this.marioExit = false;
 
    
 };
@@ -85,18 +86,23 @@ marioBros.piranyaPrefab.prototype.update = function(){
         this.position.y = this.hiddenPiranya;
         this.limitHeight = true;
         this.level.exitPipeDetect = false;
+        this.marioExit = true;
     }
     
 };
 
-
 marioBros.piranyaPrefab.prototype.move = function() {
 
-    
+        if(this.marioExit && this.level.isOverPipes){
+            this.marioExit = false;
+            this.limitHeight = false; 
+        }
     
         if(this.y >= this.limitMovementPiranya && !this.limitHeight){
             if(!this.level.isOverPipes || this.game.physics.arcade.distanceBetween(this, this.level.player) > 40){
-                this.body.velocity.y = this.speed * -1;
+                if(!this.level.exitPipeDetect && !this.marioExit){
+                    this.body.velocity.y = this.speed * -1;
+                }
             }
         }
 
@@ -113,9 +119,6 @@ marioBros.piranyaPrefab.prototype.move = function() {
             this.body.velocity.y = 0;
             this.limitHeight = false;
         }
-    
-    
-    
     
 },
 

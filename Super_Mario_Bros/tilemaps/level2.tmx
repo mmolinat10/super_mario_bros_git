@@ -776,7 +776,7 @@
  </objectgroup>
  <objectgroup name="Pipes"/>
  <objectgroup name="PositionExitPipe">
-  <object id="802" name="positionExitPipe" x="1839.5" y="398.875" width="32.375" height="16.75"/>
+  <object id="802" name="positionExitPipe" x="1839.5" y="398.875" width="32.375" height="18.125"/>
  </objectgroup>
  <objectgroup name="PositionExitPipe2">
   <object id="863" name="positionExitPipe2" x="2447.64" y="144.364" width="32" height="15.6364"/>
@@ -867,7 +867,7 @@
   <object id="1321" name="bricksFlowerOrMushroomType2" x="2400" y="367.87" width="15.9565" height="15.9565"/>
  </objectgroup>
  <objectgroup name="OverPipe">
-  <object id="1322" name="overPipe" x="1647.45" y="398.409" width="32.4545" height="1.5"/>
+  <object id="1322" name="overPipe" x="1648.01" y="398.409" width="31.892" height="1.5"/>
   <object id="1323" name="overPipe" x="1743.52" y="383.25" width="32.4545" height="1.5"/>
   <object id="1324" name="overPipe" x="1839.52" y="414.25" width="32.4545" height="1.5"/>
   <object id="1325" name="overPipe" x="2447.64" y="158.477" width="32.4545" height="1.5"/>

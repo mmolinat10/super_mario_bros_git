@@ -372,7 +372,7 @@
          "name":"PositionExitPipe",
          "objects":[
                 {
-                 "height":16.75,
+                 "height":18.125,
                  "id":802,
                  "name":"positionExitPipe",
                  "rotation":0,
@@ -731,8 +731,8 @@
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":32.4545,
-                 "x":1647.45,
+                 "width":31.892,
+                 "x":1648.0125,
                  "y":398.409
                 }, 
                 {
