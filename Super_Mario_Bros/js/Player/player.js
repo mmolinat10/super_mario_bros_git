@@ -44,6 +44,7 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.collBrickInvisible1UP;
     this.collPlatformUp;
     this.collPlatformDown;
+    this.collPuente;
     
     this.onGround = false;
     this.bigMario = false;
@@ -74,6 +75,10 @@ function collisionBlock(player, block){
 
 function collisionPlatform(player, platform){
     platform.playPlatform(); 
+}
+
+function collisionPuente(player, puente){
+    puente.playPuente(); 
 }
 
 marioBros.marioPrefab.prototype.update = function(){
@@ -499,6 +504,9 @@ marioBros.marioPrefab.prototype.collisionsMario = function(){
             this.collPlatformUp = this.game.physics.arcade.collide(this, this.level.platformUp, collisionPlatform, null,this);
             this.collPlatformDown = this.game.physics.arcade.collide(this, this.level.platformDown, collisionPlatform, null,this);
         }
+        if(gameOptions.numLevel == 84){
+            this.collPuente = this.game.physics.arcade.collide(this, this.level.puente, collisionPuente, null,this);
+        }
         
         this.collBrickStar = this.game.physics.arcade.collide(this, this.level.brickStar, collisionBlock, null,this);
     
@@ -513,7 +521,7 @@ marioBros.marioPrefab.prototype.collisionsMario = function(){
 };
 
 marioBros.marioPrefab.prototype.checkIsGroundMario = function(){
-    if(!this.collBrick && !this.collBrickCoin && !this.collBrickCoins && !this.collBrickFlowerOrMushroom && !this.collBrickStar &&  !this.collBrickInvisible1UP && !this.body.onFloor() && !this.collPlatformDown && !this.collPlatformUp && !this.collBrickFlowerOrMushroomType2){
+    if(!this.collBrick && !this.collBrickCoin && !this.collBrickCoins && !this.collBrickFlowerOrMushroom && !this.collBrickStar &&  !this.collBrickInvisible1UP && !this.body.onFloor() && !this.collPlatformDown && !this.collPlatformUp && !this.collBrickFlowerOrMushroomType2 && !this.collPuente){
        this.onGround = false;
     }
     

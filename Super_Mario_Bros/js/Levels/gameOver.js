@@ -29,6 +29,9 @@ marioBros.gameOver.prototype = {
         else if(gameOptions.numLevel == 11){
             textWorld = "1-2";   
         }
+        else if(gameOptions.numLevel == 84){
+            textWorld = "8-4";   
+        }
         
         textTimeGameoverScreen = "TIME";
         textTimeLevel = gameOptions.time;

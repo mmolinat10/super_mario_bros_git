@@ -15,6 +15,7 @@ marioBros.preloader.prototype = {
         this.load.image('cursor', 'img/UI/Menu/cursor.png');
         this.load.tilemap('level1','tilemaps/level1.json',null,Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('level2','tilemaps/level2.json',null,Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('level3','tilemaps/level3.json',null,Phaser.Tilemap.TILED_JSON);
         this.load.image('tileset_levels','tilemaps/tileset_levels.png');
         this.load.spritesheet('marioSmall', 'img/Player/Mario Small/small_mario(versionFier).png', 16, 16);
         this.load.spritesheet('marioBig', 'img/Player/Mario Big/big_mario.png', 16, 32);
@@ -54,9 +55,11 @@ marioBros.preloader.prototype = {
         this.load.image('coin1', 'img/Items/coin.png');
         this.load.image('coin2', 'img/Items/coin_2.png');
         this.load.image('platform', 'img/Levels/platform.png');
+        this.load.spritesheet('puente', 'img/Levels/puente.png', 14, 16);
         
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
         this.load.audio('level2', 'sounds/Levels/Level1_2/level1_2.mp3');
+        this.load.audio('level3', 'sounds/Levels/Level8_4/level8_4.mp3');
         this.load.audio('jumpSmall', 'sounds/Player/jumpSmall.wav');
         this.load.audio('jumpBig', 'sounds/Player/jumpBig.wav');
         this.load.audio('mariodie', 'sounds/Player/mariodie.wav');

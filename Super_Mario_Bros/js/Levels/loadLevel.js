@@ -30,12 +30,18 @@ marioBros.loadLevel.prototype = {
         else if(gameOptions.numLevel == 11){
             textWorld = "1-2";   
         }
+        else if(gameOptions.numLevel == 84){
+            textWorld = "8-4";   
+        }
         
         if(gameOptions.numLevel == 1){
             textWorldLvlCenter = "WORLD 1 - 1";
         }
         else if(gameOptions.numLevel == 11){
              textWorldLvlCenter = "WORLD 1 - 2";  
+        }
+        else if(gameOptions.numLevel == 84){
+             textWorldLvlCenter = "WORLD 8 - 4";  
         }
         
         textTimeLoadScreen = "TIME";
@@ -84,10 +90,13 @@ marioBros.loadLevel.prototype = {
     startGame: function () {
         //habria que pasar una variable levelMario del player
         if(gameOptions.numLevel == 1){
-            this.state.start('level1');
+            this.state.start('level3');
         }
         else if(gameOptions.numLevel == 11){
             this.state.start('level2');
+        }
+        else if(gameOptions.numLevel == 84){
+            this.state.start('level3');
         }
     }
     
