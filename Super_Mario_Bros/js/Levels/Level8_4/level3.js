@@ -134,7 +134,7 @@ marioBros.level3.prototype = {
         //1250
         //400
         
-        this.player = new marioBros.marioPrefab(this.game,15,this.game.world.height/2-15, this);
+        this.player = new marioBros.marioPrefab(this.game,4100,this.game.world.height/2-15, this);
         this.player.marioFlower = gameOptions.isMarioFier;
         this.player.bigMario = gameOptions.isMarioBig;
         this.player.level = this;
@@ -160,7 +160,7 @@ marioBros.level3.prototype = {
         //this.coinsAlone = [];
         this.createCoinsPrefabs();
         
-        //this.camera.follow(this.player, null, 1, 0);
+        this.camera.follow(this.player, null, 1, 0);
         this.game.camera.y = 270;
         
         this.game.time.events.loop(1000, function(){
