@@ -150,6 +150,8 @@ marioBros.level3.prototype = {
         
         this.game.add.existing(this.player);       
         
+        this.bowser = new marioBros.bowserPrefab(this.game,4100,this.game.world.height/2-15,this);
+        this.game.add.existing(this.bowser);
         //this.goomba = [];
         //this.createGoombasPrefabs();
         

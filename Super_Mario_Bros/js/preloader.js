@@ -50,6 +50,7 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('1UP', 'img/Items/1up_mushroom.png', 16, 16);
         this.load.spritesheet('1UP2', 'img/Items/1up_mushroom_2.png', 16, 16);
         this.load.spritesheet('coinOfBlock', 'img/Items/coinBlock.png', 16, 16);
+        this.load.spritesheet('bowser', 'img/Enemies/Bowser/bowser.png', 32,32);
         this.load.image('marioLoadScreen', 'img/UI/Load/marioSmallIdle.png');
         this.load.image('coinLoadScreen', 'img/UI/Load/coin2.png');
         this.load.image('coin1', 'img/Items/coin.png');
