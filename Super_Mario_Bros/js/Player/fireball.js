@@ -99,9 +99,7 @@ marioBros.fireballPrefab.prototype.update = function(){
     if(this.x <= this.game.camera.x-16){
         this.kill();
     }
-    
-    this.timeCheckDie = this.game.time.now; 
-    
+        
     this.collGraphicLayer = this.game.physics.arcade.collide(this, this.level.graphicLayer);
     this.collBrick = this.game.physics.arcade.collide(this, this.level.brick,collisionFireBricks, null, this);
     this.collBrickCoin = this.game.physics.arcade.collide(this, this.level.brickCoin,collisionFireBricks, null, this);

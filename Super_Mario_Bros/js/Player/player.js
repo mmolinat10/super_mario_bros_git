@@ -64,6 +64,9 @@ marioBros.marioPrefab = function(game,x,y,level)
     this.timeInitFire;
     this.firstTimeFire = false;
     this.readyToFire = true;
+    this.checkerAnimationFinishGame = false;
+    this.finishAnimationGame = false;
+    gameOptions.win = false;
 };
 
 marioBros.marioPrefab.prototype = Object.create(Phaser.Sprite.prototype);
@@ -82,42 +85,10 @@ function collisionPuente(player, puente){
 }
 
 marioBros.marioPrefab.prototype.update = function(){
-    if(this.body.x <= this.game.camera.x && this.cursors.left.isDown){
-        this.body.x = this.game.camera.x;
-        this.body.velocity.x = 0;
-    }
-    
     this.timeCheck = this.game.time.now;
     this.collisionsMario();
-    
+
     this.checkIsGroundMario();
-    
-    if(!this.die){
-        if(this.bigMario && !this.marioFlower){
-            this.moveBigMario();
-            this.jumpBigMario();
-            if((this.cursors.down.isDown && this.checkIsGroundMario && !this.cursors.left.isDown && !this.cursors.right.isDown)){
-              //funcion para agacharse
-                this.crouch()
-            }
-        }
-        else if(!this.bigMario && !this.marioFlower){
-            this.moveSmallMario();
-            this.jumpSmallMario();
-        }
-        else if(this.marioFlower){
-            this.moveFierMario();   
-            this.jumpFierMario();
-            this.attackFierMario();
-            if((this.cursors.down.isDown && this.checkIsGroundMario && !this.cursors.left.isDown && !this.cursors.right.isDown)){
-              //funcion para agacharse
-                this.crouch()
-            }
-        }
-    }
-    else{
-        this.animations.stop();
-    }
     
     if(this.die){
         this.body.velocity.x = 0;
@@ -128,7 +99,7 @@ marioBros.marioPrefab.prototype.update = function(){
             this.timeInitDie = this.game.time.now;
             this.dieMario();
         }
-    
+
         //animacion morir
         this.frame = 6;
         if(this.timeCheck>= this.timeInitDie + this.timeAnimationDie){
@@ -144,37 +115,109 @@ marioBros.marioPrefab.prototype.update = function(){
                this.gameOver();
             }
         }
+
+    }
+
+    
+    if(gameOptions.numLevel == 84 && gameOptions.win){
+        
+        if(!this.checkerAnimationFinishGame){
+            this.checkerAnimationFinishGame = true;
+            this.body.velocity.x = 0;
+            this.body.acceleration.x = 0;
+        }
+
+        if(this.body.position.x >= 4484){
+            this.body.velocity.x = 0;
+            this.body.acceleration.x = 0;
+            this.frame = 1;
+            this.finishAnimationGame = true;
+        }
+        else{
+            if(!this.bigMario && !this.marioFlower){
+                this.animations.play('rightSmall', 15, true);
+            }
+            else if(this.bigMario && !this.marioFlower){
+                this.animations.play('rightBig', 15, true);    
+            }
+            else if(this.marioFlower){
+                this.animations.play('rightFire', 15, true);    
+            }
+            this.body.velocity.x = 25;
+        }
         
     }
     
-    if(this.timeCheck>= this.timeInit + this.invulnerableTime && this.marioStar){
-        this.marioStar = false;
-        this.marioStarSound.stop();
-        if(gameOptions.numLevel == 1){
-            this.level.soundLevel1.resume();
+    else{
+        if(this.body.x <= this.game.camera.x && this.cursors.left.isDown){
+            this.body.x = this.game.camera.x;
+            this.body.velocity.x = 0;
         }
-        else if(gameOptions.numLevel == 11){
-            this.level.soundLevel2.resume();
-        }
-    }
     
-    if(this.marioStar){
-        if(!this.createTime){
+        if(this.body.x-(256) >= this.game.camera.x && this.cursors.right.isDown){
+            this.body.x = this.body.x-16;
+            this.body.velocity.x = 0;
+        }        
+
+        if(!this.die){
+            if(this.bigMario && !this.marioFlower){
+                this.moveBigMario();
+                this.jumpBigMario();
+                if((this.cursors.down.isDown && this.checkIsGroundMario && !this.cursors.left.isDown && !this.cursors.right.isDown)){
+                  //funcion para agacharse
+                    this.crouch()
+                }
+            }
+            else if(!this.bigMario && !this.marioFlower){
+                this.moveSmallMario();
+                this.jumpSmallMario();
+            }
+            else if(this.marioFlower){
+                this.moveFierMario();   
+                this.jumpFierMario();
+                this.attackFierMario();
+                if((this.cursors.down.isDown && this.checkIsGroundMario && !this.cursors.left.isDown && !this.cursors.right.isDown)){
+                  //funcion para agacharse
+                    this.crouch()
+                }
+            }
+        }
+        else{
+            this.animations.stop();
+        }
+
+        
+        if(this.timeCheck>= this.timeInit + this.invulnerableTime && this.marioStar){
+            this.marioStar = false;
+            this.marioStarSound.stop();
             if(gameOptions.numLevel == 1){
-                this.level.soundLevel1.pause();
+                this.level.soundLevel1.resume();
             }
             else if(gameOptions.numLevel == 11){
-                this.level.soundLevel2.pause();
+                this.level.soundLevel2.resume();
             }
-            this.marioStarSound.play();
-            this.createTime = true;
-            this.timeInit = this.game.time.now;
         }
-    }    
-    
-    if(gameOptions.time <= 0){
-       this.die = true;
+
+        if(this.marioStar){
+            if(!this.createTime){
+                if(gameOptions.numLevel == 1){
+                    this.level.soundLevel1.pause();
+                }
+                else if(gameOptions.numLevel == 11){
+                    this.level.soundLevel2.pause();
+                }
+                this.marioStarSound.play();
+                this.createTime = true;
+                this.timeInit = this.game.time.now;
+            }
+        }    
+
+        if(gameOptions.time <= 0){
+           this.die = true;
+        }
     }
+    
+   
     
 };
 

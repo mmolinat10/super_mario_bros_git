@@ -259,20 +259,20 @@
 </data>
  </layer>
  <objectgroup name="Puente">
-  <object id="1391" name="puente" x="4096.04" y="415.854" width="15.9444" height="16.2917"/>
-  <object id="1404" name="puente" x="4112.01" y="415.854" width="15.91" height="16.2917"/>
-  <object id="1405" name="puente" x="4144" y="415.854" width="15.9986" height="16.2917"/>
-  <object id="1406" name="puente" x="4127.9" y="415.854" width="16.0555" height="16.2917"/>
-  <object id="1407" name="puente" x="4207.97" y="415.854" width="16.0352" height="16.2917"/>
-  <object id="1408" name="puente" x="4175.97" y="415.854" width="16.0208" height="16.2917"/>
-  <object id="1409" name="puente" x="4191.98" y="415.854" width="16.0048" height="16.2917"/>
-  <object id="1410" name="puente" x="4160" y="415.854" width="15.9739" height="16.2917"/>
-  <object id="1411" name="puente" x="4272" y="415.854" width="15.9896" height="16.2917"/>
-  <object id="1412" name="puente" x="4239.99" y="415.854" width="16.0059" height="16.2917"/>
-  <object id="1413" name="puente" x="4256" y="415.854" width="16.0027" height="16.2917"/>
-  <object id="1414" name="puente" x="4224" y="415.854" width="15.9817" height="16.2917"/>
-  <object id="1415" name="puente" x="4303.99" y="415.843" width="16.0114" height="16.2917"/>
-  <object id="1416" name="puente" x="4288" y="415.843" width="15.9974" height="16.2917"/>
+  <object id="1391" name="puente" x="4096.04" y="416" width="15.91" height="16.2917"/>
+  <object id="1404" name="puente" x="4112.01" y="416" width="15.91" height="16.2917"/>
+  <object id="1406" name="puente" x="4127.9" y="416" width="16.0555" height="16.2917"/>
+  <object id="1405" name="puente" x="4144" y="416" width="15.9986" height="16.2917"/>
+  <object id="1410" name="puente" x="4160" y="416" width="15.9739" height="16.2917"/>
+  <object id="1408" name="puente" x="4175.97" y="416" width="16.0208" height="16.2917"/>
+  <object id="1409" name="puente" x="4191.98" y="416" width="16.0048" height="16.2917"/>
+  <object id="1407" name="puente" x="4207.97" y="416" width="16.0352" height="16.2917"/>
+  <object id="1414" name="puente" x="4224" y="416" width="15.9817" height="16.2917"/>
+  <object id="1412" name="puente" x="4239.99" y="416" width="16.0059" height="16.2917"/>
+  <object id="1413" name="puente" x="4256" y="416" width="16.0027" height="16.2917"/>
+  <object id="1411" name="puente" x="4272" y="416" width="15.9896" height="16.29"/>
+  <object id="1416" name="puente" x="4288" y="416" width="15.9974" height="16.2917"/>
+  <object id="1415" name="puente" x="4303.99" y="416" width="16.0114" height="16.2917"/>
  </objectgroup>
  <layer name="Fire" width="290" height="45">
   <data encoding="csv">

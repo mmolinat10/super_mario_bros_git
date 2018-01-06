@@ -270,8 +270,9 @@ marioBros.level2.prototype = {
     },
     
     startLevel8: function () {
+        gameOptions.time = 400;
         this.soundLevel1.stop();
-        gameOptions.numLevel = 1;
+        gameOptions.numLevel = 84;
         gameOptions.isMarioBig = this.player.bigMario;
         gameOptions.isMarioFier = this.player.marioFlower;
         this.state.start('loadLevel');

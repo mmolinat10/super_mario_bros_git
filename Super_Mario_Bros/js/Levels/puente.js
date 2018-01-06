@@ -23,7 +23,7 @@ marioBros.puentePrefab.prototype.update = function(){
     }
 };
 
-marioBros.platformPrefab.prototype.move = function(){
+marioBros.puentePrefab.prototype.move = function(){
   
     this.body.velocity.y -= this.speed;
        

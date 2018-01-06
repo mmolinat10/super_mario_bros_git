@@ -15,7 +15,8 @@ var gameOptions = {
     numLevel:1,
     time:400,
     isMarioBig:false,
-    isMarioFier:false
+    isMarioFier:false,
+    win:false
 };
 
 

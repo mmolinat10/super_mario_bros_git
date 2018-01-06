@@ -51,11 +51,15 @@ marioBros.preloader.prototype = {
         this.load.spritesheet('1UP2', 'img/Items/1up_mushroom_2.png', 16, 16);
         this.load.spritesheet('coinOfBlock', 'img/Items/coinBlock.png', 16, 16);
         this.load.spritesheet('bowser', 'img/Enemies/Bowser/bowser.png', 32,32);
+        this.load.spritesheet('martilloBowser', 'img/Enemies/Bowser/martilloBowser.png', 12,16);
+        this.load.spritesheet('fuegoBowser', 'img/Enemies/Bowser/fuego.png', 24,8);
         this.load.image('marioLoadScreen', 'img/UI/Load/marioSmallIdle.png');
         this.load.image('coinLoadScreen', 'img/UI/Load/coin2.png');
         this.load.image('coin1', 'img/Items/coin.png');
         this.load.image('coin2', 'img/Items/coin_2.png');
         this.load.image('platform', 'img/Levels/platform.png');
+        this.load.image('princess', 'img/Items/princess.png');
+        this.load.image('finalText', 'img/Items/text.png');
         this.load.spritesheet('puente', 'img/Levels/puente.png', 14, 16);
         
         this.load.audio('level1', 'sounds/Levels/Level1/level1.mp3');
@@ -78,6 +82,9 @@ marioBros.preloader.prototype = {
         this.load.audio('bump', 'sounds/Levels/bump.wav');
         this.load.audio('fireballSound', 'sounds/Player/fireball.wav');
         this.load.audio('gameoverSound', 'sounds/Levels/gameover.wav');
+        this.load.audio('worldClear', 'sounds/Levels/world_clear.wav');
+        this.load.audio('bowserFalls', 'sounds/Enemies/Bowser/bowserfalls.wav');
+        this.load.audio('bowserFire', 'sounds/Enemies/Bowser/bowserfire.wav');
         
         
         style = { font: "12px Arial", fill: "#ffffff", align: "center"};

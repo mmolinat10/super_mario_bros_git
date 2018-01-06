@@ -317,7 +317,8 @@ marioBros.level1.prototype = {
             this.finishLvl = this.game.physics.arcade.collide(this.player,this.finishLevelLayer, flag, null, this);
         
             if(this.finishLvl){
-               this.startLevel2();
+                gameOptions.time = 400;
+                this.startLevel2();
             }
          
             this.game.physics.arcade.overlap(this.player, this.deadZones, dead, null, this);
