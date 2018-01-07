@@ -86,7 +86,9 @@ marioBros.preloader.prototype = {
         this.load.audio('bowserFalls', 'sounds/Enemies/Bowser/bowserfalls.wav');
         this.load.audio('bowserFire', 'sounds/Enemies/Bowser/bowserfire.wav');
         
-        
+        titleRanking = { font: "16px Arial", fill: "#000000", align: "center"};
+        subtitleRanking = { font: "10px Arial", fill: "#FE2E2E", align: "center"};
+        styleRanking = { font: "8px Arial", fill: "#ffffff", align: "center"};
         style = { font: "12px Arial", fill: "#ffffff", align: "center"};
         style2 = { font: "24px Arial", fill: "#ffffff", align: "center"};
         style3 = { font: "20px Arial", fill: "#ffffff", align: "center"};

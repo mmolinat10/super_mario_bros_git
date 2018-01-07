@@ -104,7 +104,7 @@ marioBros.level1.prototype = {
     
     },
    
-    create:function(){        
+    create:function(){     
         gameOptions.numLevel = 1;
         this.soundLevel1 = this.game.add.audio('level1');
         this.runningOutOfTime = this.game.add.audio('runningOutOfTime');
@@ -168,7 +168,6 @@ marioBros.level1.prototype = {
             
         }, this);
         this.loadHud();
-       
     },
     
     update:function(){   

@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>Super Mario Bros</title>
+        <script src="js/jquery-3.2.1.min.js"></script>
         <script src="js/phaser.js"></script>
   
         <script src="js/main.js"></script>
@@ -51,7 +52,7 @@
     <body>
         <div id="gameFrame"></div> 
         
-        <script type="text/javascript">
+        <script type="text/javascript">      
 
         window.onload = function() {
 
@@ -69,7 +70,9 @@
             game.state.add('gameOver', marioBros.gameOver);
             game.state.start('boot');
 
-    };
-</script>
+        };        
+        
+        </script>
+         
     </body>
 </html>

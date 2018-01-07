@@ -257,7 +257,15 @@ marioBros.level3.prototype = {
       
     },
     
-    startMenu: function () {
+    startMenu: function () { 
+        $.ajax({
+            data:{ lifes: gameOptions.lifes, coins: gameOptions.coins, score: gameOptions.score, time: gameOptions.time },
+            url: 'php/operacion_guardar.php',
+            type: 'post',
+            success: function(data){
+                console.log(data); 
+            }
+        });
         this.soundLevel3.stop();
         this.soundLevel1.stop();
         gameOptions.numLevel = 1;
